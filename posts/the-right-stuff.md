@@ -1,0 +1,20 @@
+---
+title: 'Boook Review: The Right Stuff'
+date: '2019-11-25'
+---
+
+I was recommended *The Right Stuff* because of my interest in U.S. space program and space generally, but of course, this really isn’t a space book. Tom Wolfe discusses the military test pilots who participated in in the dangerous test flights, and later, the Mercury space program which put the first American men into orbit. It’s a study of personality and society; how these astronauts became Cold War heroes at a time when fear about Soviet technical superiority was ubiquitous.
+
+The book is very entertaining and I learned a great deal about these individuals as well as internal NASA political struggles between the science and engineering division and the astronauts who crewed the capsules, as well as between NASA as a civilian agency with rocket propelled vehicles, and the Air Force, with jet propulsion planes.
+
+The concept of “the right stuff” is thought-provoking, and credit goes to Wolfe for injecting it into the social consciousness. It refers essentially to pilot ability, but its relevance derives from the fact that early test pilot survivability was not great. Wolfe writes about how test pilot wives sat in fear of being called and informed of their husbands’ demise. Everyone knew a friend who had perished in a flight accident.
+
+Nonetheless, I find it interesting to contrast the importance with which Wolfe places on the Mercury pilots as national heroes, particularly John Glenn and Alan Shepard, and the actual memory today of Apollo and Neil Armstrong as being the most recognizable astronaut name; I thought of John Glenn as a senator.
+
+I also thought the tension between the astronauts who actually flew the missions and science divisions who helped make the underlying technology possible was interesting, but I’m not sure I came to the conclusions that the author was pointing me towards. The profession of astronaut held a certain gravitas in my mind, but this book portrays them as people who should be in Top Gun alongside Maverick and Goose; they seem like dumb jocks and not particularly vital to the space program. The astronauts seemed to be a publicity stunt — the payload which was delivered to orbit in order to boost national morale against the Russians.
+
+For me, this story foreshadowed NASA’s manned and unmanned programs and their respective trajectories. [Apollo 18, 19, and 20](https://en.wikipedia.org/wiki/Canceled_Apollo_missions) were cancelled, partially to allow for the creation of a low Earth orbit space station in Skylab. The Space Shuttle program also focused on low Earth orbit and maintained roughly the same launch capabilities for 30 years before also being cancelled. On the other hand, unmanned missions from NASA have explored every single planet of the solar system, successfully landed on Mars eight (!) times, including several rovers which have operated for years. NASA has continued to launch more and more ambitious missions, even as the manned program has continued to cut back.
+
+I also want to mention that while the storytelling in the book is wonderful, it also seems likely exaggerated and speculative. The book was written over a decade after the Mercury program, and there are no footnotes. Tom Wolfe states that he wrote it mostly through interviews with many individuals involved in the program, but it’s unclear where reality ends and hyperbole consumes.
+
+I think the Mercury 7 astronauts were fascinating people willing to risk their lives to push the boundaries of where human beings could go. And I can understand why it is an American classic, interweaving Cold War politics, astronaut folk legend, and lurid storytelling. Ultimately, it wasn’t a book I’d feel compelled to read again even though the subject matter is something I otherwise find captivating. Nonetheless, if you want a good human interest story about the first people brave enough to get on American rockets, this is a great book! If you want a book about the hard science behind rocket engines and getting to the moon (subjects I find more personally compelling), you should definitely look elsewhere.
