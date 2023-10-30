@@ -20,12 +20,18 @@ export default function Home({ allPostsData }) {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <h1 className={utilStyles.heading2Xl}>Michael Elgart</h1>
+      <h1 className={utilStyles.headingXl}>Michael Elgart</h1>
       <section className={utilStyles.headingMd}>
         <p>I’m a software engineer at Meta where I work on the Metrics Platform team. I’ve previously worked at IBM as an automation engineer and consultant. I’ve most often used technologies like React, Node, Kubernetes, and Python.</p>
         <p>Apart from work, I graduated from Duke University in 2014, where I studied both economics and computer science. I live with my family in Memphis, TN where we play too many board games.</p>
         <p>I occasionally write some thoughts which are hosted on the blog here.</p>
       </section>
+      <h2 className={utilStyles.headingLg}>
+      <Link href='https://www.linkedin.com/in/michaelelgart/' target='_blank'>LinkedIn</Link>  {"\t\t"}
+      <Link href='https://github.com/mjelgart' target='_blank'>GitHub</Link> {"\t"}
+      <Link href='https://replit.com/@MichaelElgart1' target='_blank'>Replit</Link>
+      
+      </h2>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
