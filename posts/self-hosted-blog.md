@@ -16,12 +16,10 @@ It's a pretty solid answer. I had heard of Github Pages before and figured I'll 
 
 # React Frameworks
 
-It had been a while since I'd worked on a small and simple React project. I initially reached for 
+It had been a while since I'd worked on a small and simple React project. I initially reached for the Create React App tool as that was the way to go the last time I had tried building a new React site. Interestingly I learned that Create React App was now considered deprecated. Digging into things a bit deeper, it seems there has been some controversy surrounding the Next.js framework, but nonetheless I figured for a small personal site it would be fine. 
 
-It's now hosted on melgart.net.
+Next.js actually has [a pretty good demo](https://nextjs.org/learn-pages-router/basics/create-nextjs-app) to get you familiar with the framework and it's even made by setting up blog posts as markdown files. Since this was 90% of what I wanted to do anyway, I followed the tutorial which uses the `remark` and `remark-html` libraries and then made some tweaks. 
 
-It's now using Github Pages instead of Wordpress.com where I was paying $50/year.
 
-It's now built using code I wrote with Nextjs and markdown instead of a fullstack Wordpress install, which had been overkill for my needs for some time. 
 
 https://www.viget.com/articles/host-build-and-deploy-next-js-projects-on-github-pages/
