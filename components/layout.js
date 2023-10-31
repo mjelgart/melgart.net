@@ -5,7 +5,7 @@ import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
 
 const name = 'Michael Elgart';
-export const siteTitle = 'Next.js Sample Website';
+export const siteTitle = 'Michael Elgart';
 
 export default function Layout({ children, home }) {
   return (
@@ -14,7 +14,7 @@ export default function Layout({ children, home }) {
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
-          content="Learn how to build a personal website using Next.js"
+          content="Michael Elgart's personal blog."
         />
         <meta
           property="og:image"
@@ -25,9 +25,9 @@ export default function Layout({ children, home }) {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <header className={styles.header}>
+
         {home ? (
-          <>
+          <header className={styles.homePageHeader}>
             <Image
               priority
               src="/images/profile.jpg"
@@ -36,28 +36,18 @@ export default function Layout({ children, home }) {
               width={144}
               alt=""
             />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-          </>
+
+          </header>
         ) : (
-          <>
-            <Link href="/">
-              <Image
-                priority
-                src="/images/profile.jpg"
-                className={utilStyles.borderCircle}
-                height={108}
-                width={108}
-                alt=""
-              />
-            </Link>
+          <header className={styles.header}>
             <h2 className={utilStyles.headingLg}>
               <Link href="/" className={utilStyles.colorInherit}>
                 {name}
               </Link>
             </h2>
-          </>
+          </header>
         )}
-      </header>
+     
       <main>{children}</main>
       {!home && (
         <div className={styles.backToHome}>
