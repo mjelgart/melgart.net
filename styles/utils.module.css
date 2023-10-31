@@ -36,6 +36,10 @@
   .padding1px {
     padding-top: 1px;
   }
+
+  .marginBottom16px {
+    margin-bottom: 16px;
+  }
   
   .list {
     list-style: none;
@@ -44,9 +48,13 @@
   }
   
   .listItem {
-    margin: 0 0 1.25rem;
+    margin: 0 0 1rem;
   }
   
   .lightText {
     color: #666;
   }
+
+.column {
+  flex-direction: column;
+}
