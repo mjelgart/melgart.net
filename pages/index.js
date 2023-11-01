@@ -28,11 +28,17 @@ export default function Home({ allPostsData }) {
         <p>I like discussing prediction markets, AI risk, governance incentives, and basketball. I occasionally write down some of those thoughts which are hosted on the blog here. </p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px} ${utilStyles.marginBottom16px}`}>
-        <h3 className={utilStyles.headingMd}>My Links</h3>
+        <h2 className={utilStyles.headingLg}>My Links</h2>
         <b>
-        <Link href='https://www.linkedin.com/in/michaelelgart/' target='_blank'>LinkedIn</Link>  {"\t\t"}
+        Professional: <Link href='https://www.linkedin.com/in/michaelelgart/' target='_blank'>LinkedIn</Link> 
+        <br />
+        Coding: 
         <Link href='https://github.com/mjelgart' target='_blank'>GitHub</Link> {"\t"}
-        <Link href='https://replit.com/@MichaelElgart1' target='_blank'>Replit</Link> </b>
+        <Link href='https://replit.com/@MichaelElgart1' target='_blank'>Replit</Link> 
+        <br/>
+        Fun: 
+        <Link href='https://www.threads.net/@mjelgart' target='_blank'>Threads</Link> {"\t"}
+        <Link href='https://letterboxd.com/3Fast3Furious/' target='_blank'>Letterboxd</Link> </b>
       </section>
       <section className={` ${utilStyles.padding1px} ${utilStyles.marginBottom16px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
