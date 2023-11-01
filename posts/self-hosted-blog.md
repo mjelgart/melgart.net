@@ -34,12 +34,12 @@ Other tweaks included adding the Creative Commons licensing, changing the fonts,
 
 This ended up being more involved than I had hoped from GitHub Pages. I had to create a custom GitHub Actions template. I based it mostly off of [this blog post](https://www.viget.com/articles/host-build-and-deploy-next-js-projects-on-github-pages/), but see the [actual yaml file](https://github.com/mjelgart/melgart.net/blob/behind-the-scenes-blog/.github/workflows/build-and-deploy.yml) for the raw code. Nonetheless, it seemed to work, with the exception that Next.js could not understand where my images were stored with GitHub Pages unexpected way of setting up the base url (it's USERNAME.github.io/REPO-NAME not just USERNAME.github.io). 
 
-However, this ought to be fixed once the custom domain name starts working. 
+However, this was fixed once I got the custom domain working working. 
 
 # Custom Domain
 
 Unfortunately, with the unexpected demise of Google Domains, I'm also doing a domain name migration at the same time. I'm using Cloudflare. I appreciate the strong security, and indeed that was my primary motivation, the ease of use is significantly lacking compared to Google Domains. I'm not a DNS expert, and Google Domains meant I didn't have to be. Unfortunately, Cloudflare requires a lot more expert knowledge. 
 
-I had some trouble with part, but I reached out to ChatGPT again and it helped me troubleshoot the issue. I used [Spencer Greenberg's recommended](https://twitter.com/SpencrGreenberg/status/1717169489647739370) instructions to get the most out of ChatGPT, and it really seemed to do the trick. It guided me through the troubleshooting and also had helpful recommendations along the way. I'm not sure I'll ever be able to program without a LLM again TBH. 
+I had some trouble with this part, but I reached out to ChatGPT again and it helped me troubleshoot the issue. I used [Spencer Greenberg's recommended](https://twitter.com/SpencrGreenberg/status/1717169489647739370) instructions to get the most out of ChatGPT, and it really seemed to do the trick. It guided me through the troubleshooting and also had helpful recommendations along the way. I'm not sure I'll ever be able to program without a LLM again TBH. 
 
 That brings us to the present. Hopefully this post can help anyone else that wants to do something similar. I've found the project to be reinvigorating after basically writing code exclusively as a professional for the past year or two. Programming is fun again! 
