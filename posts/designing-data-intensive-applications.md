@@ -1,6 +1,6 @@
 ---
 title: 'Book Review: Designing Data-Intensive Applications'
-date: '2021-7-31'
+date: '2021-07-31'
 ---
 
 This textbook is excellent and I wish I had read it sooner.

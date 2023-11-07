@@ -1,7 +1,8 @@
 ---
-title: Social Gaming 
-date: 2023-11-06
+title: 'Social Gaming' 
+date: '2023-11-06'
 ---
+
 This was pieced together from essays originally created in 2016 and 2019, this is updated in 2023. 
 
 I enjoy videogames, but I had a big gap in playing them from about 2010 until 2016. Moreover, I missed the Xbox 360 generation of multiplayer games in the late 2000s which many of my friends played. As a result, for a long time, gaming was a solo endeavor for me. I gravitated towards single-player, story-driven games (*Portal*, *Arkham Asylum*, *Skyrim*) and sometimes strategy games (*Total War* series, *Civ V*). And, of course, I tended to play these on a delay, waiting for Steam sales to reduce the cost of my infrequent hobby. 
