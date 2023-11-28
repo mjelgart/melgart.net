@@ -1,0 +1,15 @@
+---
+title: 'Book Review: Unsong'
+date: '2018-05-05'
+---
+This is the next installment in my push to read a book a month during 2018.
+
+Scott Alexander's fiction story *Unsong* is a particular brand of humor and epic scope that I suspect only the rational community can come up with. I enjoyed this story immensely but I wouldn't recommend it "cold"; the reader has to understand that this is an unusual take on fantasy and religion, and probably blasphemes frequently.
+
+*Unsong* spends a lot of time worldbuilding. That may be a turn off to some people, but I found it very well done. A significant portion of the beginning of the novel is an exploration of the founding principle of *Unsong*'s universe: what if the world turned out to actually follow Jewish mysticism? The world used to have a lot more theological magic in it, but over time, this "magic" was coalesced into more rigorous and mathematical physics until humans accidentally broke the machine running the world, and plunged everything back into chaos. *Unsong*'s characters do not take this new world as is, they question it rationally, try experiments to see what works, and push boundaries. This magic follows rules and can be researched scientifically, grounded in reality, and in fact, *Unsong*'s title comes from the United Nations Subcommittee on Names of God.  Perhaps more impressively, *Unsong*'s bizarre world with angels and demons and true names of God and Kabbalah is all quite internally consistent.
+
+The book also explores real theological challenges humans would have if we found out the divine existed. Most specifically, Scott tackles the concepts of theodicy, the question of why God is good given we see so much evil in the world.
+
+If this sounds interesting, if philosophical theological debate in the midst of an epic religious magic fantasy storyline, oddly interspersed with whale puns, sounds like something you might want to check out, I can assure you that Scott executes his story perfectly. The word "epic" is interesting when it comes to storytelling. It conveys usually that a story is great in length, which *Unsong* certainly is. It also implies great achievements done by heroes, which also applies here. But I feel a story has to be epic primarily for its scope and impact on the world and the characters. Length definitely helps with this; if an entire world is introduced in a single film, it's hard for it to reach that "epic" feeling. This is part of the criticism of the DC universe films; they jumped quickly to world ending apocalypses when we hadn't gotten a chance to really know the characters.
+
+*Unsong* takes it time, starting from small stories of human and divine characters, slowly building the world and the stakes, foreshadowing and hinting at bigger events. The final story is epic in length, impact, and heroics; there is an excellent sense of divine oomph that the story leaves you with, having forced the reader to climb a mountain of understanding the world and its characters. I found my time well spent.
