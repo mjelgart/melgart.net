@@ -26,9 +26,6 @@ export default function Page() {
         </Head>
         <article>
           <h1 className={utilStyles.headingXl}>Money Saved</h1>
-          <div className={utilStyles.lightText}>
-            Placeholder
-          </div>
           <section className={`${utilStyles.headingMd}`}>
             <p>This page calculates how much money I've saved by using the free Github Pages site over the former Wordpress hosted site.</p>
             {moneyCalculator()}
