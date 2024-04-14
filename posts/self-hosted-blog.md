@@ -16,7 +16,7 @@ It's a pretty solid answer. I had heard of Github Pages before and figured I'll 
 
 # Dev Environment
 
-I had been planning to use Windows Subsystem for Linux (my home PC is still running Windows for gaming), but before I waded into setting up an SSH key with the git repo, I noticed GitHub gives you a bunch free hours every month for GitHub Codespaces. These are cloud development environments that are spun up on demand. This is what we've been using at Meta since before I've been there. 
+I had been planning to use Windows Subsystem for Linux (my home PC is still running Windows for gaming), but before I waded into setting up an SSH key with the git repo, I noticed GitHub gives you a bunch of free hours every month for GitHub Codespaces. These are cloud development environments that are spun up on demand. This is what we've been using at Meta since before I've been there. 
 
 It has the benefit of not having to care if you mess up the dev environment since you can just blow it away and build a new one quickly. It also meant that if I wanted to hang out on the couch with my family instead of on my big PC in my office, I could just grab my laptop, open the codespace I was just using with VS Code on my laptop and then just continue coding. It looks like I've used about 30 of the 120 core-hours available per month. Since the lowest tier has 2 cores, that works out to 15 out of 60 hours available. If you do run out of time, you can tag on extra hours at 36 cents / hour, or, you know, just develop it in WSL like I had planned originally. 
 
