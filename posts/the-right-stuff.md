@@ -1,5 +1,5 @@
 ---
-title: 'Boook Review: The Right Stuff'
+title: 'Book Review: The Right Stuff'
 date: '2019-11-25'
 ---
 
