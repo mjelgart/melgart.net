@@ -84,6 +84,9 @@ export default function Home({ allPostsData }) {
           <li className={utilStyles.listItem} key='apricitas'>
             <Link href='https://www.apricitas.io/' target='_blank'>Aprecitas Economics</Link>
           </li>
+          <li className={utilStyles.listItem} key='betonit'>
+            <Link href='https://www.betonit.ai/' target='_blank'>Bet On It</Link>
+          </li>
         </ul>
       </section>
       <section className={`${utilStyles.padding1px} ${utilStyles.marginBottom16px}`}>
