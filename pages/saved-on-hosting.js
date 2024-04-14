@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import Layout, { siteTitle } from '../../components/layout';
-import utilStyles from '../../styles/utils.module.css';
+import Layout, { siteTitle } from '../components/layout';
+import utilStyles from '../styles/utils.module.css';
 
 function moneyCalculator() {
     const startDate = new Date('2024-04-14');
@@ -12,7 +12,7 @@ function moneyCalculator() {
   
     return (
       <div>
-        <p>Money saved: ${moneySaved}</p>
+        <p className={`${utilStyles.headingLg}`}>Money saved on cloud hosting: ${moneySaved}</p>
         {moneySaved < 10 && <p>Not a lot so far! But in a few months it'll start to add up.</p>}
       </div>
     );
@@ -26,7 +26,7 @@ export default function Page() {
         </Head>
         <article>
           <h1 className={utilStyles.headingXl}>Money Saved</h1>
-          <section className={`${utilStyles.headingMd}`}>
+          <section>
             <p>This page calculates how much money I've saved by using the free Github Pages site over the former Wordpress hosted site.</p>
             {moneyCalculator()}
         </section>

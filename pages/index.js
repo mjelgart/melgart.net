@@ -84,9 +84,16 @@ export default function Home({ allPostsData }) {
           <li className={utilStyles.listItem} key='apricitas'>
             <Link href='https://www.apricitas.io/' target='_blank'>Aprecitas Economics</Link>
           </li>
-
-
         </ul>
+      </section>
+      <section className={`${utilStyles.padding1px} ${utilStyles.marginBottom16px}`}>
+      <h2 className={utilStyles.headingLg}>Extra Stuff</h2>
+      <ul className={utilStyles.list}>
+        <li className={utilStyles.listItem} key='hosting-saved'>
+          <Link href='/saved-on-hosting' >Money Saved Self Hosting</Link>
+        </li>
+
+      </ul>
       </section>
       <br />
       <p>Material on this site created by Michael Elgart is licensed under 
