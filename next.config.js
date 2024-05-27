@@ -8,7 +8,16 @@ if (isGithubActions) {
   const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, '')
 }
 
-module.exports = {
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
+  output: 'export',
+  images: {
+    unoptimized: true,
+  },
   assetPrefix: assetPrefix,
   basePath: basePath,
 }
+
+module.exports = nextConfig
