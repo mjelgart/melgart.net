@@ -32,16 +32,16 @@ export default function Post({ postData }) {
           />
           <meta name="og:title" content={postData.title} />
 
-            {/* facebook */}
-            <meta property="og:type" content="website" />
-            <meta property="og:title" content={postData.title} />
-            <meta property="og:description" content="" />
+          {/* facebook */}
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content={postData.title} />
+          <meta property="og:description" content="" />
 
-            {/* twitter */}
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta property="twitter:domain" content="melgart.net" />
-            <meta name="twitter:title" content={postData.title}/>
-            <meta name="twitter:description" content="Michael's blog" />
+          {/* twitter */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta property="twitter:domain" content="melgart.net" />
+          <meta name="twitter:title" content={postData.title}/>
+          <meta name="twitter:description" content="Michael's blog" />
             
         </Head>
         <article>

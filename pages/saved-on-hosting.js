@@ -18,14 +18,33 @@ function moneyCalculator() {
     );
 }
 
+const title = "Money Saved";
+const description = "Raking in the benjamins."
+
 export default function Page() {
     return (
       <Layout>
         <Head>
-          <title>"Money Saved"</title>
+          <title>{title}</title>
+          <meta
+            name="description"
+            content={description}
+          />
+          <meta name="og:title" content={title} />
+
+          {/* facebook */}
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content="" />
+
+          {/* twitter */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta property="twitter:domain" content="melgart.net" />
+          <meta name="twitter:title" content={title}/>
+          <meta name="twitter:description" content={description} />
         </Head>
         <article>
-          <h1 className={utilStyles.headingXl}>Money Saved</h1>
+          <h1 className={utilStyles.headingXl}>{title}</h1>
           <section>
             <p>This page calculates how much money I've saved by using the free Github Pages site over the former Wordpress hosted site.</p>
             {moneyCalculator()}
