@@ -1,5 +1,6 @@
 ---
 title: 'Fast Food Ranking 2024'
+subtitle: "Please tell Firehouse Subs I'm looking for sponsors."
 date: '2024-04-14'
 ---
 

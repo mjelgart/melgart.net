@@ -2,6 +2,7 @@ import Layout from '../../components/layout';
 import { getAllPostIds, getPostData } from '../../utils/posts';
 import Head from 'next/head';
 import Date from '../../components/date';
+import Metadata from '../../components/metadata'
 import utilStyles from '../../styles/utils.module.css';
 
 export async function getStaticProps({ params }) {
@@ -22,35 +23,20 @@ export async function getStaticPaths() {
 
 
 export default function Post({ postData }) {
-    return (
-      <Layout>
-        <Head>
-          <title>{postData.title}</title>
-          <meta
-            name="description"
-            content="'Is it real?' 'I don't know. Ask him.'"
-          />
-          <meta name="og:title" content={postData.title} />
-
-          {/* facebook */}
-          <meta property="og:type" content="website" />
-          <meta property="og:title" content={postData.title} />
-          <meta property="og:description" content="" />
-
-          {/* twitter */}
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta property="twitter:domain" content="melgart.net" />
-          <meta name="twitter:title" content={postData.title}/>
-          <meta name="twitter:description" content="Michael's blog" />
-            
-        </Head>
-        <article>
-          <h1 className={utilStyles.headingXl}>{postData.title}</h1>
-          <div className={utilStyles.lightText}>
-            <Date dateString={postData.date} />
-          </div>
-          <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-        </article>
-      </Layout>
-    );
+  const description = postData.subtitle ?? "Within cells interlinked.";
+  return (
+    <Layout>
+      <Head>
+        <Metadata title={postData.title} description={description} />
+          
+      </Head>
+      <article>
+        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+        <div className={utilStyles.lightText}>
+          <Date dateString={postData.date} />
+        </div>
+        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      </article>
+    </Layout>
+  );
   }

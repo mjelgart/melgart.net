@@ -15,7 +15,7 @@ export default function Layout({ children, home }) {
 
         <meta
           property="og:image"
-          content='https://www.melgart.net/images/melgart%20preview.jpg'
+          content='https://www.melgart.net/images/melgart_preview_window.jpg'
         />
       </Head>
 
