@@ -1,5 +1,6 @@
 ---
 title: 'Book Review: The Dispossessed'
+subtitle: 'Anarchy, State, and Utopia. No, not that one.'
 date: '2024-04-30'
 ---
 
