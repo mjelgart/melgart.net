@@ -12,16 +12,11 @@ export default function Layout({ children, home }) {
     <div className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon-16x16.png" />
-        <meta
-          name="description"
-          content="Michael Elgart's personal blog."
-        />
+
         <meta
           property="og:image"
           content='https://www.melgart.net/images/melgart%20preview.jpg'
         />
-        <meta name="og:title" content={siteTitle} />
-        <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
         {home ? (

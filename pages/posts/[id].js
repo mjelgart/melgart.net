@@ -28,7 +28,7 @@ export default function Post({ postData }) {
           <title>{postData.title}</title>
           <meta
             name="description"
-            content="Michael's blog."
+            content="'Is it real?' 'I don't know. Ask him.'"
           />
           <meta name="og:title" content={postData.title} />
 
