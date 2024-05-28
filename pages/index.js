@@ -14,11 +14,30 @@ export async function getStaticProps() {
   };
 }
 
+const description = "Michael's blog."
+
 export default function Home({ allPostsData }) {
   return (
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
+        <meta
+            name="description"
+            content={description}
+          />
+          <meta name="og:title" content={siteTitle} />
+
+          {/* facebook */}
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content={siteTitle} />
+          <meta property="og:description" content={description} />
+
+          {/* twitter */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta property="twitter:domain" content="melgart.net" />
+          <meta name="twitter:title" content={siteTitle}/>
+          <meta name="twitter:description" content={description} />
+
       </Head>
       <div className={utilStyles.column}>
       <h1 className={utilStyles.headingXl}>Michael Elgart</h1>
