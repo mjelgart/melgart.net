@@ -2,7 +2,7 @@ import Layout from '../../components/layout';
 import { getAllPostIds, getPostData } from '../../utils/posts';
 import Head from 'next/head';
 import Date from '../../components/date';
-import Metadata from '../../components/metadata'
+import injectMetadata from '../../components/injectMetadata'
 import utilStyles from '../../styles/utils.module.css';
 
 export async function getStaticProps({ params }) {
@@ -27,8 +27,7 @@ export default function Post({ postData }) {
   return (
     <Layout>
       <Head>
-        <Metadata title={postData.title} description={description} />
-          
+        {injectMetadata(postData.title, description)}
       </Head>
       <article>
         <h1 className={utilStyles.headingXl}>{postData.title}</h1>

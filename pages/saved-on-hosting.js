@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
+import injectMetadata from '../components/injectMetadata'
 
 function moneyCalculator() {
     const startDate = new Date('2024-04-14');
@@ -19,7 +20,7 @@ function moneyCalculator() {
 }
 
 const title = "Money Saved";
-const description = "Raking in the benjamins."
+const description = "Raking in the Benjamins."
 
 export default function Page() {
     return (
@@ -42,6 +43,7 @@ export default function Page() {
           <meta property="twitter:domain" content="melgart.net" />
           <meta name="twitter:title" content={title}/>
           <meta name="twitter:description" content={description} />
+          {injectMetadata(title, description)}
         </Head>
         <article>
           <h1 className={utilStyles.headingXl}>{title}</h1>

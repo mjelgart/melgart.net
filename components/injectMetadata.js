@@ -1,5 +1,7 @@
+import Head from 'next/head';
 
-const Metadata = (title, description) => {
+export default function injectMetadata(title, description) {
+    return (
     <>
         <title>{title}</title>
         <meta
@@ -19,6 +21,6 @@ const Metadata = (title, description) => {
         <meta name="twitter:title" content={title}/>
         <meta name="twitter:description" content={description} />
     </>
+    );
 }
 
-export default Metadata;

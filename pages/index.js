@@ -4,7 +4,7 @@ import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../utils/posts';
 import Link from 'next/link';
 import Date from '../components/date';
-import Metadata from '../components/metadata';
+import injectMetadata from '../components/injectMetadata';
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -21,7 +21,7 @@ export default function Home({ allPostsData }) {
   return (
     <Layout home>
       <Head>
-        <Metadata title={siteTitle} description={description} />
+        {injectMetadata(siteTitle, description)}
       </Head>
       <div className={utilStyles.column}>
       <h1 className={utilStyles.headingXl}>Michael Elgart</h1>
