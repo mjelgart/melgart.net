@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import injectMetadata from '../components/injectMetadata'
@@ -50,6 +51,7 @@ export default function Page() {
           <section>
             <p>This page calculates how much money I've saved by using the free Github Pages site over the former Wordpress hosted site.</p>
             {moneyCalculator()}
+            <p>If you'd like to set up your own site on Github Pages, I made a post documenting what I did <Link href='/posts/self-hosted-blog' target='_blank'>here</Link>.</p>
         </section>
         </article>
       </Layout>
