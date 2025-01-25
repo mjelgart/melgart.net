@@ -26,7 +26,7 @@ export default function Home({ allPostsData }) {
       <div className={utilStyles.column}>
       <h1 className={utilStyles.headingXl}>Michael Elgart</h1>
       <section className={`${utilStyles.headingMd}`}>
-        <p>I’m a software engineer at Meta, previously IBM. I grew up in Miami, graduated from Duke in North Carolina, and now live with my family in Washington, DC.</p>
+        <p>I’m a software engineer, dad, and blogger. I grew up in Miami, graduated from Duke in North Carolina, and now live with my family in Washington, DC.</p>
         <p>I like discussing prediction markets, AI risk, governance incentives, and basketball. I occasionally write down some of those thoughts which are hosted on the blog here. </p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px} ${utilStyles.marginBottom16px}`}>
