@@ -3,23 +3,16 @@
       {
         "id": "duke-basketball",
         "name": "Duke Basketball",
-        "sport": "backetball",
+        "sport": "basketball",
         "level": "college",
         "conference": "Atlantic Coast Conference",
         "seasons": [
           {
             "year": 2011,
             "achievements": [
-              { "type": "conference_championship" },
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 25 },
-              { "type": "sweet_sixteen"}
-            ]
-          },
-          {
-            "year": 2022,
-            "achievements": [
-              { "type": "conference_championship", "points": 50 },
-              { "type": "rival_victory", "opponent": "Ohio State", "points": 25 }
+              { "type": "college_conference_championship", "points": 40, "description": "ACC Champions" },
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 25, "description": "Victory over UNC" },
+              { "type": "sweet_sixteen", "points": 20}
             ]
           }
         ]
@@ -34,17 +27,10 @@
           {
             "year": 2006,
             "achievements": [
-                {"type": "championship"}
+                {"type": "championship", "points": 100, "description": "NBA Champions"}
             ]
           }
         ]
       }
-    ],
-    "pointValues": {
-      "national_championship": 100,
-      "conference_championship": 50,
-      "playoff_appearance": 30,
-      "rival_victory": 25,
-      "winning_season": 20
-    }
-  };
+    ]
+  }
