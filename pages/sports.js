@@ -4,6 +4,7 @@ import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import injectMetadata from '../components/injectMetadata';
 import sportsData from '../data/sports-data.json';
+import React, { useState, useMemo } from 'react';
 
 const title = "Michael's Sports Teams";
 const description = "Tracking team success during my life."
@@ -37,6 +38,7 @@ export default function Page() {
           <h1 className={utilStyles.headingXl}>{title}</h1>
           <section>
             <p>This page tracks my various sports teams' performance over time</p>
+            <TeamsTracker />
 
         </section>
         </article>
@@ -44,71 +46,173 @@ export default function Page() {
     );
   }
 
-  const TeamCard = ({ team, totalPoints }) => {
+  const TeamCard = ({ team }) => {
     const [isExpanded, setIsExpanded] = useState(false);
   
-    const achievements = useMemo(() => {
-      return team.seasons.flatMap(season => 
-        season.achievements.map(achievement => ({
-          ...achievement,
-          year: season.year
-        }))
-      );
+    const achievementsByYear = useMemo(() => {
+      const groupedAchievements = {};
+      team.seasons.forEach(season => {
+        if (season.achievements.length > 0) {
+          groupedAchievements[season.year] = season.achievements;
+        }
+      });
+      return groupedAchievements;
     }, [team]);
   
-    const getAchievementIcon = (type) => {
+    const getAchievementPrefix = (type) => {
       switch (type) {
         case 'national_championship':
-          return <Trophy className="text-yellow-500" />;
-        case 'conference_championship':
-          return <Medal className="text-blue-500" />;
-        case 'rival_victory':
-          return <Star className="text-green-500" />;
+          return '★';
+        case 'championship':
+          return '★';
+        case 'college_conference_championship':
+          return '•';
         default:
-          return null;
+          return '·';
       }
     };
   
     return (
-      <Card className="mb-4 hover:shadow-lg transition-shadow">
-        <CardContent className="p-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <h3 className="text-xl font-bold">{team.name}</h3>
-              <p className="text-sm text-gray-600">
-                {team.level} {team.sport} • {team.conference}
-              </p>
-            </div>
-            <div className="text-right">
-              <p className="text-2xl font-bold">{totalPoints}</p>
-              <p className="text-sm text-gray-600">points</p>
-            </div>
-          </div>
-          
+      <div style={{ marginBottom: '2rem', borderBottom: '1px solid #ddd', paddingBottom: '1rem' }}>
+        <div>
+          <h3 className="text-xl mb-1">{team.name}</h3>
+          <p className="text-sm opacity-75">
+          {team.level === "professional" 
+      ? `${team.league} • ${team.conference}`
+      : `${team.level} ${team.sport} • ${team.conference}`
+    }
+          </p>
+        </div>
+
+      {/* Championships Summary */}
+      {team.seasons.some(season => 
+        season.achievements.some(a => 
+          a.type === 'championship' || a.type === 'national_championship'
+        )
+      ) && (
+        <div style={{ marginTop: '0.5rem' }}>
+          <div style={{ fontSize: '0.9rem' }}>Championships: </div>
+          {team.seasons
+            .flatMap(season => 
+              season.achievements
+                .filter(a => a.type.includes('championship'))
+                .map(a => ({
+                  year: season.year,
+                  type: a.type,
+                  description: a.description
+                }))
+            )
+            .sort((a, b) => b.year - a.year)
+            .map((championship, index) => (
+              <div key={index} style={{ fontSize: '0.9rem', marginLeft: '1rem' }}>
+                {championship.year}
+              </div>
+            ))
+          }
+        </div>
+      )}
+        
+        {Object.keys(achievementsByYear).length > 0 && (
           <button 
             onClick={() => setIsExpanded(!isExpanded)}
-            className="mt-2 text-sm text-blue-600 hover:text-blue-800"
+            className="mt-2 text-sm underline"
           >
-            {isExpanded ? 'Show less' : 'Show achievements'}
+            {isExpanded ? 'Hide achievements' : 'Show achievements'}
           </button>
+        )}
   
-          {isExpanded && achievements.length > 0 && (
-            <div className="mt-4 space-y-2">
-              {achievements.map((achievement, index) => (
-                <div key={index} className="flex items-center gap-2">
-                  {getAchievementIcon(achievement.type)}
-                  <span className="text-sm">
-                    {achievement.year} - {achievement.type.replace('_', ' ')}
-                    {achievement.opponent && ` vs ${achievement.opponent}`}
-                    <span className="ml-2 text-gray-600">
-                      +{achievement.points} pts
-                    </span>
-                  </span>
+        {isExpanded && Object.keys(achievementsByYear).length > 0 && (
+          <div className="mt-4 ml-4">
+            {Object.entries(achievementsByYear)
+              .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
+              .map(([year, achievements]) => (
+                <div key={year} className="mb-4">
+                  <h4 className="font-bold mb-2">{year}</h4>
+                  <div className="ml-2">
+                  {achievements.map((achievement, index) => (
+                    <div key={index} className="mb-1">
+                      {getAchievementPrefix(achievement.type)} {achievement.description}
+                    </div>
+                  ))}
                 </div>
+                </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
+  
+  const TeamsTracker = () => {
+    const [sortBy, setSortBy] = useState('performance');
+    const [filterSport, setFilterSport] = useState('all');
+  
+    const teamsWithPoints = useMemo(() => {
+      return sportsData.teams.map(team => {
+        const totalPoints = team.seasons.reduce((total, season) => 
+          total + season.achievements.reduce((seasonTotal, achievement) => 
+            seasonTotal + achievement.points, 0
+          ), 0
+        );
+        return { ...team, totalPoints };
+      });
+    }, []);
+  
+    const sortedAndFilteredTeams = useMemo(() => {
+      let filtered = teamsWithPoints;
+      
+      if (filterSport !== 'all') {
+        filtered = filtered.filter(team => team.sport === filterSport);
+      }
+  
+      return filtered.sort((a, b) => {
+        if (sortBy === 'performance') return b.totalPoints - a.totalPoints;
+        if (sortBy === 'name') return a.name.localeCompare(b.name);
+        if (sortBy === 'sport') return a.sport.localeCompare(b.sport);
+        return 0;
+      });
+    }, [teamsWithPoints, sortBy, filterSport]);
+  
+    const sports = [...new Set(sportsData.teams.map(team => team.sport))];
+
+    return (
+      <div className="max-w-3xl mx-auto p-4">
+        <div className="mb-8">
+          
+          <div className="flex gap-4 mb-4">
+            <select 
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="p-1 border"
+            >
+              <option value="performance">Sort by Recent Performance</option>
+              <option value="name">Sort by Name</option>
+              <option value="sport">Sort by Sport</option>
+            </select>
+  
+            <select
+              value={filterSport}
+              onChange={(e) => setFilterSport(e.target.value)}
+              className="p-1 border"
+            >
+              <option value="all">All Sports</option>
+              {sports.map(sport => (
+                <option key={sport} value={sport}>
+                  {sport.charAt(0).toUpperCase() + sport.slice(1)}
+                </option>
               ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+            </select>
+          </div>
+        </div>
+  
+        <div>
+          {sortedAndFilteredTeams.map(team => (
+            <TeamCard 
+              key={team.id} 
+              team={team}
+            />
+          ))}
+        </div>
+      </div>
     );
   };

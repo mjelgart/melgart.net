@@ -2,9 +2,9 @@
     "teams": [
       {
         "id": "duke-basketball",
-        "name": "Duke Basketball",
-        "sport": "basketball",
-        "level": "college",
+        "name": "Duke Blue Devils",
+        "sport": "Basketball",
+        "level": "College",
         "conference": "Atlantic Coast Conference",
         "seasons": [
           {
@@ -20,9 +20,10 @@
       {
         "id": "miami-heat",
         "name": "Miami Heat",
-        "sport": "basketball",
+        "sport": "Basketball",
         "level": "professional",
-        "conference": "Eastern",
+        "league": "NBA",
+        "conference": "Eastern Conference",
         "seasons": [
           {
             "year": 2006,
