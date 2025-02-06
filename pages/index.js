@@ -92,8 +92,11 @@ export default function Home({ allPostsData }) {
         </ul>
       </section>
       <section className={`${utilStyles.padding1px} ${utilStyles.marginBottom16px}`}>
-      <h2 className={utilStyles.headingLg}>Extra Stuff</h2>
+      <h2 className={utilStyles.headingLg}>Extras</h2>
       <ul className={utilStyles.list}>
+      <li className={utilStyles.listItem} key='sports'>
+          <Link href='/sports' >Sports</Link>
+        </li>
         <li className={utilStyles.listItem} key='hosting-saved'>
           <Link href='/saved-on-hosting' >Money Saved Self Hosting</Link>
         </li>

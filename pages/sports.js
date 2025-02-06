@@ -37,7 +37,7 @@ export default function Page() {
         <article>
           <h1 className={utilStyles.headingXl}>{title}</h1>
           <section>
-            <p>This page tracks my various sports teams' performance over time</p>
+            <p>I use this page to track my six main sports team's performance.</p>
             <TeamsTracker />
 
         </section>
@@ -75,13 +75,16 @@ export default function Page() {
     return (
       <div style={{ marginBottom: '2rem', borderBottom: '1px solid #ddd', paddingBottom: '1rem' }}>
         <div>
-          <h3 className="text-xl mb-1">{team.name}</h3>
-          <p className="text-sm opacity-75">
-          {team.level === "professional" 
-      ? `${team.league} • ${team.conference}`
-      : `${team.level} ${team.sport} • ${team.conference}`
-    }
-          </p>
+          <h3 className="text-xl">{team.name}</h3>
+          <div style={{ fontSize: '0.8rem'}}>
+            <p className="text-sm opacity-75">
+
+            {team.level === "professional" 
+              ? `${team.league} • ${team.conference}`
+              : `${team.level} ${team.sport} • ${team.conference}`
+            }
+            </p>
+          </div>
         </div>
 
       {/* Championships Summary */}
@@ -91,7 +94,7 @@ export default function Page() {
         )
       ) && (
         <div style={{ marginTop: '0.5rem' }}>
-          <div style={{ fontSize: '0.9rem' }}>Championships: </div>
+          <div style={{ fontSize: '1rem' }}>Championships: </div>
           {team.seasons
             .flatMap(season => 
               season.achievements
@@ -104,7 +107,7 @@ export default function Page() {
             )
             .sort((a, b) => b.year - a.year)
             .map((championship, index) => (
-              <div key={index} style={{ fontSize: '0.9rem', marginLeft: '1rem' }}>
+              <div key={index} style={{ fontSize: '1rem', marginLeft: '1rem' }}>
                 {championship.year}
               </div>
             ))
