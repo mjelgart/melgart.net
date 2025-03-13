@@ -11,86 +11,106 @@
             "year": 2011,
             "achievements": [
               { "type": "college_conference_championship", "points": 15, "description": "ACC Champions" },
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" },
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" },
-              { "type": "sweet_sixteen", "points": 12}
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina in ACC Tournament" },
+              { "type": "sweet_sixteen", "points": 12, "description": "Sweet Sixteen"}
             ]
           },
           {
             "year": 2012,
             "achievements": [
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" }
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" }
             ]
           },
           {
             "year": 2013,
             "achievements": [
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" },
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" },
-              { "type": "elite_eight", "points": 25}
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
+              { "type": "elite_eight", "points": 25, "description":"Elite Eight"}
             ]
           },
           {
             "year": 2014,
             "achievements": [
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" }
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" }
             ]
           },  
           {
             "year": 2015,
             "achievements": [
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" },
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" },
-              { "type": "national_championship", "points": 200}
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
+              { "type": "championship", "points": 200, "description": "National Champions"}
             ]
           }, 
           {
             "year": 2016,
             "achievements": [
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" },
-              { "type": "sweet_sixteen", "points": 12}
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
+              { "type": "sweet_sixteen", "points": 12, "description": "Sweet Sixteen"}
             ]
           }, 
           {
             "year": 2017,
             "achievements": [
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" },
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" },
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina in ACC Tournament" },
               { "type": "college_conference_championship", "points": 15, "description": "ACC Champions" }
             ]
           }, 
           {
             "year": 2018,
             "achievements": [
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" },
-              { "type": "elite_eight", "points": 25}
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
+              { "type": "elite_eight", "points": 25, "description": "Elite Eight"}
             ]
           }, 
           {
             "year": 2019,
             "achievements": [
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" },
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
               { "type": "rival_victory", "opponent": "Kentucky", "points": 10, "description": "Victory over Kentucky" },
-              { "type": "elite_eight", "points": 25}
+              { "type": "elite_eight", "points": 25, "description": "Elite Eight"}
             ]
           }, 
           {
             "year": 2020,
             "achievements": [
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" },
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" },
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
               { "type": "rival_victory", "opponent": "Kansas", "points": 10, "description": "Victory over Kansas" }
             ]
           }, 
           {
             "year": 2022,
             "achievements": [
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Victory over UNC" },
-              { "type": "final_four", "points": 50}
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
+              { "type": "final_four", "points": 50, "description": "Final Four"}
             ]
-          }, 
-          
-          
+          },
+          {
+            "year": 2023,
+            "achievements": [
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
+              { "type": "college_conference_championship", "points": 15, "description": "ACC Champions" }
+            ]
+          },
+          {
+            "year": 2024,
+            "achievements": [
+              { "type": "elite_eight", "points": 25, "description": "Elite Eight" }
+            ]
+          },
+          {
+            "year": 2025,
+            "achievements": [
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" }
+            ]
+          }
         ]
       },
       {
@@ -102,12 +122,84 @@
         "conference": "Eastern Conference",
         "seasons": [
           {
+            "year": 2005,
+            "achievements": [
+              {"type": "conference_finals", "points": 50, "description": "Conference Finals"}
+            ]
+          },
+          {
             "year": 2006,
             "achievements": [
-                {"type": "championship", "points": 200, "description": "NBA Champions"}
+                {"type": "championship", "points": 200, "description": "NBA Champions"},
+                {"type": "all_nba_first_team", "points": 30, "description": "Shaquille O'Neal All NBA First Team"},
+                {"type": "all_nba_second_team", "points": 15, "description": "Dwyane Wade All NBA Second Team"}
+            ]
+          },
+          {
+            "year": 2007,
+            "achievements": [
+              { "type": "all_nba_third_team", "points": 5, "description": "Dwyane Wade All NBA Third Team"}
+            ]
+          },
+          {
+            "year": 2010,
+            "achievements": [
+              {"type": "all_nba_first_team", "points": 30, "description": "Dwyane Wade All NBA First Team"}
+            ]
+          },
+          {
+            "year": 2011,
+            "achievements": [
+              {"type": "nba_finals", "description": "NBA Finals"},
+              {"type": "all_nba_first_team", "description": "LeBron James All NBA First Team"},
+              {"type": "all_nba_second_team", "description": "Dwyane Wade All NBA Second Team"}
+            ]
+          }, 
+          {
+            "year": 2012,
+            "achievements":[
+              {"type": "championship", "description": "NBA Champions"},
+              {"type": "all_nba_first_team", "description": "LeBron James All NBA First Team"},
+              {"type": "all_nba_third_team", "description": "Dwyane Wade All NBA Third Team"},
+              {"type": "nba_mvp", "description": "LeBron James NBA MVP"}
+            ]
+          },
+          {
+            "year": 2013,
+            "achievements":[
+              {"type": "championship", "description": "NBA Champions"},
+              {"type": "all_nba_first_team", "description": "LeBron James All NBA First Team"},
+              {"type": "all_nba_third_team", "description": "Dwyane Wade All NBA Third Team"},
+              {"type": "nba_mvp", "description": "LeBron James NBA MVP"},
+              {"type": "win_streak", "points": 15, "description": "27 Game Win Streak"}
+            ]
+          },
+          {
+            "year": 2014,
+            "achievements":[
+              {"type": "nba_finals", "description": "NBA Finals"},
+              {"type": "all_nba_first_team", "description": "LeBron James All NBA First Team"}
             ]
           }
         ]
       }
-    ]
+    ],
+    "achievement_default_points": {
+      "rival_victory": {
+        "North Carolina": 20,
+        "Kentucky": 10,
+        "Kansas": 10
+      },
+      "college_conference_championship": 15,
+      "sweet_sixteen": 12,
+      "elite_eight": 25,
+      "final_four": 50,
+      "championship": 200,
+      "nba_finals": 100,
+      "nba_mvp": 60,
+      "conference_finals": 50,
+      "all_nba_first_team": 30,
+      "all_nba_second_team": 15,
+      "all_nba_third_team": 5
+    }
   }

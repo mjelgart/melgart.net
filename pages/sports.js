@@ -98,7 +98,7 @@ export default function Page() {
           {team.seasons
             .flatMap(season => 
               season.achievements
-                .filter(a => a.type.includes('championship'))
+                .filter(a => a.type === ('championship'))
                 .map(a => ({
                   year: season.year,
                   type: a.type,
@@ -153,10 +153,30 @@ export default function Page() {
     const teamsWithPoints = useMemo(() => {
       return sportsData.teams.map(team => {
         const totalPoints = team.seasons.reduce((total, season) => 
-          total + season.achievements.reduce((seasonTotal, achievement) => 
-            seasonTotal + achievement.points, 0
-          ), 0
-        );
+          total + season.achievements.reduce((seasonTotal, achievement) => {
+            // First check if the achievement has its own points
+            if (achievement.points !== undefined) {
+              return seasonTotal + achievement.points;
+            }
+            
+            // Fall back to default points based on achievement type
+            const defaultPoints = sportsData.achievement_default_points[achievement.type];
+            
+            // For rival victories, check if there's a specific opponent value
+            if (achievement.type === 'rival_victory' && achievement.opponent && 
+                typeof defaultPoints === 'object' && defaultPoints[achievement.opponent]) {
+              return seasonTotal + defaultPoints[achievement.opponent];
+            }
+            
+            // Use the default points value if it exists
+            if (defaultPoints !== undefined && typeof defaultPoints !== 'object') {
+              return seasonTotal + defaultPoints;
+            }
+            
+            // If no points value found anywhere, default to 0
+            return seasonTotal;
+          }, 0)
+        , 0);
         return { ...team, totalPoints };
       });
     }, []);
