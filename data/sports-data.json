@@ -107,8 +107,10 @@
           {
             "year": 2025,
             "achievements": [
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
-              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" }
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina at Home" },
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina at the Dean Dome" },
+              {"type": "rival_victory", "opponent": "North Carolina", "description": "Beat Carolina in ACC Tournament"},
+              {"type": "college_conference_championship", "description": "ACC Champions"}
             ]
           }
         ]
@@ -232,9 +234,12 @@
           { 
             "year": 2013,
             "achievements": [
+              {"type": "beat_ranked_opponent", "points": 10, "description": "Beat #16 Virginia Tech"},
               { "type": "rival_victory", "opponent":"North Carolina", "description": "Beat Carolina"},
               { "type": "acc_championship_game", "description": "ACC Coastal Division Champion"},
-              { "type": "bowl_game", "description": "Chick-fil-A Bowl"}
+              { "type": "bowl_game", "description": "Chick-fil-A Bowl"},
+              {"type": "ranked_final_poll", "points": 15, "description": "Ranked #23 in AP Final Poll"}
+
             ]
           }, 
           {
@@ -247,6 +252,86 @@
             "year": 2015,
             "achievements": [
               { "type": "won_bowl_game", "description": "Won Pinstripe Bowl"}
+            ]
+          },
+          {
+            "year": 2016,
+            "achievements": [
+              { "type": "rival_victory", "opponent":"North Carolina", "description": "Beat #15 North Carolina"}
+            ]
+          },
+          {          
+            "year": 2017,
+            "achievements": [
+              { "type": "rival_victory", "opponent":"North Carolina", "description": "Beat Carolina"},
+              { "type": "won_bowl_game", "description": "Won Quick Lane Bowl"}
+            ]
+          },
+          {
+            "year": 2018,
+            "achievements": [
+              { "type": "rival_victory", "opponent":"North Carolina", "description": "Beat Carolina"},
+              { "type": "won_bowl_game", "description": "Won Independence Bowl"}
+            ]
+          },
+          {
+            "year": 2022,
+            "achievements": [
+              {"type": "won_bowl_game", "description": "Won Military Bowl"}
+            ]
+          }, 
+          {
+            "year": 2023,
+            "achievements": [
+              { "type": "beat_ranked_opponent", "points": 15, "description": "Beat #9 Clemson"},
+              {"type": "won_bowl_game", "description": "Won Birmingham Bowl"}
+            ]
+          },
+          {
+            "year": 2024,
+            "achievements": [
+              {"type": "rival_victory", "opponent":"North Carolina", "description": "Beat Carolina"},
+              {"type": "bowl_game", "description": "Gator Bowl"}
+            ]
+          }
+        ]
+      },
+      {
+        "id": "miami-dolphins",
+        "name": "Miami Dolphins",
+        "sport": "Football",
+        "level": "professional",
+        "conference": "AFC",
+        "seasons": [
+          {
+            "year": 1998,
+            "achievements": [
+              {"type": "nfl_divisional_playoff", "description": "Divisional Playoff Round"}
+            ]
+          },
+          {
+            "year": 1999,
+            "achievements": [
+              {"type": "nfl_divisional_playoff", "description": "Divisional Playoff Round" }
+            ]
+          },
+          {
+            "year": 2000,
+            "achievements": [
+              {"type": "won_division", "description": "AFC East Winner"},
+              {"type": "nfl_divisional_playoff", "description": "Divisional Playoff Round"}
+            ]
+          },
+          {
+            "year": 2001,
+            "achievements": [
+              {"type": "nfl_playoff", "description": "Wild Card Playoff Round"}
+            ]
+          },
+          {
+            "year": 2002,
+            "achievements": [
+              {"type": "nfl_rushing_leader", "points": 15, "description": "Ricky Williams NFL Rushing Leader"}
             ]
           }
         ]
@@ -270,6 +355,7 @@
       "all_nba_second_team": 15,
       "all_nba_third_team": 5,
       "bowl_game": 20,
-      "won_bowl_game": 40
+      "won_bowl_game": 40,
+      "nfl_divisional_playoff": 25
     }
   }
