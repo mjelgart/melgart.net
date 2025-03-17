@@ -398,8 +398,20 @@
               {"type": "beat_ranked_opponent", "points": 15, "description": "Beat #12 Washington 65-7"},
               {"type": "beat_ranked_opponent", "points": 15, "description": "Beat #14 Virginia Tech"},
               {"type": "cfb_conference_championship", "description": "Big East Champions"},
-              {"type": "won_bowl_game", "points": 50, "description": "Beat #7 Florida in Sugar Bowl"},
-              { "type": "ranked_final_poll", "description": "Ranked #2 in Final AP+Coaches Poll"}
+              {"type": "championship", "description": "National Champions, won Rose Bowl"},
+              { "type": "ranked_final_poll", "description": "Ranked #1 in Final AP+Coaches Poll"}
+            ]
+          },
+          {
+            "year": 2002,
+            "achievements": [
+              {"type": "rival_victory", "opponent": "Florida", "description": "Beat #6 Florida 41-16"},
+              {"type": "rival_victory", "opponent": "Florida State", "description": "Beat #9 Florida State"},
+              {"type": "beat_ranked_opponent", "points": 10, "description": "Beat #17 Pitt"},
+              {"type": "beat_ranked_opponent", "points": 10, "description": "Beat #18 Virginia Tech"},
+              {"type": "cfb_conference_championship", "description": "Big East Champions"},
+              {"type": "national_runner_up", "description": "National Runner-up" },
+              {"type": "ranked_final_poll", "description": "Ranked #2 in Final AP+Coaches Poll"}
             ]
           }
         ]
@@ -416,6 +428,7 @@
       "sweet_sixteen": 12,
       "elite_eight": 25,
       "final_four": 50,
+      "national_runner_up": 100,
       "championship": 200,
       "nba_finals": 100,
       "nba_mvp": 60,
