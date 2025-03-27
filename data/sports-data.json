@@ -10,7 +10,7 @@
           {
             "year": 2011,
             "achievements": [
-              { "type": "college_conference_championship", "points": 15, "description": "ACC Champions" },
+              { "type": "cbb_conference_championship", "points": 15, "description": "ACC Champions" },
               { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
               { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina in ACC Tournament" },
               { "type": "sweet_sixteen", "points": 12, "description": "Sweet Sixteen"}
@@ -56,7 +56,7 @@
             "achievements": [
               { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
               { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina in ACC Tournament" },
-              { "type": "college_conference_championship", "points": 15, "description": "ACC Champions" }
+              { "type": "cbb_conference_championship", "points": 15, "description": "ACC Champions" }
             ]
           }, 
           {
@@ -95,7 +95,7 @@
             "achievements": [
               { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
               { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
-              { "type": "college_conference_championship", "points": 15, "description": "ACC Champions" }
+              { "type": "cbb_conference_championship", "description": "ACC Champions" }
             ]
           },
           {
@@ -110,7 +110,7 @@
               { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina at Home" },
               { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina at the Dean Dome" },
               {"type": "rival_victory", "opponent": "North Carolina", "description": "Beat Carolina in ACC Tournament"},
-              {"type": "college_conference_championship", "description": "ACC Champions"}
+              {"type": "cbb_conference_championship", "description": "ACC Champions"}
             ]
           }
         ]
@@ -238,7 +238,7 @@
               { "type": "rival_victory", "opponent":"North Carolina", "description": "Beat Carolina"},
               { "type": "acc_championship_game", "description": "ACC Coastal Division Champion"},
               { "type": "bowl_game", "description": "Chick-fil-A Bowl"},
-              {"type": "ranked_final_poll", "points": 15, "description": "Ranked #23 in AP Final Poll"}
+              {"type": "ranked_final_poll", "points": 15, "description": "Ranked #22 in Final Coaches Poll"}
 
             ]
           }, 
@@ -301,6 +301,7 @@
         "name": "Miami Dolphins",
         "sport": "Football",
         "level": "professional",
+        "league": "NFL",
         "conference": "AFC",
         "seasons": [
           {
@@ -318,6 +319,7 @@
           {
             "year": 2000,
             "achievements": [
+              {"type": "11_win_season", "points": 10, "description": "11 Win Season"},
               {"type": "won_division", "description": "AFC East Winner"},
               {"type": "nfl_divisional_playoff", "description": "Divisional Playoff Round"}
             ]
@@ -325,6 +327,7 @@
           {
             "year": 2001,
             "achievements": [
+              {"type": "11_win_season", "points": 10, "description": "11 Win Season"},
               {"type": "nfl_playoff", "description": "Wild Card Playoff Round"}
             ]
           },
@@ -333,20 +336,250 @@
             "achievements": [
               {"type": "nfl_rushing_leader", "points": 15, "description": "Ricky Williams NFL Rushing Leader"}
             ]
+          },
+          {
+            "year": 2008,
+            "achievements": [
+              {"type": "won_division", "description": "AFC East Winner"},
+              {"type": "11_win_season", "points": 10, "description": "11 Win Season"},
+              {"type": "nfl_playoff", "description": "Wild Card Playoff Round"}
+            ]
+          },
+          {
+            "year": 2016,
+            "achievements": [
+              {"type": "nfl_playoff", "description": "Wild Card Playoff Round"}
+            ]
+          },
+          {
+            "year": 2022,
+            "achievements": [
+              {"type": "nfl_playoff", "description": "Wild Card Playoff Round"}
+            ]
+          },
+          {
+            "year": 2023,
+            "achievements": [
+              {"type": "nfl_passing_leader", "points": 15, "description": "Tua Tagovailoa NFL Passing Leader"},
+              {"type": "nfl_playoff", "description": "Wild Card Playoff Round"}
+            ]
           }
+        ]
+      },
+      {
+        "id": "umiami-football",
+        "name":"Miami Hurricanes Football",
+        "sport": "Football",
+        "level": "College",
+        "conference":"Big East / Atlantic Coast Conference",
+        "seasons":[
+          {
+            "year": 1999,
+            "achievements": [
+              { "type": "won_bowl_game", "description": "Won Gator Bowl"},
+              { "type": "ranked_final_poll", "description": "Ranked #15 in Final AP+Coaches Poll"}
+            ]
+          },
+          {
+            "year":2000,
+            "achievements": [
+              {"type": "rival_victory", "opponent": "Florida State", "description": "Beat #1 Florida State"},
+              {"type": "beat_ranked_opponent", "points": 15, "description": "Beat #2 Virginia Tech"},
+              {"type": "cfb_conference_championship", "description": "Big East Champions"},
+              {"type": "won_bowl_game", "points": 50, "description": "Beat #7 Florida in Sugar Bowl"},
+              { "type": "ranked_final_poll", "points": 25, "description": "Ranked #2 in Final AP+Coaches Poll"}
+            ]
+          },
+          {
+            "year": 2001,
+            "achievements": [
+              {"type": "rival_victory", "opponent": "Florida State", "description": "Beat #14 Florida State 49-27"},
+              {"type": "beat_ranked_opponent", "points": 15, "description": "Beat #14 Syracuse 59-0"},
+              {"type": "beat_ranked_opponent", "points": 15, "description": "Beat #12 Washington 65-7"},
+              {"type": "beat_ranked_opponent", "points": 15, "description": "Beat #14 Virginia Tech"},
+              {"type": "cfb_conference_championship", "description": "Big East Champions"},
+              {"type": "championship", "description": "National Champions, won Rose Bowl"},
+              { "type": "ranked_final_poll",  "points": 25, "description": "Ranked #1 in Final AP+Coaches Poll"}
+            ]
+          },
+          {
+            "year": 2002,
+            "achievements": [
+              {"type": "rival_victory", "opponent": "Florida", "description": "Beat #6 Florida 41-16"},
+              {"type": "rival_victory", "opponent": "Florida State", "description": "Beat #9 Florida State"},
+              {"type": "beat_ranked_opponent", "points": 10, "description": "Beat #17 Pitt"},
+              {"type": "beat_ranked_opponent", "points": 10, "description": "Beat #18 Virginia Tech"},
+              {"type": "cfb_conference_championship", "description": "Big East Champions"},
+              {"type": "national_runner_up", "description": "National Runner-up" },
+              {"type": "ranked_final_poll",  "points": 25, "description": "Ranked #2 in Final AP+Coaches Poll"}
+            ]
+          },
+          {
+            "year": 2003,
+            "achievements": [
+              {"type": "rival_victory", "opponent": "Florida", "description": "Beat #21 Florida"},
+              {"type": "rival_victory", "opponent": "Florida State", "description": "Beat #5 Florida State"},
+              {"type": "cfb_conference_championship", "description": "Big East Co-Champions"},
+              {"type": "won_bowl_game", "points": 50, "description": "Beat #9 Florida State in Orange Bowl"},
+              {"type": "ranked_final_poll",  "points": 20, "description": "Ranked #5 in Final AP+Coaches Poll"}
+            ]
+          },
+          {
+            "year": 2004,
+            "achievements": [
+              {"type": "rival_victory", "opponent": "Florida State", "description": "Beat #4 Florida State"},
+              {"type": "beat_ranked_opponent", "points": 10, "description": "Beat #10 Virginia"},
+              {"type": "won_bowl_game", "points": 50, "description": "Beat #20 Floridea in Peach Bowl"},
+              {"type": "ranked_final_poll",  "points": 15, "description": "Ranked #11 in Final AP+Coaches Poll"}
+            ]
+          },
+          {
+            "year": 2005,
+            "achievements": [
+              {"type": "beat_ranked_opponent", "points": 13, "description": "Beat #3 Virginia Tech"},
+              {"type": "bowl_game", "description": "Peach Bowl"},
+              {"type": "ranked_final_poll",  "points": 10, "description": "Ranked #17 in Final AP Poll"}
+            ]
+          },
+          {
+            "year": 2006,
+            "achievements": [
+              {"type": "won_bowl_game", "points": 20, "description": "MPC Computers Bowl"}
+            ]
+          },
+          {
+            "year": 2007,
+            "achievements": [
+              {"type": "rival_victory", "opponent": "Florida State", "description": "Beat Florida State"}
+            ]
+          },
+          {
+            "year": 2008,
+            "achievements": [
+              {"type": "bowl_game", "description": "Emerald Bowl"}
+            ]
+          },
+          {
+            "year": 2009,
+            "achievements": [
+              {"type": "rival_victory", "opponent": "Florida State", "description": "Beat #18 Florida State"},
+              {"type": "beat_ranked_opponent", "points": 10, "description": "Beat #14 Georgia Tech"},
+              {"type": "beat_ranked_opponent", "points": 10, "description": "Beat #8 Oklahoma"},
+              {"type": "bowl_game", "description": "Champs Sports Bowl"},
+              {"type": "ranked_final_poll",  "points": 10, "description": "Ranked #19 in Final AP+Coaches Poll"}
+            ]
+          }, 
+          {
+            "year": 2010,
+            "achievements": [
+              {"type": "bowl_game", "description": "Sun Bowl"}
+            ]
+          },
+          {
+            "year": 2011,
+            "achievements": [
+              {"type": "beat_ranked_opponent", "points": 13, "description": "Beat #17 Ohio State"}
+            ]
+          },
+          {
+            "year": 2013,
+            "achievements": [
+              {"type": "rival_victory", "points": 15, "opponent": "Florida", "description": "Beat #12 Florida" },
+              {"type": "won_bowl_game", "description": "Won Russell Athletic Bowl"}
+            ]
+          },
+          {
+            "year": 2014,
+            "achievements": [
+              {"type": "bowl_game", "description": "Independence Bowl"}
+            ]
+          },
+          {
+            "year": 2015,
+            "achievements": [
+              {"type": "bowl_game", "description": "Sun Bowl"}
+            ]
+          },
+          {
+            "year": 2016,
+            "achievements": [
+              {"type": "won_bowl_game", "description": "Beat #14 West Virginia in Russell Athletic Bowl"},
+              {"type": "ranked_final_poll",  "points": 9, "description": "Ranked #20 in Final AP Poll"}
+            ]
+          },
+          {
+            "year": 2017,
+            "achievements": [
+              {"type": "rival_victory", "opponent": "Florida State", "description": "Beat Florida State"},
+              {"type": "beat_ranked_opponent", "points": 10, "description": "Beat #13 Virginia Tech"},
+              {"type": "beat_ranked_opponent", "points": 15, "description": "Beat #3 Notre Dame"},
+              {"type": "bowl_game", "points": 25, "description": "Orange Bowl"},
+              {"type": "ranked_final_poll",  "points": 13, "description": "Ranked #13 in Final AP+Coaches Poll"}
+            ]
+          },
+          {
+            "year": 2018,
+            "achievements": [
+              {"type": "rival_victory", "opponent": "Florida State", "description": "Beat Florida State"},
+              {"type": "bowl_game", "description": "Pinstripe Bowl"}
+            ]
+          },
+          {
+            "year": 2019,
+            "achievements": [
+              {"type": "rival_victory", "opponent": "Florida State", "description": "Beat Florida State"},
+              {"type": "beat_ranked_opponent", "points": 5, "description": "Beat #20 Virginia"},
+              {"type": "bowl_game", "description": "Independence Bowl"}
+            ]
+          },
+          {
+            "year": 2020,
+            "achievements": [
+              {"type": "rival_victory", "opponent": "Florida State", "description": "Beat Florida State"},
+              {"type": "bowl_game", "description": "Cheez-It Bowl"},
+              {"type": "ranked_final_poll",  "points": 5, "description": "Ranked #22 in Final AP+Coaches Poll"}
+            ]
+          },
+          {
+            "year": 2021,
+            "achievements": [
+              {"type": "beat_ranked_opponent", "points": 10, "description": "Beat #18 NC State"},
+              {"type": "beat_ranked_opponent", "points": 10, "description": "Beat #17 Pitt"}
+            ]
+          },
+          {
+            "year": 2023,
+            "achievements": [
+              {"type": "beat_ranked_opponent", "points": 5, "description": "Beat #23 Texas A&M"},
+              {"type": "bowl_game", "description": "Pinstripe Bowl"}
+            ]
+          },
+          {
+            "year": 2024,
+            "achievements": [
+              {"type": "rival_victory", "opponent": "Florida", "description": "Beat Florida"},
+              {"type": "rival_victory", "opponent": "Florida State", "description": "Beat Florida State"},
+              {"type": "bowl_game", "description": "Pop-Tarts Bowl"},
+              {"type": "ranked_final_poll",  "points": 10, "description": "Ranked #18 in Final AP+Coaches Poll"}
+            ]
+          }
+
         ]
       }
     ],
     "achievement_default_points": {
       "rival_victory": {
         "North Carolina": 20,
+        "Florida State": 20,
         "Kentucky": 10,
-        "Kansas": 10
+        "Kansas": 10,
+        "Florida": 10
       },
-      "college_conference_championship": 15,
+      "cbb_conference_championship": 17,
       "sweet_sixteen": 12,
       "elite_eight": 25,
       "final_four": 50,
+      "national_runner_up": 100,
       "championship": 200,
       "nba_finals": 100,
       "nba_mvp": 60,
@@ -356,6 +589,7 @@
       "all_nba_third_team": 5,
       "bowl_game": 20,
       "won_bowl_game": 40,
+      "cfb_conference_championship": 50,
       "nfl_divisional_playoff": 25
     }
   }
