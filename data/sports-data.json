@@ -41,6 +41,7 @@
             "achievements": [
               { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
               { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina" },
+              {"type": "final_four", "description": "Final Four"},
               { "type": "championship", "points": 200, "description": "National Champions"}
             ]
           }, 
@@ -110,7 +111,8 @@
               { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina at Home" },
               { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat Carolina at the Dean Dome" },
               {"type": "rival_victory", "opponent": "North Carolina", "description": "Beat Carolina in ACC Tournament"},
-              {"type": "cbb_conference_championship", "description": "ACC Champions"}
+              {"type": "cbb_conference_championship", "description": "ACC Champions"},
+              {"type": "final_four", "description": "Final Four"}
             ]
           }
         ]
@@ -564,6 +566,25 @@
             ]
           }
 
+        ]
+      },
+      {
+        "id": "miami-marlins",
+        "name":"Florida Marlins",
+        "sport": "Baseball",
+        "level": "professional",
+        "conference":"National League",
+        "seasons":[
+          {"year": 1997,
+           "achievements": [
+            {"type": "championship", "description": "World Series Champions"}
+           ]
+          },
+          {"year": 2003,
+           "achievements": [
+            {"type": "championship", "description": "World Series Champions"}
+           ]
+          }
         ]
       }
     ],
