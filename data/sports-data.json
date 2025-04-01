@@ -573,6 +573,7 @@
         "name":"Florida Marlins",
         "sport": "Baseball",
         "level": "professional",
+        "league": "MLB",
         "conference":"National League",
         "seasons":[
           {"year": 1997,
