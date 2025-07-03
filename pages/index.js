@@ -36,7 +36,6 @@ export default function Home({ allPostsData }) {
         <br />
         Coding: 
         <Link href='https://github.com/mjelgart' target='_blank'>GitHub</Link> {"\t"}
-        <Link href='https://replit.com/@MichaelElgart1' target='_blank'>Replit</Link> 
         <br/>
         Fun: 
         <Link href='https://www.threads.net/@mjelgart' target='_blank'>Threads</Link> {"\t"}
@@ -70,7 +69,6 @@ export default function Home({ allPostsData }) {
           <li className={utilStyles.listItem} key='stratechery'>
             <Link href='https://stratechery.com/' target='_blank'>Stratechery</Link>
           </li>
-
           <li className={utilStyles.listItem} key='Postlibertarian'>
             <Link href='https://postlibertarian.com/' target='_blank'>Postlibertarian</Link>
           </li>
@@ -80,15 +78,40 @@ export default function Home({ allPostsData }) {
           <li className={utilStyles.listItem} key='gwern'>
             <Link href='https://gwern.net/index' target='_blank'>Gwern</Link>
           </li>
+          <li className={utilStyles.listItem} key='constructionphysics'>
+            <Link href='https://www.construction-physics.com/' target='_blank'>Construction Physics</Link>
+          </li>
           <li className={utilStyles.listItem} key='margrev'>
             <Link href='https://marginalrevolution.com/' target='_blank'>Marginal Revolution</Link>
-          </li>
-          <li className={utilStyles.listItem} key='apricitas'>
-            <Link href='https://www.apricitas.io/' target='_blank'>Aprecitas Economics</Link>
           </li>
           <li className={utilStyles.listItem} key='betonit'>
             <Link href='https://www.betonit.ai/' target='_blank'>Bet On It</Link>
           </li>
+        </ul>
+      </section>
+      <section className={`${utilStyles.padding1px} ${utilStyles.marginBottom16px}`}>
+        <h2 className={utilStyles.headingLg}>What I'm Listening To</h2>
+        <ul className={utilStyles.list}>
+
+          <li className={utilStyles.listItem} key='dwarkesh'>
+            <Link href='https://www.dwarkesh.com/' target='_blank'>Dwarkesh</Link>
+          </li>
+          <li className={utilStyles.listItem} key='complexsystemsc'>
+            <Link href='https://www.complexsystemspodcast.com/' target='_blank'>Complex Systems</Link>
+          </li>
+          <li className={utilStyles.listItem} key='reasonroundtable'>
+            <Link href='https://reason.com/podcasts/the-reason-roundtable/' target='_blank'>Reason Roundtable</Link>
+          </li>
+          <li className={utilStyles.listItem} key='thefifthcolumn'>
+            <Link href='https://www.wethefifth.com/' target='_blank'>The Fifth Column</Link>
+          </li>
+          <li className={utilStyles.listItem} key='econtalk'>
+            <Link href='https://www.econlib.org/econtalk/' target='_blank'>EconTalk</Link>
+          </li>
+          <li className={utilStyles.listItem} key='80000hours'>
+            <Link href='https://80000hours.org/podcast//' target='_blank'>80,000 Hours</Link>
+          </li>
+          
         </ul>
       </section>
       <section className={`${utilStyles.padding1px} ${utilStyles.marginBottom16px}`}>
