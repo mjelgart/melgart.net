@@ -295,6 +295,13 @@
               {"type": "rival_victory", "opponent":"North Carolina", "description": "Beat Carolina"},
               {"type": "bowl_game", "description": "Gator Bowl"}
             ]
+          },
+          {
+            "year": 2025,
+            "achievements": [
+              {"type": "rival_victory", "opponent":"North Carolina", "description": "Beat Carolina"},
+              {"type": "cfb_conference_championship", "description": "ACC Champions"}
+            ]
           }
         ]
       },
@@ -563,6 +570,16 @@
               {"type": "rival_victory", "opponent": "Florida State", "description": "Beat Florida State"},
               {"type": "bowl_game", "description": "Pop-Tarts Bowl"},
               {"type": "ranked_final_poll",  "points": 10, "description": "Ranked #18 in Final AP+Coaches Poll"}
+            ]
+          },
+          {
+            "year": 2025,
+            "achievements": [
+              {"type": "rival_victory", "opponent": "Florida State", "description": "Beat #18 Florida State"},
+              {"type": "beat_ranked_opponent", "points": 15, "description": "Beat #6 Notre Dame"},
+              {"type": "beat_ranked_opponent", "points": 10, "description": "Beat #18 South Florida"},
+              {"type": "beat_ranked_opponent", "points": 10, "description": "Beat #22 Pittsburgh"},
+              {"type": "cfb_playoff_win", "points": 60, "description": "College Football Playoff Win over #7 Texas A&M"}
             ]
           }
 
