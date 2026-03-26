@@ -579,7 +579,10 @@
               {"type": "beat_ranked_opponent", "points": 15, "description": "Beat #6 Notre Dame"},
               {"type": "beat_ranked_opponent", "points": 10, "description": "Beat #18 South Florida"},
               {"type": "beat_ranked_opponent", "points": 10, "description": "Beat #22 Pittsburgh"},
-              {"type": "cfb_playoff_win", "points": 60, "description": "College Football Playoff Win over #7 Texas A&M"}
+              {"type": "cfb_playoff_win", "points": 60, "description": "College Football Playoff Win over #7 Texas A&M"},
+              {"type": "cfb_playoff_win", "points": 60, "description": "College Football Playoff Win over Ohio State"},
+              {"type": "cfb_playoff_win", "points": 60, "description": "College Football Playoff Win over Ole Miss"},
+              {"type": "national_runner_up", "points": 100, "description": "College Football Playoff National Championship Game, lost to Indiana 27-21"}
             ]
           }
 
