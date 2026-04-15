@@ -29,7 +29,7 @@ export default function Post({ postData }) {
       <Head>
         {injectMetadata(postData.title, description)}
       </Head>
-      <article>
+      <article data-pagefind-body>
         <h1 className={utilStyles.headingXl}>{postData.title}</h1>
         <div className={utilStyles.lightText}>
           <Date dateString={postData.date} />

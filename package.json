@@ -4,7 +4,8 @@
     "build": "next build",
     "dev": "next dev",
     "start": "next start",
-    "export": "next export"
+    "export": "next export",
+    "postbuild": "npx pagefind --site out"
   },
   "dependencies": {
     "date-fns": "^2.30.0",
@@ -15,6 +16,9 @@
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.0",
     "remark-html": "^16.0.1"
+  },
+  "devDependencies": {
+    "pagefind": "^1.0.0"
   },
   "engines": {
     "node": ">=18"

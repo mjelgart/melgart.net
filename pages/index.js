@@ -5,6 +5,7 @@ import { getSortedPostsData } from '../utils/posts';
 import Link from 'next/link';
 import Date from '../components/date';
 import injectMetadata from '../components/injectMetadata';
+import Search from '../components/Search';
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -40,6 +41,10 @@ export default function Home({ allPostsData }) {
         Fun: 
         <Link href='https://www.threads.net/@mjelgart' target='_blank'>Threads</Link> {"\t"}
         <Link href='https://letterboxd.com/3Fast3Furious/' target='_blank'>Letterboxd</Link> </b>
+      </section>
+      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px} ${utilStyles.marginBottom16px}`}>
+        <h2 className={utilStyles.headingLg}>Search</h2>
+        <Search />
       </section>
       <section className={` ${utilStyles.padding1px} ${utilStyles.marginBottom16px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
