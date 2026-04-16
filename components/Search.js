@@ -11,12 +11,22 @@ export default function Search() {
       try {
         // Dynamically import Pagefind only on the client side and in production builds
         if (typeof window !== 'undefined') {
-          const pagefind = await import('/pagefind/pagefind.js');
-          await pagefind.init();
+          // Use dynamic script injection to avoid Next.js compile-time module resolution
+          await new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = '/pagefind/pagefind-ui.js';
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+          });
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = '/pagefind/pagefind-ui.css';
+          document.head.appendChild(link);
 
           // Create search interface
-          if (searchRef.current) {
-            new pagefind.PagefindUI({
+          if (searchRef.current && window.PagefindUI) {
+            new window.PagefindUI({
               element: searchRef.current,
               showImages: false,
               showSubResults: true,
