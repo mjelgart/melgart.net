@@ -27,7 +27,10 @@ The implementer should NOT revisit these. If one seems wrong mid-execution,
 stop and flag it to the user rather than improvising.
 
 ### Framework & integrations
-- Astro latest (5.x).
+- Astro latest (6.x). (Originally specified as 5.x when this plan was
+  authored 2026-04-20; `astro@latest` has since rolled forward to 6 and we
+  adopted it during astro-01 rather than pin back. Content-collection
+  differences are noted in the "Content pipeline" subsection below.)
 - `output: 'static'` (default).
 - `@astrojs/react` integration — lets the two interactive components stay as
   React islands. Expected bundle: React runtime ships only on `/` and `/sports`
@@ -38,19 +41,26 @@ stop and flag it to the user rather than improvising.
 - Use `astro:content` **Content Collections**.
 - Collection name: `posts`. Physical location: `src/content/posts/`.
 - All 15 markdown files from `/posts/` move here unchanged.
-- Schema (`src/content/config.ts`):
+- Schema (`src/content.config.ts` — Astro 6 moved the file out of
+  `src/content/` and requires a `loader` per collection):
   ```ts
   import { defineCollection, z } from 'astro:content';
-  export const collections = {
-    posts: defineCollection({
-      schema: z.object({
-        title: z.string(),
-        date: z.string(),
-        subtitle: z.string().optional(),
-      }),
+  import { glob } from 'astro/loaders';
+
+  const posts = defineCollection({
+    loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
+    schema: z.object({
+      title: z.string(),
+      date: z.string(),
+      subtitle: z.string().optional(),
     }),
-  };
+  });
+
+  export const collections = { posts };
   ```
+  Under the glob loader each entry's stable key is `entry.id` (filename
+  without extension), and there is no `entry.slug` or `entry.render()`.
+  Use `render(entry)` imported from `astro:content` — see Commit 4.
 - **Delete** `utils/posts.js`, `tests/utils/posts.test.js`, and
   `tests/fixtures/posts/` — the content collection replaces every one of
   those lines.
@@ -187,6 +197,8 @@ Edit `.github/workflows/build-and-deploy.yml`:
 - `astro`
 - `@astrojs/react`
 - `react`, `react-dom` (direct deps again, but only loaded by islands)
+- `@astrojs/check`, `typescript` (devDeps — required by `npx astro check`
+  checkpoint; added during astro-01)
 
 The net expectation: node_modules drops from ~597 MB to ~250 MB; transitive
 deps from 235 to ~120.
@@ -213,8 +225,11 @@ and all verifications pass, open **one PR** to `main`.
 - **Checkpoint:** `npx astro --version` works.
 
 ### Commit 2 — `feat(astro): add content collection for posts`
-- `src/content/config.ts` with the schema above.
-- Move all 15 files from `/posts/*.md` → `/src/content/posts/*.md` (git mv).
+- `src/content.config.ts` with the schema above (Astro 6 path — NOT
+  `src/content/config.ts`, which is the legacy location that `astro check`
+  will reject).
+- Move all 15 files from `/posts/*.md` → `/src/content/posts/*.md` (git mv
+  with a wildcard, not file-by-file).
 - `npx astro check` — no type errors.
 - **Checkpoint:** `npx astro check` succeeds.
 
@@ -236,9 +251,15 @@ and all verifications pass, open **one PR** to `main`.
 - **Checkpoint:** `npm run build` in Astro (rename one of Next's scripts temporarily if needed) produces `/`, `/posts`, `/saved-on-hosting` with correct content. Spot-check HTML output.
 
 ### Commit 4 — `feat(astro): port dynamic posts and React islands`
-- `src/pages/posts/[slug].astro`:
-  - `getStaticPaths` returns all entries from the collection with `params: { slug: entry.slug }`.
-  - Body: `<article data-pagefind-body>` with title, date, and `<Content />` from `entry.render()`.
+- `src/pages/posts/[slug].astro` (Astro 6 content API):
+  - Import `{ getCollection, render }` from `astro:content`.
+  - `getStaticPaths` maps each entry to `{ params: { slug: entry.id },
+    props: { entry } }`. (Under the glob loader, `entry.id` is the
+    filename without `.md` extension — matches the current Next slug.)
+  - Body frontmatter: `const { entry } = Astro.props; const { Content } =
+    await render(entry);`
+  - Body: `<article data-pagefind-body>` with title, date, and
+    `<Content />`.
 - `src/components/Search.jsx`:
   - Copy `components/Search.js` verbatim, rename. Adjust CSS import (styled block or .module.css next to it). No logic changes.
 - `src/components/TeamsTracker.jsx`:
