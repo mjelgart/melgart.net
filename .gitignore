@@ -90,6 +90,9 @@ web_modules/
 .next
 out
 
+# Astro build output and generated types
+.astro
+
 # Nuxt.js build / generate output
 .nuxt
 dist
