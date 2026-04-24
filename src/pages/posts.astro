@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch and sort all posts
+const allPosts = await getCollection('posts');
+const sortedPosts = allPosts.sort((a, b) =>
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const title = 'Blog Archive';
+const description = 'Archive of all blog posts by Michael Elgart';
+
+// Date formatter
+const formatDate = (dateString) => {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(new Date(dateString));
+};
+---
+
+<Layout title={title} description={description}>
+  <section class="padding1px marginBottom16px">
+    <h2 class="headingLg">All Posts</h2>
+    <ul class="list">
+      {sortedPosts.map((post) => (
+        <li class="listItem" key={post.id}>
+          <a href={`/posts/${post.id}`}>{post.data.title}</a>
+          <br />
+          <small class="lightText">
+            <time datetime={post.data.date}>{formatDate(post.data.date)}</time>
+          </small>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>
