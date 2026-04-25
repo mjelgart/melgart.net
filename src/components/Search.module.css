@@ -1,0 +1,79 @@
+.searchContainer {
+  margin-bottom: 2rem;
+}
+
+.searchWidget {
+  max-width: 100%;
+}
+
+.searchPlaceholder {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.placeholderInput {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  cursor: not-allowed;
+}
+
+.loadingText {
+  color: #666;
+  font-style: italic;
+}
+
+.errorText {
+  color: #999;
+  font-style: italic;
+}
+
+/* Pagefind UI styling overrides */
+.searchWidget :global(.pagefind-ui) {
+  font-family: inherit;
+}
+
+.searchWidget :global(.pagefind-ui__search-input) {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.searchWidget :global(.pagefind-ui__search-input):focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 1px #0070f3;
+}
+
+.searchWidget :global(.pagefind-ui__results) {
+  margin-top: 1rem;
+}
+
+.searchWidget :global(.pagefind-ui__result) {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+}
+
+.searchWidget :global(.pagefind-ui__result-link) {
+  color: #0070f3;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.searchWidget :global(.pagefind-ui__result-link):hover {
+  text-decoration: underline;
+}
+
+.searchWidget :global(.pagefind-ui__result-excerpt) {
+  margin-top: 0.5rem;
+  color: #666;
+  line-height: 1.5;
+}

@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TeamsTracker from '../components/TeamsTracker.jsx';
+
+const title = "Michael's Sports Teams";
+const description = "Tracking team success during my life.";
+---
+
+<Layout title={title} description={description}>
+  <article>
+    <h1 class="headingXl">{title}</h1>
+    <section>
+      <p>I use this page to track my six main sports team's performance.</p>
+      <TeamsTracker client:load />
+    </section>
+  </article>
+</Layout>

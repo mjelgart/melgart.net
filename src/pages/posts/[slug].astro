@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const description = entry.data.subtitle ?? "Within cells interlinked.";
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(new Date(entry.data.date));
+---
+
+<Layout title={entry.data.title} description={description}>
+  <article data-pagefind-body>
+    <h1 class="headingXl">{entry.data.title}</h1>
+    <div class="lightText">
+      <time datetime={entry.data.date}>{formattedDate}</time>
+    </div>
+    <Content />
+  </article>
+</Layout>
