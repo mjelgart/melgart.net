@@ -1,31 +1,29 @@
 {
   "private": true,
   "scripts": {
-    "build": "next build",
-    "dev": "next dev",
-    "start": "next start",
-    "export": "next export",
-    "postbuild": "npx pagefind --site out",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "postbuild": "npx pagefind --site dist",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "astro": "astro"
   },
   "dependencies": {
-    "date-fns": "^2.30.0",
-    "gray-matter": "^4.0.3",
-    "next": "^14.2.3",
+    "@astrojs/react": "^5.0.4",
+    "astro": "^6.1.9",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "remark": "^15.0.1",
-    "remark-gfm": "^4.0.0",
-    "remark-html": "^16.0.1"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.8",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
-    "@vitejs/plugin-react": "^6.0.1",
     "jsdom": "^29.0.2",
     "pagefind": "^1.0.0",
+    "typescript": "^5.9.3",
     "vitest": "^4.1.4"
   },
   "engines": {

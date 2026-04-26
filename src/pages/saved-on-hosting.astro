@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Money calculator - runs at build time
+const startDate = new Date('2024-04-14');
+const currentDate = new Date();
+const timeDiff = currentDate.getTime() - startDate.getTime();
+const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+const yearsDiff = daysDiff / 365.25;
+const moneySaved = (yearsDiff * 48).toFixed(2);
+
+const title = "Money Saved";
+const description = "Raking in the Benjamins.";
+---
+
+<Layout title={title} description={description}>
+  <article>
+    <h1 class="headingXl">{title}</h1>
+    <section>
+      <p>This page calculates how much money I've saved by using the free Github Pages site over the former Wordpress hosted site.</p>
+      <div>
+        <p class="headingLg">Money saved on cloud hosting: ${moneySaved}</p>
+        {parseFloat(moneySaved) < 10 && <p>Not a lot so far! But in a few months it'll start to add up.</p>}
+      </div>
+      <p>If you'd like to set up your own site on Github Pages, I made a post documenting what I did <a href="/posts/self-hosted-blog" target="_blank">here</a>.</p>
+    </section>
+  </article>
+</Layout>

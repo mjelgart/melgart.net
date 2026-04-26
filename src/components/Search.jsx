@@ -9,9 +9,7 @@ export default function Search() {
   useEffect(() => {
     async function loadPagefind() {
       try {
-        // Dynamically import Pagefind only on the client side and in production builds
         if (typeof window !== 'undefined') {
-          // Use dynamic script injection to avoid Next.js compile-time module resolution
           await new Promise((resolve, reject) => {
             const script = document.createElement('script');
             script.src = '/pagefind/pagefind-ui.js';
@@ -24,7 +22,6 @@ export default function Search() {
           link.href = '/pagefind/pagefind-ui.css';
           document.head.appendChild(link);
 
-          // Create search interface
           if (searchRef.current && window.PagefindUI) {
             new window.PagefindUI({
               element: searchRef.current,
@@ -48,7 +45,6 @@ export default function Search() {
           }
         }
       } catch (err) {
-        // In development mode, Pagefind won't be available
         setError('Search functionality is available only in production builds.');
         console.log('Pagefind not available:', err.message);
       }

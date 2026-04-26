@@ -1,0 +1,132 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import Search from '../components/Search.jsx';
+
+// Fetch and sort posts
+const allPosts = await getCollection('posts');
+const sortedPosts = allPosts.sort((a, b) =>
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+).slice(0, 5);
+
+const siteTitle = 'Michael Elgart';
+const description = "Michael's blog.";
+
+// Date formatter
+const formatDate = (dateString) => {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(new Date(dateString));
+};
+---
+
+<Layout title={siteTitle} description={description} home={true}>
+  <div class="column">
+    <h1 class="headingXl">Michael Elgart</h1>
+    <section class="headingMd">
+      <p>I'm a software engineer, dad, and blogger. I grew up in Miami, graduated from Duke in North Carolina, and now live with my family in Central Texas.</p>
+      <p>I like discussing prediction markets, AI risk, governance incentives, and basketball. I occasionally write down some of those thoughts which are hosted on the blog here.</p>
+    </section>
+    <section class="headingMd padding1px marginBottom16px">
+      <h2 class="headingLg">My Links</h2>
+      <b>
+        Professional: <a href="https://www.linkedin.com/in/michaelelgart/" target="_blank">LinkedIn</a>
+        <br />
+        Coding:
+        <a href="https://github.com/mjelgart" target="_blank">GitHub</a>
+        <br/>
+        Fun:
+        <a href="https://www.threads.net/@mjelgart" target="_blank">Threads</a>
+        <a href="https://letterboxd.com/3Fast3Furious/" target="_blank">Letterboxd</a>
+      </b>
+    </section>
+    <section class="headingMd padding1px marginBottom16px">
+      <h2 class="headingLg">Search</h2>
+      <Search client:visible />
+    </section>
+    <section class="padding1px marginBottom16px">
+      <h2 class="headingLg">Blog</h2>
+      <ul class="list">
+        {sortedPosts.map((post) => (
+          <li class="listItem" key={post.id}>
+            <a href={`/posts/${post.id}`}>{post.data.title}</a>
+            <br />
+            <small class="lightText">
+              <time datetime={post.data.date}>{formatDate(post.data.date)}</time>
+            </small>
+          </li>
+        ))}
+        <li><a href="/posts"> ➡️All Posts</a></li>
+      </ul>
+    </section>
+    <section class="padding1px marginBottom16px">
+      <h2 class="headingLg">What I'm Reading</h2>
+      <ul class="list">
+        <li class="listItem">
+          <a href="https://www.astralcodexten.com/" target="_blank">Astral Codex Ten</a>
+        </li>
+        <li class="listItem">
+          <a href="https://www.slowboring.com/" target="_blank">Slow Boring</a>
+        </li>
+        <li class="listItem">
+          <a href="https://stratechery.com/" target="_blank">Stratechery</a>
+        </li>
+        <li class="listItem">
+          <a href="https://postlibertarian.com/" target="_blank">Postlibertarian</a>
+        </li>
+        <li class="listItem">
+          <a href="https://thezvi.wordpress.com/" target="_blank">Don't Worry About the Vase</a>
+        </li>
+        <li class="listItem">
+          <a href="https://gwern.net/index" target="_blank">Gwern</a>
+        </li>
+        <li class="listItem">
+          <a href="https://www.construction-physics.com/" target="_blank">Construction Physics</a>
+        </li>
+        <li class="listItem">
+          <a href="https://marginalrevolution.com/" target="_blank">Marginal Revolution</a>
+        </li>
+      </ul>
+    </section>
+    <section class="padding1px marginBottom16px">
+      <h2 class="headingLg">What I'm Listening To</h2>
+      <ul class="list">
+        <li class="listItem">
+          <a href="https://www.dwarkesh.com/" target="_blank">Dwarkesh</a>
+        </li>
+        <li class="listItem">
+          <a href="https://www.complexsystemspodcast.com/" target="_blank">Complex Systems</a>
+        </li>
+        <li class="listItem">
+          <a href="https://reason.com/podcasts/the-reason-roundtable/" target="_blank">Reason Roundtable</a>
+        </li>
+        <li class="listItem">
+          <a href="https://www.wethefifth.com/" target="_blank">The Fifth Column</a>
+        </li>
+        <li class="listItem">
+          <a href="https://www.econlib.org/econtalk/" target="_blank">EconTalk</a>
+        </li>
+        <li class="listItem">
+          <a href="https://80000hours.org/podcast/" target="_blank">80,000 Hours</a>
+        </li>
+      </ul>
+    </section>
+    <section class="padding1px marginBottom16px">
+      <h2 class="headingLg">Extras</h2>
+      <ul class="list">
+        <li class="listItem">
+          <a href="/sports">Sports</a>
+        </li>
+        <li class="listItem">
+          <a href="/saved-on-hosting">Money Saved Self Hosting</a>
+        </li>
+      </ul>
+    </section>
+    <br />
+    <p>Material on this site created by Michael Elgart is licensed under
+      <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer"> CC BY 4.0</a>.
+    </p>
+  </div>
+</Layout>

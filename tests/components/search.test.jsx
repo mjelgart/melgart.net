@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
-import Search from '../../components/Search.js';
+import Search from '../../src/components/Search.jsx';
 
 describe('Search component', () => {
   beforeEach(() => {
