@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/build-stats.mjs",
     "preview": "astro preview",
     "postbuild": "npx pagefind --site dist",
     "test": "vitest",
