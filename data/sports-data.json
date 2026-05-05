@@ -114,6 +114,14 @@
               {"type": "cbb_conference_championship", "description": "ACC Champions"},
               {"type": "final_four", "description": "Final Four"}
             ]
+          },
+          {
+            "year": 2026,
+            "achievements": [
+              { "type": "rival_victory", "opponent": "North Carolina", "points": 20, "description": "Beat UNC" },
+              { "type": "cbb_conference_championship", "points": 17, "description": "ACC Tournament Champions" },
+              { "type": "elite_eight", "points": 25, "description": "Elite Eight (lost to UConn 73-72)" }
+            ]
           }
         ]
       },
@@ -300,7 +308,8 @@
             "year": 2025,
             "achievements": [
               {"type": "rival_victory", "opponent":"North Carolina", "description": "Beat Carolina"},
-              {"type": "cfb_conference_championship", "description": "ACC Champions"}
+              {"type": "cfb_conference_championship", "description": "ACC Champions"},
+              {"type": "won_bowl_game", "points": 40, "description": "Won Sun Bowl 42-39 vs Arizona State"}
             ]
           }
         ]
