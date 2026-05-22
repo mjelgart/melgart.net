@@ -61,6 +61,7 @@ function walkDirectory(dirPath, baseDir = dirPath) {
 
         files.push({
           path: relativePath,
+          fullPath,
           type,
           ...sizes,
         });
@@ -70,6 +71,28 @@ function walkDirectory(dirPath, baseDir = dirPath) {
 
   walk(dirPath);
   return files;
+}
+
+// Astro inlines CSS into <style> tags rather than emitting .css files, so
+// counting by extension reports 0 CSS bytes. Pull <style> contents out of
+// each HTML file to surface the inlined CSS size as a separate informational
+// field. The bytes remain counted under the html bucket — this is a subset.
+function getInlinedCssStats(files) {
+  const styleRegex = /<style[^>]*>([\s\S]*?)<\/style>/gi;
+  let rawConcat = '';
+
+  for (const file of files) {
+    if (file.type !== 'html') continue;
+    const content = fs.readFileSync(file.fullPath, 'utf8');
+    let match;
+    while ((match = styleRegex.exec(content)) !== null) {
+      rawConcat += match[1];
+    }
+  }
+
+  const raw = Buffer.byteLength(rawConcat, 'utf8');
+  const gzipped = raw === 0 ? 0 : zlib.gzipSync(rawConcat).length;
+  return { raw, gzipped };
 }
 
 function getRouteFromPath(filePath) {
@@ -102,19 +125,25 @@ function analyzeRouteAssets(files) {
     };
   }
 
-  // Analyze each file and assign to routes
+  const addToRoute = (route, file) => {
+    const typeStats = routeAssets[route][file.type] || { raw: 0, gzipped: 0 };
+    typeStats.raw += file.raw;
+    typeStats.gzipped += file.gzipped;
+    routeAssets[route].total.raw += file.raw;
+    routeAssets[route].total.gzipped += file.gzipped;
+  };
+
   for (const file of files) {
-    const route = getRouteFromPath(file.path);
-
-    // If this is a tracked route, add to its stats
-    if (routeAssets[route]) {
-      const typeStats = routeAssets[route][file.type] || { raw: 0, gzipped: 0 };
-      typeStats.raw += file.raw;
-      typeStats.gzipped += file.gzipped;
-
-      routeAssets[route].total.raw += file.raw;
-      routeAssets[route].total.gzipped += file.gzipped;
+    // Files under _astro/ are shared bundles (Astro runtime, hydrated islands)
+    // that a browser may load on any page. Attribute them to every tracked
+    // route so per-route totals reflect what's actually downloaded.
+    if (file.path.startsWith('_astro/') || file.path.startsWith('_astro' + path.sep)) {
+      for (const route of TRACKED_ROUTES) addToRoute(route, file);
+      continue;
     }
+
+    const route = getRouteFromPath(file.path);
+    if (routeAssets[route]) addToRoute(route, file);
   }
 
   return routeAssets;
@@ -176,6 +205,7 @@ function generateBuildStats() {
   // Walk the dist directory and analyze files
   const files = walkDirectory(distDir);
   const totalsByType = getTotalSizeByType(files);
+  totalsByType.inlinedCss = getInlinedCssStats(files);
   const routeAssets = analyzeRouteAssets(files);
 
   // Count posts
