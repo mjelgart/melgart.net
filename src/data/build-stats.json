@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0.0",
+  "buildTimestamp": "2026-05-05T12:02:01.537Z",
+  "gitCommitSha": "ce95a62281c135747225e8fc5ce57b4dddbd22a7",
+  "postCount": 15,
+  "totalSizes": {
+    "html": {
+      "raw": 165154,
+      "gzipped": 68541
+    },
+    "css": {
+      "raw": 0,
+      "gzipped": 0
+    },
+    "js": {
+      "raw": 166992,
+      "gzipped": 51742
+    },
+    "images": {
+      "raw": 962474,
+      "gzipped": 937015
+    },
+    "other": {
+      "raw": 0,
+      "gzipped": 0
+    },
+    "total": {
+      "raw": 1294620,
+      "gzipped": 1057298
+    }
+  },
+  "routeAssets": {
+    "/": {
+      "html": {
+        "raw": 12807,
+        "gzipped": 4474
+      },
+      "css": {
+        "raw": 0,
+        "gzipped": 0
+      },
+      "js": {
+        "raw": 0,
+        "gzipped": 0
+      },
+      "images": {
+        "raw": 0,
+        "gzipped": 0
+      },
+      "total": {
+        "raw": 12807,
+        "gzipped": 4474
+      }
+    },
+    "/blog": {
+      "html": {
+        "raw": 0,
+        "gzipped": 0
+      },
+      "css": {
+        "raw": 0,
+        "gzipped": 0
+      },
+      "js": {
+        "raw": 0,
+        "gzipped": 0
+      },
+      "images": {
+        "raw": 0,
+        "gzipped": 0
+      },
+      "total": {
+        "raw": 0,
+        "gzipped": 0
+      }
+    },
+    "/sports": {
+      "html": {
+        "raw": 10200,
+        "gzipped": 3344
+      },
+      "css": {
+        "raw": 0,
+        "gzipped": 0
+      },
+      "js": {
+        "raw": 0,
+        "gzipped": 0
+      },
+      "images": {
+        "raw": 0,
+        "gzipped": 0
+      },
+      "total": {
+        "raw": 10200,
+        "gzipped": 3344
+      }
+    },
+    "/search": {
+      "html": {
+        "raw": 0,
+        "gzipped": 0
+      },
+      "css": {
+        "raw": 0,
+        "gzipped": 0
+      },
+      "js": {
+        "raw": 0,
+        "gzipped": 0
+      },
+      "images": {
+        "raw": 0,
+        "gzipped": 0
+      },
+      "total": {
+        "raw": 0,
+        "gzipped": 0
+      }
+    }
+  },
+  "fileCount": 30,
+  "generatedBy": "scripts/build-stats.mjs"
+}
