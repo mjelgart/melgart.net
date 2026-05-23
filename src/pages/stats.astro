@@ -1,0 +1,157 @@
+---
+import Layout from '../layouts/Layout.astro';
+import buildStats from '../data/build-stats.json';
+
+const title = "Site Stats";
+const description = "How tiny this static site really is.";
+
+// Format a byte count into human-readable units (binary KB/MB).
+const formatBytes = (bytes) => {
+  if (!bytes) return '0 B';
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+};
+
+const formatDate = (iso) =>
+  new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(new Date(iso));
+
+const { totalSizes, routeAssets, postCount, fileCount, buildTimestamp, gitCommitSha } = buildStats;
+const inlinedCss = totalSizes.inlinedCss; // added 2026-05; may be absent in older builds
+const shortSha = gitCommitSha ? gitCommitSha.slice(0, 7) : null;
+
+// By-type rows for the main breakdown. The literal `css` bucket is omitted —
+// Astro inlines CSS into <style> tags, so it always reads 0; the real number
+// is surfaced separately as inlinedCss below.
+const typeLabels = { html: 'HTML', js: 'JavaScript', images: 'Images', other: 'Other' };
+const typeRows = Object.entries(typeLabels)
+  .map(([key, label]) => ({ label, ...(totalSizes[key] || { raw: 0, gzipped: 0 }) }))
+  .filter((row) => row.raw > 0);
+
+// Per-route rows, largest gzipped footprint first.
+const routeRows = Object.entries(routeAssets)
+  .map(([route, stats]) => ({ route, ...stats.total }))
+  .sort((a, b) => b.gzipped - a.gzipped);
+---
+
+<Layout title={title} description={description}>
+  <article>
+    <h1 class="headingXl">{title}</h1>
+    <section>
+      <p>
+        This site is static — plain HTML built ahead of time, no server doing
+        work per request. Here's exactly how small that makes it. Numbers are
+        regenerated on every build.
+      </p>
+
+      <p class="hero">
+        Whole site: <strong>{formatBytes(totalSizes.total.gzipped)}</strong> gzipped
+        <span class="lightText">({formatBytes(totalSizes.total.raw)} raw)</span>
+        across {fileCount} files.
+      </p>
+
+      <p class="lightText meta">
+        {postCount} blog posts · built {formatDate(buildTimestamp)}
+        {shortSha && (
+          <> · commit <a href={`https://github.com/mjelgart/melgart.net/commit/${gitCommitSha}`} target="_blank" rel="noopener">{shortSha}</a></>
+        )}
+      </p>
+    </section>
+
+    <section>
+      <h2 class="headingLg">By file type</h2>
+      <table>
+        <thead>
+          <tr><th>Type</th><th>Gzipped</th><th>Raw</th></tr>
+        </thead>
+        <tbody>
+          {typeRows.map((row) => (
+            <tr>
+              <td>{row.label}</td>
+              <td>{formatBytes(row.gzipped)}</td>
+              <td class="lightText">{formatBytes(row.raw)}</td>
+            </tr>
+          ))}
+          <tr class="totalRow">
+            <td>Total</td>
+            <td>{formatBytes(totalSizes.total.gzipped)}</td>
+            <td class="lightText">{formatBytes(totalSizes.total.raw)}</td>
+          </tr>
+        </tbody>
+      </table>
+      {inlinedCss && (
+        <p class="lightText note">
+          CSS is inlined into the HTML (no separate stylesheet requests):
+          {' '}{formatBytes(inlinedCss.gzipped)} gzipped, already counted within HTML above.
+        </p>
+      )}
+    </section>
+
+    <section>
+      <h2 class="headingLg">By page</h2>
+      <table>
+        <thead>
+          <tr><th>Route</th><th>Gzipped</th><th>Raw</th></tr>
+        </thead>
+        <tbody>
+          {routeRows.map((row) => (
+            <tr>
+              <td>{row.route}</td>
+              <td>{formatBytes(row.gzipped)}</td>
+              <td class="lightText">{formatBytes(row.raw)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p class="lightText note">
+        Shared <code>_astro</code> bundles (the bit of JavaScript that hydrates
+        interactive islands) are counted into every page that could load them,
+        so per-page totals overlap. <code>/posts</code> rolls up all blog posts.
+      </p>
+    </section>
+  </article>
+</Layout>
+
+<style>
+  .hero {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  .meta {
+    margin-top: 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.5rem 0;
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 0.4rem 0.75rem 0.4rem 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th + th,
+  td + td {
+    text-align: right;
+  }
+
+  .totalRow td {
+    border-top: 2px solid #999;
+    border-bottom: none;
+    font-weight: bold;
+  }
+
+  .note {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+</style>

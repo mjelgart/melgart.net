@@ -18,8 +18,9 @@ const FILE_TYPES = {
   images: ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp', '.avif', '.ico'],
 };
 
-// Routes we care about for per-route analysis
-const TRACKED_ROUTES = ['/', '/blog', '/sports', '/search'];
+// Routes we care about for per-route analysis. These mirror the real pages
+// Astro emits (each as <route>/index.html), not aspirational ones.
+const TRACKED_ROUTES = ['/', '/posts', '/sports', '/saved-on-hosting', '/stats'];
 
 function getFileType(filePath) {
   const ext = path.extname(filePath).toLowerCase();
@@ -96,19 +97,30 @@ function getInlinedCssStats(files) {
 }
 
 function getRouteFromPath(filePath) {
-  // Simple heuristic to map file paths to routes
-  // This may need refinement based on actual Astro output structure
+  // Astro emits each page as a directory with an index.html
+  // (e.g. sports/index.html, posts/artemis/index.html). Map a file to the
+  // route of the page directory that contains it.
 
-  if (filePath === 'index.html') return '/';
-  if (filePath.startsWith('blog/')) return '/blog';
-  if (filePath.startsWith('sports/')) return '/sports';
-  if (filePath.startsWith('search/') || filePath.includes('search')) return '/search';
+  // Normalize separators so this works regardless of platform.
+  const normalized = filePath.split(path.sep).join('/');
 
-  // Extract route from path
-  const withoutExt = filePath.replace(/\.[^/.]+$/, '');
-  const route = withoutExt === 'index' ? '/' : `/${withoutExt}`;
+  // The site root.
+  if (normalized === 'index.html') return '/';
 
-  return route;
+  // Drop a trailing index.html to get the page directory, otherwise use the
+  // file's own directory (covers non-html assets that sit beside a page).
+  const dir = normalized.endsWith('/index.html')
+    ? normalized.slice(0, -'/index.html'.length)
+    : normalized.replace(/\/[^/]*$/, '');
+
+  if (!dir) return '/';
+
+  // Roll individual blog posts (posts/<slug>) up into the /posts section so
+  // the blog reads as a single number rather than 15 separate routes.
+  const topSegment = dir.split('/')[0];
+  if (topSegment === 'posts') return '/posts';
+
+  return `/${dir}`;
 }
 
 function analyzeRouteAssets(files) {
