@@ -1,12 +1,12 @@
 {
-  "schemaVersion": "1.0.0",
-  "buildTimestamp": "2026-05-05T12:02:01.537Z",
-  "gitCommitSha": "ce95a62281c135747225e8fc5ce57b4dddbd22a7",
+  "schemaVersion": "1.1.0",
+  "buildTimestamp": "2026-05-23T15:35:29.787Z",
+  "gitCommitSha": "b32951b2691a825c59b16aa428067607502b4ef3",
   "postCount": 15,
   "totalSizes": {
     "html": {
-      "raw": 165154,
-      "gzipped": 68541
+      "raw": 172649,
+      "gzipped": 70832
     },
     "css": {
       "raw": 0,
@@ -25,37 +25,37 @@
       "gzipped": 0
     },
     "total": {
-      "raw": 1294620,
-      "gzipped": 1057298
+      "raw": 1302115,
+      "gzipped": 1059589
+    },
+    "inlinedCss": {
+      "raw": 24682,
+      "gzipped": 1191
     }
   },
   "routeAssets": {
     "/": {
       "html": {
-        "raw": 12807,
-        "gzipped": 4474
+        "raw": 12867,
+        "gzipped": 4484
       },
       "css": {
         "raw": 0,
         "gzipped": 0
       },
       "js": {
-        "raw": 0,
-        "gzipped": 0
-      },
-      "images": {
-        "raw": 0,
-        "gzipped": 0
+        "raw": 138274,
+        "gzipped": 44961
       },
       "total": {
-        "raw": 12807,
-        "gzipped": 4474
+        "raw": 151141,
+        "gzipped": 49445
       }
     },
-    "/blog": {
+    "/posts": {
       "html": {
-        "raw": 0,
-        "gzipped": 0
+        "raw": 139212,
+        "gzipped": 59501
       },
       "css": {
         "raw": 0,
@@ -65,13 +65,9 @@
         "raw": 0,
         "gzipped": 0
       },
-      "images": {
-        "raw": 0,
-        "gzipped": 0
-      },
       "total": {
-        "raw": 0,
-        "gzipped": 0
+        "raw": 139212,
+        "gzipped": 59501
       }
     },
     "/sports": {
@@ -84,22 +80,18 @@
         "gzipped": 0
       },
       "js": {
-        "raw": 0,
-        "gzipped": 0
-      },
-      "images": {
-        "raw": 0,
-        "gzipped": 0
+        "raw": 157559,
+        "gzipped": 47754
       },
       "total": {
-        "raw": 10200,
-        "gzipped": 3344
+        "raw": 167759,
+        "gzipped": 51098
       }
     },
-    "/search": {
+    "/saved-on-hosting": {
       "html": {
-        "raw": 0,
-        "gzipped": 0
+        "raw": 2936,
+        "gzipped": 1222
       },
       "css": {
         "raw": 0,
@@ -109,16 +101,30 @@
         "raw": 0,
         "gzipped": 0
       },
-      "images": {
+      "total": {
+        "raw": 2936,
+        "gzipped": 1222
+      }
+    },
+    "/stats": {
+      "html": {
+        "raw": 7434,
+        "gzipped": 2281
+      },
+      "css": {
+        "raw": 0,
+        "gzipped": 0
+      },
+      "js": {
         "raw": 0,
         "gzipped": 0
       },
       "total": {
-        "raw": 0,
-        "gzipped": 0
+        "raw": 7434,
+        "gzipped": 2281
       }
     }
   },
-  "fileCount": 30,
+  "fileCount": 31,
   "generatedBy": "scripts/build-stats.mjs"
 }

@@ -18,8 +18,9 @@ const FILE_TYPES = {
   images: ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp', '.avif', '.ico'],
 };
 
-// Routes we care about for per-route analysis
-const TRACKED_ROUTES = ['/', '/blog', '/sports', '/search'];
+// Routes we care about for per-route analysis. These mirror the real pages
+// Astro emits (each as <route>/index.html), not aspirational ones.
+const TRACKED_ROUTES = ['/', '/posts', '/sports', '/saved-on-hosting', '/stats'];
 
 function getFileType(filePath) {
   const ext = path.extname(filePath).toLowerCase();
@@ -96,54 +97,96 @@ function getInlinedCssStats(files) {
 }
 
 function getRouteFromPath(filePath) {
-  // Simple heuristic to map file paths to routes
-  // This may need refinement based on actual Astro output structure
+  // Astro emits each page as a directory with an index.html
+  // (e.g. sports/index.html, posts/artemis/index.html). Map a file to the
+  // route of the page directory that contains it.
 
-  if (filePath === 'index.html') return '/';
-  if (filePath.startsWith('blog/')) return '/blog';
-  if (filePath.startsWith('sports/')) return '/sports';
-  if (filePath.startsWith('search/') || filePath.includes('search')) return '/search';
+  // Normalize separators so this works regardless of platform.
+  const normalized = filePath.split(path.sep).join('/');
 
-  // Extract route from path
-  const withoutExt = filePath.replace(/\.[^/.]+$/, '');
-  const route = withoutExt === 'index' ? '/' : `/${withoutExt}`;
+  // The site root.
+  if (normalized === 'index.html') return '/';
 
-  return route;
+  // Drop a trailing index.html to get the page directory, otherwise use the
+  // file's own directory (covers non-html assets that sit beside a page).
+  const dir = normalized.endsWith('/index.html')
+    ? normalized.slice(0, -'/index.html'.length)
+    : normalized.replace(/\/[^/]*$/, '');
+
+  if (!dir) return '/';
+
+  // Roll individual blog posts (posts/<slug>) up into the /posts section so
+  // the blog reads as a single number rather than 15 separate routes.
+  const topSegment = dir.split('/')[0];
+  if (topSegment === 'posts') return '/posts';
+
+  return `/${dir}`;
+}
+
+// Pull the /_astro/* JS and CSS bundles a page actually links to. Astro
+// references hydrated-island code via component-url / renderer-url attributes
+// (and modulepreload links), so a fully static page references none and stays
+// tiny. Returns dist-relative paths (no leading slash) to match walked files.
+function extractAstroAssetRefs(htmlContent) {
+  const refs = new Set();
+  const re = /\/?_astro\/[A-Za-z0-9._-]+\.(?:js|css)/g;
+  let match;
+  while ((match = re.exec(htmlContent)) !== null) {
+    refs.add(match[0].replace(/^\//, ''));
+  }
+  return refs;
 }
 
 function analyzeRouteAssets(files) {
   const routeAssets = {};
 
-  // Initialize tracked routes
+  // Initialize tracked routes. Per-route totals measure page code (HTML plus
+  // the JS/CSS that page loads); images are reported site-wide in totalSizes.
   for (const route of TRACKED_ROUTES) {
     routeAssets[route] = {
       html: { raw: 0, gzipped: 0 },
       css: { raw: 0, gzipped: 0 },
       js: { raw: 0, gzipped: 0 },
-      images: { raw: 0, gzipped: 0 },
       total: { raw: 0, gzipped: 0 },
     };
   }
 
-  const addToRoute = (route, file) => {
-    const typeStats = routeAssets[route][file.type] || { raw: 0, gzipped: 0 };
-    typeStats.raw += file.raw;
-    typeStats.gzipped += file.gzipped;
-    routeAssets[route].total.raw += file.raw;
-    routeAssets[route].total.gzipped += file.gzipped;
+  // Index every file by its dist-relative path so referenced bundles can be
+  // looked up by the path that appears in the HTML.
+  const fileByPath = new Map();
+  for (const file of files) {
+    fileByPath.set(file.path.split(path.sep).join('/'), file);
+  }
+
+  const add = (route, type, raw, gzipped) => {
+    routeAssets[route][type].raw += raw;
+    routeAssets[route][type].gzipped += gzipped;
+    routeAssets[route].total.raw += raw;
+    routeAssets[route].total.gzipped += gzipped;
   };
 
-  for (const file of files) {
-    // Files under _astro/ are shared bundles (Astro runtime, hydrated islands)
-    // that a browser may load on any page. Attribute them to every tracked
-    // route so per-route totals reflect what's actually downloaded.
-    if (file.path.startsWith('_astro/') || file.path.startsWith('_astro' + path.sep)) {
-      for (const route of TRACKED_ROUTES) addToRoute(route, file);
-      continue;
-    }
+  // A shared bundle counts once per route even if several pages in that route
+  // (e.g. multiple posts rolled into /posts) reference it.
+  const countedByRoute = {};
+  for (const route of TRACKED_ROUTES) countedByRoute[route] = new Set();
 
+  for (const file of files) {
+    if (file.type !== 'html') continue;
     const route = getRouteFromPath(file.path);
-    if (routeAssets[route]) addToRoute(route, file);
+    if (!routeAssets[route]) continue;
+
+    // The page's own markup.
+    add(route, 'html', file.raw, file.gzipped);
+
+    // Plus only the bundles this page actually references.
+    const refs = extractAstroAssetRefs(fs.readFileSync(file.fullPath, 'utf8'));
+    for (const ref of refs) {
+      if (countedByRoute[route].has(ref)) continue;
+      countedByRoute[route].add(ref);
+      const asset = fileByPath.get(ref);
+      if (!asset) continue;
+      add(route, asset.type === 'css' ? 'css' : 'js', asset.raw, asset.gzipped);
+    }
   }
 
   return routeAssets;
@@ -217,7 +260,7 @@ function generateBuildStats() {
 
   // Generate statistics object
   const buildStats = {
-    schemaVersion: '1.0.0',
+    schemaVersion: '1.1.0',
     buildTimestamp,
     gitCommitSha,
     postCount,
