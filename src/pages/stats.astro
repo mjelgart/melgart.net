@@ -43,8 +43,13 @@ const routeRows = Object.entries(routeAssets)
     <h1 class="headingXl">{title}</h1>
     <section>
       <p>
-        This site is static — plain HTML built ahead of time, no server doing
-        work per request. Here's exactly how small that makes it. Numbers are
+        Large language models make it cheap to build software fitted exactly to
+        the job at hand. Widely-used frameworks are great, but when you don't
+        need all their features, dropping down to something simpler is now easy.
+        So this site is completely static — no server-side rendering, nothing
+        computed per request — and kept deliberately small: every page's code
+        comes in under 60&nbsp;kB, and the fully static pages, just markup with
+        no JavaScript, weigh only a kilobyte or two. The numbers below are
         regenerated on every build.
       </p>
 
@@ -108,9 +113,11 @@ const routeRows = Object.entries(routeAssets)
         </tbody>
       </table>
       <p class="lightText note">
-        Shared <code>_astro</code> bundles (the bit of JavaScript that hydrates
-        interactive islands) are counted into every page that could load them,
-        so per-page totals overlap. <code>/posts</code> rolls up all blog posts.
+        Each page counts only the HTML and JavaScript it actually loads, so
+        fully static pages stay tiny; the pages with interactive islands
+        (<code>/</code>, <code>/sports</code>) also pull a shared ~44&nbsp;kB
+        React bundle. Images aren't included here — they're in the site total
+        above. <code>/posts</code> rolls up all blog posts.
       </p>
     </section>
   </article>

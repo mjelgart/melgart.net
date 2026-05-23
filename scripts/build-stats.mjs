@@ -123,39 +123,70 @@ function getRouteFromPath(filePath) {
   return `/${dir}`;
 }
 
+// Pull the /_astro/* JS and CSS bundles a page actually links to. Astro
+// references hydrated-island code via component-url / renderer-url attributes
+// (and modulepreload links), so a fully static page references none and stays
+// tiny. Returns dist-relative paths (no leading slash) to match walked files.
+function extractAstroAssetRefs(htmlContent) {
+  const refs = new Set();
+  const re = /\/?_astro\/[A-Za-z0-9._-]+\.(?:js|css)/g;
+  let match;
+  while ((match = re.exec(htmlContent)) !== null) {
+    refs.add(match[0].replace(/^\//, ''));
+  }
+  return refs;
+}
+
 function analyzeRouteAssets(files) {
   const routeAssets = {};
 
-  // Initialize tracked routes
+  // Initialize tracked routes. Per-route totals measure page code (HTML plus
+  // the JS/CSS that page loads); images are reported site-wide in totalSizes.
   for (const route of TRACKED_ROUTES) {
     routeAssets[route] = {
       html: { raw: 0, gzipped: 0 },
       css: { raw: 0, gzipped: 0 },
       js: { raw: 0, gzipped: 0 },
-      images: { raw: 0, gzipped: 0 },
       total: { raw: 0, gzipped: 0 },
     };
   }
 
-  const addToRoute = (route, file) => {
-    const typeStats = routeAssets[route][file.type] || { raw: 0, gzipped: 0 };
-    typeStats.raw += file.raw;
-    typeStats.gzipped += file.gzipped;
-    routeAssets[route].total.raw += file.raw;
-    routeAssets[route].total.gzipped += file.gzipped;
+  // Index every file by its dist-relative path so referenced bundles can be
+  // looked up by the path that appears in the HTML.
+  const fileByPath = new Map();
+  for (const file of files) {
+    fileByPath.set(file.path.split(path.sep).join('/'), file);
+  }
+
+  const add = (route, type, raw, gzipped) => {
+    routeAssets[route][type].raw += raw;
+    routeAssets[route][type].gzipped += gzipped;
+    routeAssets[route].total.raw += raw;
+    routeAssets[route].total.gzipped += gzipped;
   };
 
-  for (const file of files) {
-    // Files under _astro/ are shared bundles (Astro runtime, hydrated islands)
-    // that a browser may load on any page. Attribute them to every tracked
-    // route so per-route totals reflect what's actually downloaded.
-    if (file.path.startsWith('_astro/') || file.path.startsWith('_astro' + path.sep)) {
-      for (const route of TRACKED_ROUTES) addToRoute(route, file);
-      continue;
-    }
+  // A shared bundle counts once per route even if several pages in that route
+  // (e.g. multiple posts rolled into /posts) reference it.
+  const countedByRoute = {};
+  for (const route of TRACKED_ROUTES) countedByRoute[route] = new Set();
 
+  for (const file of files) {
+    if (file.type !== 'html') continue;
     const route = getRouteFromPath(file.path);
-    if (routeAssets[route]) addToRoute(route, file);
+    if (!routeAssets[route]) continue;
+
+    // The page's own markup.
+    add(route, 'html', file.raw, file.gzipped);
+
+    // Plus only the bundles this page actually references.
+    const refs = extractAstroAssetRefs(fs.readFileSync(file.fullPath, 'utf8'));
+    for (const ref of refs) {
+      if (countedByRoute[route].has(ref)) continue;
+      countedByRoute[route].add(ref);
+      const asset = fileByPath.get(ref);
+      if (!asset) continue;
+      add(route, asset.type === 'css' ? 'css' : 'js', asset.raw, asset.gzipped);
+    }
   }
 
   return routeAssets;
@@ -229,7 +260,7 @@ function generateBuildStats() {
 
   // Generate statistics object
   const buildStats = {
-    schemaVersion: '1.0.0',
+    schemaVersion: '1.1.0',
     buildTimestamp,
     gitCommitSha,
     postCount,
