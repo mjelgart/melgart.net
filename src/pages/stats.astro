@@ -24,9 +24,9 @@ const { totalSizes, routeAssets, postCount, fileCount, buildTimestamp, gitCommit
 const inlinedCss = totalSizes.inlinedCss; // added 2026-05; may be absent in older builds
 const shortSha = gitCommitSha ? gitCommitSha.slice(0, 7) : null;
 
-// By-type rows for the main breakdown. The literal `css` bucket is omitted —
-// Astro inlines CSS into <style> tags, so it always reads 0; the real number
-// is surfaced separately as inlinedCss below.
+// By-type rows for the main breakdown. The literal `css` bucket is omitted
+// because Astro inlines CSS into <style> tags, so it always reads 0; the real
+// number is surfaced separately as inlinedCss below.
 const typeLabels = { html: 'HTML', js: 'JavaScript', images: 'Images', other: 'Other' };
 const typeRows = Object.entries(typeLabels)
   .map(([key, label]) => ({ label, ...(totalSizes[key] || { raw: 0, gzipped: 0 }) }))
@@ -44,13 +44,13 @@ const routeRows = Object.entries(routeAssets)
     <section>
       <p>
         Large language models make it cheap to build software fitted exactly to
-        the job at hand. Widely-used frameworks are great, but when you don't
+        the job at hand. Widely used frameworks are great, but when you don't
         need all their features, dropping down to something simpler is now easy.
-        So this site is completely static — no server-side rendering, nothing
-        computed per request — and kept deliberately small: every page's code
-        comes in under 60&nbsp;kB, and the fully static pages, just markup with
-        no JavaScript, weigh only a kilobyte or two. The numbers below are
-        regenerated on every build.
+        So the site is completely static with no server side rendering, no
+        middleware frameworks, nothing computed per request, and everything is
+        kept small: every page's code comes in under 60&nbsp;kB, and the fully
+        static pages, just markup with no JavaScript, weigh only a kilobyte or
+        two. The numbers below are regenerated on every build.
       </p>
 
       <p class="hero">
@@ -116,7 +116,7 @@ const routeRows = Object.entries(routeAssets)
         Each page counts only the HTML and JavaScript it actually loads, so
         fully static pages stay tiny; the pages with interactive islands
         (<code>/</code>, <code>/sports</code>) also pull a shared ~44&nbsp;kB
-        React bundle. Images aren't included here — they're in the site total
+        React bundle. Images aren't included here; they're in the site total
         above. <code>/posts</code> rolls up all blog posts.
       </p>
     </section>

@@ -1,12 +1,12 @@
 {
   "schemaVersion": "1.1.0",
-  "buildTimestamp": "2026-05-23T04:01:07.861Z",
-  "gitCommitSha": "b9e8094086fe2f73a6b92ce4dc478efd5ac84d00",
+  "buildTimestamp": "2026-05-23T15:35:29.787Z",
+  "gitCommitSha": "b32951b2691a825c59b16aa428067607502b4ef3",
   "postCount": 15,
   "totalSizes": {
     "html": {
-      "raw": 172628,
-      "gzipped": 70834
+      "raw": 172649,
+      "gzipped": 70832
     },
     "css": {
       "raw": 0,
@@ -25,8 +25,8 @@
       "gzipped": 0
     },
     "total": {
-      "raw": 1302094,
-      "gzipped": 1059591
+      "raw": 1302115,
+      "gzipped": 1059589
     },
     "inlinedCss": {
       "raw": 24682,
@@ -108,8 +108,8 @@
     },
     "/stats": {
       "html": {
-        "raw": 7413,
-        "gzipped": 2283
+        "raw": 7434,
+        "gzipped": 2281
       },
       "css": {
         "raw": 0,
@@ -120,8 +120,8 @@
         "gzipped": 0
       },
       "total": {
-        "raw": 7413,
-        "gzipped": 2283
+        "raw": 7434,
+        "gzipped": 2281
       }
     }
   },
