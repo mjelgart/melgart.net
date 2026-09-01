@@ -38,6 +38,9 @@ const name = 'melgart.net';
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
 
+  <!-- Tints mobile browser chrome; kept current by the pre-paint script below -->
+  <meta name="theme-color" content="#ffffff" />
+
   <!-- Pre-paint theme init: must run before first render to avoid a flash of light mode -->
   <script is:inline>
     (function () {
@@ -47,6 +50,10 @@ const name = 'melgart.net';
         ? stored
         : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       document.documentElement.dataset.theme = theme;
+
+      // Literals, because global.css may not be parsed yet. Keep in sync with --bg.
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', theme === 'dark' ? '#1c1a16' : '#ffffff');
     })();
   </script>
 </head>
@@ -88,20 +95,26 @@ const name = 'melgart.net';
 
   <script>
     const toggle = document.getElementById('theme-toggle')!;
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
 
-    function renderLabel() {
+    function syncTheme() {
       const dark = document.documentElement.dataset.theme === 'dark';
       toggle.textContent = dark ? '[ light mode ]' : '[ dark mode ]';
       toggle.setAttribute('aria-pressed', String(dark));
+
+      // Read --bg back from CSS so the chrome can't drift from the palette
+      const bg = getComputedStyle(document.documentElement)
+        .getPropertyValue('--bg').trim();
+      if (themeMeta && bg) themeMeta.setAttribute('content', bg);
     }
 
-    renderLabel();
+    syncTheme();
 
     toggle.addEventListener('click', () => {
       const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
       document.documentElement.dataset.theme = next;
       try { localStorage.setItem('theme', next); } catch (e) {}
-      renderLabel();
+      syncTheme();
     });
   </script>
 </body>
