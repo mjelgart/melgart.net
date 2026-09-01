@@ -89,7 +89,10 @@ const name = 'melgart.net';
     )}
 
     <footer class="footer">
-      <button id="theme-toggle" type="button">[ dark mode ]</button>
+      <button id="theme-toggle" type="button">
+        <span class="whenLight">[ dark mode ]</span>
+        <span class="whenDark">[ light mode ]</span>
+      </button>
     </footer>
   </div>
 
@@ -99,7 +102,6 @@ const name = 'melgart.net';
 
     function syncTheme() {
       const dark = document.documentElement.dataset.theme === 'dark';
-      toggle.textContent = dark ? '[ light mode ]' : '[ dark mode ]';
       toggle.setAttribute('aria-pressed', String(dark));
 
       // Read --bg back from CSS so the chrome can't drift from the palette
@@ -160,5 +162,19 @@ const name = 'melgart.net';
 
   .footer button:hover {
     text-decoration: underline;
+  }
+
+  /* Keyed off data-theme (stamped pre-paint) so the label is right at
+     first paint, with no post-load JS correction to flash through */
+  .footer .whenDark {
+    display: none;
+  }
+
+  :global(html[data-theme='dark']) .footer .whenLight {
+    display: none;
+  }
+
+  :global(html[data-theme='dark']) .footer .whenDark {
+    display: inline;
   }
 </style>
