@@ -37,6 +37,25 @@ const name = 'melgart.net';
   <meta property="twitter:domain" content="melgart.net" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
+
+  <!-- Tints mobile browser chrome; kept current by the pre-paint script below -->
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Pre-paint theme init: must run before first render to avoid a flash of light mode -->
+  <script is:inline>
+    (function () {
+      var stored;
+      try { stored = localStorage.getItem('theme'); } catch (e) {}
+      var theme = (stored === 'light' || stored === 'dark')
+        ? stored
+        : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.dataset.theme = theme;
+
+      // Literals, because global.css may not be parsed yet. Keep in sync with --bg.
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', theme === 'dark' ? '#1c1a16' : '#ffffff');
+    })();
+  </script>
 </head>
 <body>
   <div class="container">
@@ -68,7 +87,38 @@ const name = 'melgart.net';
         <a href="/">← Back to home</a>
       </div>
     )}
+
+    <footer class="footer">
+      <button id="theme-toggle" type="button">
+        <span class="whenLight">[ dark mode ]</span>
+        <span class="whenDark">[ light mode ]</span>
+      </button>
+    </footer>
   </div>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle')!;
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+    function syncTheme() {
+      const dark = document.documentElement.dataset.theme === 'dark';
+      toggle.setAttribute('aria-pressed', String(dark));
+
+      // Read --bg back from CSS so the chrome can't drift from the palette
+      const bg = getComputedStyle(document.documentElement)
+        .getPropertyValue('--bg').trim();
+      if (themeMeta && bg) themeMeta.setAttribute('content', bg);
+    }
+
+    syncTheme();
+
+    toggle.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      syncTheme();
+    });
+  </script>
 </body>
 </html>
 
@@ -93,5 +143,38 @@ const name = 'melgart.net';
 
   .backToHome {
     margin: 3rem 0 0;
+  }
+
+  .footer {
+    margin: 4rem 0 0;
+    text-align: center;
+  }
+
+  .footer button {
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .footer button:hover {
+    text-decoration: underline;
+  }
+
+  /* Keyed off data-theme (stamped pre-paint) so the label is right at
+     first paint, with no post-load JS correction to flash through */
+  .footer .whenDark {
+    display: none;
+  }
+
+  :global(html[data-theme='dark']) .footer .whenLight {
+    display: none;
+  }
+
+  :global(html[data-theme='dark']) .footer .whenDark {
+    display: inline;
   }
 </style>
