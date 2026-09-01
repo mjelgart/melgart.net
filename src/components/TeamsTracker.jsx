@@ -28,7 +28,7 @@ const TeamCard = ({ team }) => {
   };
 
   return (
-    <div style={{ marginBottom: '2rem', borderBottom: '1px solid #ddd', paddingBottom: '1rem' }}>
+    <div style={{ marginBottom: '2rem', borderBottom: '1px solid var(--border)', paddingBottom: '1rem' }}>
       <div>
         <h3 className="text-xl">{team.name}</h3>
         <div style={{ fontSize: '0.8rem'}}>

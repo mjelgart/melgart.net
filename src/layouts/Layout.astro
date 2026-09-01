@@ -37,6 +37,18 @@ const name = 'melgart.net';
   <meta property="twitter:domain" content="melgart.net" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
+
+  <!-- Pre-paint theme init: must run before first render to avoid a flash of light mode -->
+  <script is:inline>
+    (function () {
+      var stored;
+      try { stored = localStorage.getItem('theme'); } catch (e) {}
+      var theme = (stored === 'light' || stored === 'dark')
+        ? stored
+        : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
 </head>
 <body>
   <div class="container">
@@ -68,7 +80,30 @@ const name = 'melgart.net';
         <a href="/">← Back to home</a>
       </div>
     )}
+
+    <footer class="footer">
+      <button id="theme-toggle" type="button">[ dark mode ]</button>
+    </footer>
   </div>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle')!;
+
+    function renderLabel() {
+      const dark = document.documentElement.dataset.theme === 'dark';
+      toggle.textContent = dark ? '[ light mode ]' : '[ dark mode ]';
+      toggle.setAttribute('aria-pressed', String(dark));
+    }
+
+    renderLabel();
+
+    toggle.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      renderLabel();
+    });
+  </script>
 </body>
 </html>
 
@@ -93,5 +128,24 @@ const name = 'melgart.net';
 
   .backToHome {
     margin: 3rem 0 0;
+  }
+
+  .footer {
+    margin: 4rem 0 0;
+    text-align: center;
+  }
+
+  .footer button {
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .footer button:hover {
+    text-decoration: underline;
   }
 </style>

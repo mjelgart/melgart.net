@@ -52,7 +52,7 @@
   }
 
   .lightText {
-    color: #666;
+    color: var(--text-muted);
   }
 
 .column {
