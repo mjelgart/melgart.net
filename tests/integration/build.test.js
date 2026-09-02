@@ -34,5 +34,14 @@ describe('Build integration', () => {
     expect(postContent).toContain('The Dispossessed'); // Expected post title
     expect(postContent).toContain('data-pagefind-body'); // Pagefind marker
     expect(postContent).toContain('<article'); // Article structure
+
+    // Assert the RSS feed was generated with real post entries
+    const feedPath = join(process.cwd(), 'dist/rss.xml');
+    expect(existsSync(feedPath)).toBe(true);
+
+    const feedContent = readFileSync(feedPath, 'utf8');
+    expect(feedContent).toContain('<rss'); // Feed root element
+    expect(feedContent).toContain('https://melgart.net/posts/the-dispossessed'); // Absolute post link
+    expect(feedContent).toContain('Anarchy, State, and Utopia'); // Subtitle used as description
   }, 60000); // 60 second timeout for build
 });
