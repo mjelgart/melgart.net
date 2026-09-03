@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^5.0.4",
+    "@astrojs/rss": "^4.0.19",
     "astro": "^6.1.9",
     "react": "18.2.0",
     "react-dom": "18.2.0"
