@@ -2,9 +2,6 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
 
-// Drafts get a page like any other post — being reachable by URL is the point.
-// What sets them apart is handled below: no search index, no crawling, and a
-// banner so a reader who follows the link knows what they're looking at.
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
   return posts.map((entry) => ({
@@ -17,9 +14,7 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 
 // Pagefind indexes only pages carrying data-pagefind-body once any page has
-// it, so leaving the attribute off a draft keeps it out of search. The value
-// has to be undefined rather than false: Astro renders a false data-*
-// attribute as the string "false", which Pagefind would still count as present.
+// it, so it must be undefined here to make drafts not searchable
 const isDraft = entry.data.draft;
 const pagefindBody = isDraft ? undefined : true;
 
