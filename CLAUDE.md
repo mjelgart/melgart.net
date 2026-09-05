@@ -31,18 +31,8 @@
 
 ## Public Drafts
 A post with `draft: true` in its frontmatter still builds at `/posts/<slug>`, so the
-URL can be shared, but it is withheld from everything that would surface it to a
-reader who wasn't given the link: the home page, `/posts`, the RSS feed, the Pagefind
-search index, and the post count on `/stats`. It also renders a draft banner and a
-`noindex, nofollow` robots tag. This behaves identically in dev and in production.
+URL can be shared, but it is withheld from everything that would surface it including the PageFind search index. 
 
-- Publish a draft by deleting its `draft: true` line — nothing else changes.
-- Any new page that lists posts should call `getPublishedPosts()` from
-  `src/utils/posts.js` rather than `getCollection('posts')`, so drafts stay excluded
-  by default. `pages/posts/[slug].astro` is the deliberate exception: it uses
-  `getCollection` directly so drafts still get a route.
-- Drafts are unlisted by design, so nothing on the site enumerates them. The build
-  prints a `Drafts: N` line when any exist.
 
 ## Code Style Guidelines
 - Use functional React components for islands with named exports
