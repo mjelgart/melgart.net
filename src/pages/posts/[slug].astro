@@ -13,6 +13,11 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 
+// Pagefind indexes only pages carrying data-pagefind-body once any page has
+// it, so it must be undefined here to make drafts not searchable
+const isDraft = entry.data.draft;
+const pagefindBody = isDraft ? undefined : true;
+
 const description = entry.data.subtitle ?? "Within cells interlinked.";
 
 const formattedDate = new Intl.DateTimeFormat('en-US', {
@@ -22,8 +27,14 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 }).format(new Date(entry.data.date));
 ---
 
-<Layout title={entry.data.title} description={description}>
-  <article data-pagefind-body>
+<Layout title={entry.data.title} description={description} noindex={isDraft}>
+  <article data-pagefind-body={pagefindBody}>
+    {isDraft && (
+      <p class="draftNotice">
+        <strong>Draft.</strong> This post is unfinished and isn't linked from
+        anywhere on the site. It may change or disappear.
+      </p>
+    )}
     <h1 class="headingXl">{entry.data.title}</h1>
     <div class="lightText">
       <time datetime={entry.data.date}>{formattedDate}</time>
@@ -31,3 +42,14 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     <Content />
   </article>
 </Layout>
+
+<style>
+  .draftNotice {
+    margin: 1rem 0 0;
+    padding: 0.75rem 1rem;
+    background-color: var(--surface);
+    border: 1px dashed var(--border-strong);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+</style>

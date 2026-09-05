@@ -212,18 +212,40 @@ function getTotalSizeByType(files) {
   return totals;
 }
 
+// Leading YAML frontmatter block of a markdown file.
+const FRONTMATTER = /^---\r?\n([\s\S]*?)\r?\n---/;
+
+function isDraft(source) {
+  const frontmatter = source.match(FRONTMATTER);
+  return frontmatter ? /^draft:\s*true\s*$/m.test(frontmatter[1]) : false;
+}
+
+// Splits the content directory into published posts and public drafts. The
+// reported postCount covers published posts only, matching what a reader can
+// actually reach from the site.
 function countPosts() {
   const postsDir = 'src/content/posts';
   if (!fs.existsSync(postsDir)) {
     console.warn(`Posts directory ${postsDir} not found`);
-    return 0;
+    return { published: 0, drafts: 0 };
   }
 
   const posts = fs.readdirSync(postsDir).filter(file =>
     file.endsWith('.md') || file.endsWith('.mdx')
   );
 
-  return posts.length;
+  let published = 0;
+  let drafts = 0;
+
+  for (const post of posts) {
+    if (isDraft(fs.readFileSync(path.join(postsDir, post), 'utf8'))) {
+      drafts += 1;
+    } else {
+      published += 1;
+    }
+  }
+
+  return { published, drafts };
 }
 
 function getGitCommitSha() {
@@ -252,7 +274,7 @@ function generateBuildStats() {
   const routeAssets = analyzeRouteAssets(files);
 
   // Count posts
-  const postCount = countPosts();
+  const { published: postCount, drafts: draftCount } = countPosts();
 
   // Get build metadata
   const gitCommitSha = getGitCommitSha();
@@ -278,6 +300,9 @@ function generateBuildStats() {
   console.log(`Total files: ${files.length}`);
   console.log(`Total size: ${Math.round(totalsByType.total.raw / 1024)}KB raw, ${Math.round(totalsByType.total.gzipped / 1024)}KB gzipped`);
   console.log(`Posts: ${postCount}`);
+  if (draftCount > 0) {
+    console.log(`Drafts: ${draftCount} (built and reachable by URL, but unlinked from the site)`);
+  }
   console.log(`Git commit: ${gitCommitSha?.substring(0, 8) || 'unknown'}`);
 
   return buildStats;

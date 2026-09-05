@@ -6,9 +6,12 @@ export interface Props {
   title: string;
   description: string;
   home?: boolean;
+  /** Keep the page out of search engines. Used for public drafts, which are
+      unlinked on the site but would otherwise be crawled from a shared link. */
+  noindex?: boolean;
 }
 
-const { title, description, home = false } = Astro.props;
+const { title, description, home = false, noindex = false } = Astro.props;
 const name = 'melgart.net';
 ---
 
@@ -27,6 +30,7 @@ const name = 'melgart.net';
   <!-- Basic meta -->
   <title>{title}</title>
   <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />

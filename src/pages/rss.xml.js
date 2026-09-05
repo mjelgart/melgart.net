@@ -1,5 +1,5 @@
 import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
+import { getPublishedPosts } from '../utils/posts.js';
 
 // Roughly one line of text in a feed reader's post list
 const EXCERPT_LENGTH = 200;
@@ -35,10 +35,7 @@ const summarize = (post) => {
 };
 
 export async function GET(context) {
-  const allPosts = await getCollection('posts');
-  const sortedPosts = allPosts.sort((a, b) =>
-    new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-  );
+  const sortedPosts = await getPublishedPosts();
 
   return rss({
     title: 'Michael Elgart',
