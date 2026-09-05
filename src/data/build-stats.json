@@ -1,61 +1,61 @@
 {
   "schemaVersion": "1.1.0",
-  "buildTimestamp": "2026-05-23T15:35:29.787Z",
-  "gitCommitSha": "b32951b2691a825c59b16aa428067607502b4ef3",
+  "buildTimestamp": "2026-09-05T04:38:46.062Z",
+  "gitCommitSha": "f2d3db51ac6630b2a41f59d38c2c01f3f8215d72",
   "postCount": 15,
   "totalSizes": {
     "html": {
-      "raw": 172649,
-      "gzipped": 70832
+      "raw": 247463,
+      "gzipped": 98911
     },
     "css": {
       "raw": 0,
       "gzipped": 0
     },
     "js": {
-      "raw": 166992,
-      "gzipped": 51742
+      "raw": 164453,
+      "gzipped": 51043
     },
     "images": {
       "raw": 962474,
       "gzipped": 937015
     },
     "other": {
-      "raw": 0,
-      "gzipped": 0
+      "raw": 6472,
+      "gzipped": 2041
     },
     "total": {
-      "raw": 1302115,
-      "gzipped": 1059589
+      "raw": 1380862,
+      "gzipped": 1089010
     },
     "inlinedCss": {
-      "raw": 24682,
-      "gzipped": 1191
+      "raw": 51378,
+      "gzipped": 1813
     }
   },
   "routeAssets": {
     "/": {
       "html": {
-        "raw": 12867,
-        "gzipped": 4484
+        "raw": 16482,
+        "gzipped": 5749
       },
       "css": {
         "raw": 0,
         "gzipped": 0
       },
       "js": {
-        "raw": 138274,
-        "gzipped": 44961
+        "raw": 136697,
+        "gzipped": 44207
       },
       "total": {
-        "raw": 151141,
-        "gzipped": 49445
+        "raw": 153179,
+        "gzipped": 49956
       }
     },
     "/posts": {
       "html": {
-        "raw": 139212,
-        "gzipped": 59501
+        "raw": 201213,
+        "gzipped": 82984
       },
       "css": {
         "raw": 0,
@@ -66,32 +66,32 @@
         "gzipped": 0
       },
       "total": {
-        "raw": 139212,
-        "gzipped": 59501
+        "raw": 201213,
+        "gzipped": 82984
       }
     },
     "/sports": {
       "html": {
-        "raw": 10200,
-        "gzipped": 3344
+        "raw": 13660,
+        "gzipped": 4559
       },
       "css": {
         "raw": 0,
         "gzipped": 0
       },
       "js": {
-        "raw": 157559,
-        "gzipped": 47754
+        "raw": 154662,
+        "gzipped": 46927
       },
       "total": {
-        "raw": 167759,
-        "gzipped": 51098
+        "raw": 168322,
+        "gzipped": 51486
       }
     },
     "/saved-on-hosting": {
       "html": {
-        "raw": 2936,
-        "gzipped": 1222
+        "raw": 5752,
+        "gzipped": 2264
       },
       "css": {
         "raw": 0,
@@ -102,14 +102,14 @@
         "gzipped": 0
       },
       "total": {
-        "raw": 2936,
-        "gzipped": 1222
+        "raw": 5752,
+        "gzipped": 2264
       }
     },
     "/stats": {
       "html": {
-        "raw": 7434,
-        "gzipped": 2281
+        "raw": 10356,
+        "gzipped": 3355
       },
       "css": {
         "raw": 0,
@@ -120,11 +120,11 @@
         "gzipped": 0
       },
       "total": {
-        "raw": 7434,
-        "gzipped": 2281
+        "raw": 10356,
+        "gzipped": 3355
       }
     }
   },
-  "fileCount": 31,
+  "fileCount": 33,
   "generatedBy": "scripts/build-stats.mjs"
 }
