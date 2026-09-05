@@ -10,8 +10,9 @@
 - `npm run astro` - Run Astro CLI commands
 
 ## Testing
-- Tests live in `/tests`, with component tests in `tests/components/` and integration tests in `tests/integration/`.
+- Tests live in `/tests`, with component tests in `tests/components/`, unit tests in `tests/unit/`, and integration tests in `tests/integration/`.
 - Component tests use React Testing Library to test React islands (Search component).
+- `astro:content` is a build-only virtual module; `vitest.config.js` aliases it to `tests/stubs/astro-content.js` so unit tests can import site modules that reach for it.
 - Integration tests use `tests/integration/build.test.js` to verify `astro build` succeeds and generates expected output.
 - CI runs `npm run test:run` before `astro build`, so a test failure blocks deploy.
 - Vitest config lives at `vitest.config.js`. `tests/setup.js` imports jest-dom matchers for enhanced assertions.
@@ -21,11 +22,27 @@
 - `/src/pages` - Astro pages (routes) with `/src/pages/posts/[slug].astro` for dynamic routes
 - `/src/components` - React island components (Search.jsx, TeamsTracker.jsx)
 - `/src/layouts` - Astro layout components (Layout.astro)
+- `/src/utils` - Shared build-time helpers (posts.js)
 - `/src/styles` - Global CSS and utility styles
 - `/src/content/posts` - Markdown content with frontmatter (Astro Content Collections)
 - `/public` - Static assets
 - `/dist` - Built static site output
 - `/tests` - Vitest test files (components and integration tests)
+
+## Public Drafts
+A post with `draft: true` in its frontmatter still builds at `/posts/<slug>`, so the
+URL can be shared, but it is withheld from everything that would surface it to a
+reader who wasn't given the link: the home page, `/posts`, the RSS feed, the Pagefind
+search index, and the post count on `/stats`. It also renders a draft banner and a
+`noindex, nofollow` robots tag. This behaves identically in dev and in production.
+
+- Publish a draft by deleting its `draft: true` line — nothing else changes.
+- Any new page that lists posts should call `getPublishedPosts()` from
+  `src/utils/posts.js` rather than `getCollection('posts')`, so drafts stay excluded
+  by default. `pages/posts/[slug].astro` is the deliberate exception: it uses
+  `getCollection` directly so drafts still get a route.
+- Drafts are unlisted by design, so nothing on the site enumerates them. The build
+  prints a `Drafts: N` line when any exist.
 
 ## Code Style Guidelines
 - Use functional React components for islands with named exports

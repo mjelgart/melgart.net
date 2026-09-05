@@ -7,6 +7,9 @@ const posts = defineCollection({
     title: z.string(),
     date: z.string(),
     subtitle: z.string().optional(),
+    // Public draft: the post still builds at /posts/<slug> so the URL can be
+    // shared, but it is withheld from every listing, the feed, and search.
+    draft: z.boolean().default(false),
   }),
 });
 

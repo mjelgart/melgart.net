@@ -1,13 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
 import Search from '../components/Search.jsx';
+import { getPublishedPosts } from '../utils/posts.js';
 
-// Fetch and sort posts
-const allPosts = await getCollection('posts');
-const sortedPosts = allPosts.sort((a, b) =>
-  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-).slice(0, 5);
+// Five most recent posts; drafts are already excluded
+const sortedPosts = (await getPublishedPosts()).slice(0, 5);
 
 const siteTitle = 'Michael Elgart';
 const description = "Michael's blog.";
