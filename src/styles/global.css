@@ -9,6 +9,26 @@
   --border-light: #eee;
   --border-strong: #999;
   --surface: #f9f9f9;
+
+  /* --font-body (Literata) and --font-mono (Source Code Pro) are defined by
+     Astro's fonts config, not here: it emits the @font-face rules and the
+     variables together, with fallback metrics matched to the real faces.
+     See astro.config.mjs. */
+
+  /* Syntax highlighting. Shiki runs on its css-variables theme (see
+     astro.config.mjs) so code blocks read from the site palette instead of
+     hard-coding a background that fights it. */
+  --astro-code-background: var(--surface);
+  --astro-code-foreground: var(--text);
+  --astro-code-token-comment: #8a8274;
+  --astro-code-token-keyword: #9a2b62;
+  --astro-code-token-string: #2f6b42;
+  --astro-code-token-string-expression: #2f6b42;
+  --astro-code-token-function: #0059c1;
+  --astro-code-token-constant: #a35200;
+  --astro-code-token-parameter: #6b4a8a;
+  --astro-code-token-punctuation: #6b6355;
+  --astro-code-token-link: #0059c1;
 }
 
 html[data-theme='dark'] {
@@ -23,19 +43,45 @@ html[data-theme='dark'] {
   --border-light: #2e2b24;
   --border-strong: #6b6355;
   --surface: #26231d;
+
+  --astro-code-token-comment: #8a8274;
+  --astro-code-token-keyword: #e59ac4;
+  --astro-code-token-string: #96c9a4;
+  --astro-code-token-string-expression: #96c9a4;
+  --astro-code-token-function: #6cb2ff;
+  --astro-code-token-constant: #e0b070;
+  --astro-code-token-parameter: #c4aee0;
+  --astro-code-token-punctuation: #a89f8f;
+  --astro-code-token-link: #6cb2ff;
+}
+
+html {
+  /* Anchors rem, and deliberately stays 16px. .container is sized in rem, so
+     moving this would silently widen the measure along with the type. */
+  font-size: 16px;
 }
 
 html,
 body {
   padding: 0;
   margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
-  font-family: Ubuntu Mono, source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-  line-height: 1.6;
-  font-size: 16px;
   background-color: var(--bg);
   color: var(--text);
+}
+
+body {
+  font-family: var(--font-body);
+  font-optical-sizing: auto;
+  font-size: 18px;
+  /* Generous for an ~80-character measure: the failure mode of a long line is
+     the return sweep, and leading is what pays for it. */
+  line-height: 1.68;
+}
+
+/* Light text on a dark ground optically blooms and reads heavier than it is.
+   Literata is variable, so the fix is simply to ask for less weight. */
+html[data-theme='dark'] body {
+  font-weight: 380;
 }
 
 * {
@@ -54,4 +100,42 @@ a:hover {
 img {
   max-width: 100%;
   display: block;
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--font-mono);
+  /* Source Code Pro ships static 400/600, so it must not inherit the 380 the
+     dark theme sets on body — that would round oddly rather than gracefully. */
+  font-weight: 400;
+}
+
+/* Inline code: a chip, so it reads as code mid-sentence without a fence. */
+code {
+  font-size: 0.85em;
+  background-color: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: 2px;
+  padding: 0.1em 0.35em;
+}
+
+pre {
+  font-size: 0.8em;
+  line-height: 1.6;
+  margin: 1.5em 0;
+  padding: 1rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--link);
+  overflow-x: auto;
+}
+
+/* Shiki emits <pre><code>; the inner element must not re-apply the chip. */
+pre code {
+  font-size: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
 }
