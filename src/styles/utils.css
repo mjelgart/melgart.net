@@ -1,6 +1,5 @@
-/* Weights top out at 700: that is the end of Literata's variable axis, and
-   asking for 800 only gets it clamped back down. Tracking is in em so it
-   scales with the heading instead of staying pinned to 0.8px. */
+/* Weights top out at 700: that is the end of Literata's variable axis. Tracking is in em so it
+   scales with the heading */
 .heading2Xl {
     font-size: 2.5rem;
     line-height: 1.2;
@@ -62,9 +61,7 @@
   flex-direction: column;
 }
 
-/* Site identity stays monospace against the serif body — that contrast is the
-   whole point, which is why one mono covers both this and the code. Declared
-   after the heading classes so it wins the weight on source order. */
+/* Declared after the heading classes so it wins the weight on source order. */
 .wordmark {
   font-family: var(--font-mono);
   font-weight: 600;
