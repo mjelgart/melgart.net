@@ -1,61 +1,61 @@
 {
-  "schemaVersion": "1.1.0",
-  "buildTimestamp": "2026-05-23T15:35:29.787Z",
-  "gitCommitSha": "b32951b2691a825c59b16aa428067607502b4ef3",
+  "schemaVersion": "1.2.0",
+  "buildTimestamp": "2026-09-06T18:59:35.118Z",
+  "gitCommitSha": "8d87a936b3e0a41947866b4d01dc2c366c2e9690",
   "postCount": 15,
   "totalSizes": {
     "html": {
-      "raw": 172649,
-      "gzipped": 70832
+      "raw": 366575,
+      "gzipped": 122590
     },
     "css": {
       "raw": 0,
       "gzipped": 0
     },
     "js": {
-      "raw": 166992,
-      "gzipped": 51742
+      "raw": 164453,
+      "gzipped": 51043
     },
     "images": {
       "raw": 962474,
       "gzipped": 937015
     },
     "other": {
-      "raw": 0,
-      "gzipped": 0
+      "raw": 157308,
+      "gzipped": 152862
     },
     "total": {
-      "raw": 1302115,
-      "gzipped": 1059589
+      "raw": 1650810,
+      "gzipped": 1263510
     },
     "inlinedCss": {
-      "raw": 24682,
-      "gzipped": 1191
+      "raw": 157163,
+      "gzipped": 3587
     }
   },
   "routeAssets": {
     "/": {
       "html": {
-        "raw": 12867,
-        "gzipped": 4484
+        "raw": 22029,
+        "gzipped": 6834
       },
       "css": {
-        "raw": 0,
-        "gzipped": 0
+        "raw": 14482,
+        "gzipped": 2599
       },
       "js": {
-        "raw": 138274,
-        "gzipped": 44961
+        "raw": 256684,
+        "gzipped": 74417
       },
       "total": {
-        "raw": 151141,
-        "gzipped": 49445
+        "raw": 293195,
+        "gzipped": 83850
       }
     },
     "/posts": {
       "html": {
-        "raw": 139212,
-        "gzipped": 59501
+        "raw": 295512,
+        "gzipped": 101723
       },
       "css": {
         "raw": 0,
@@ -66,32 +66,32 @@
         "gzipped": 0
       },
       "total": {
-        "raw": 139212,
-        "gzipped": 59501
+        "raw": 295512,
+        "gzipped": 101723
       }
     },
     "/sports": {
       "html": {
-        "raw": 10200,
-        "gzipped": 3344
+        "raw": 19207,
+        "gzipped": 5648
       },
       "css": {
         "raw": 0,
         "gzipped": 0
       },
       "js": {
-        "raw": 157559,
-        "gzipped": 47754
+        "raw": 154662,
+        "gzipped": 46927
       },
       "total": {
-        "raw": 167759,
-        "gzipped": 51098
+        "raw": 173869,
+        "gzipped": 52575
       }
     },
     "/saved-on-hosting": {
       "html": {
-        "raw": 2936,
-        "gzipped": 1222
+        "raw": 11299,
+        "gzipped": 3360
       },
       "css": {
         "raw": 0,
@@ -102,14 +102,14 @@
         "gzipped": 0
       },
       "total": {
-        "raw": 2936,
-        "gzipped": 1222
+        "raw": 11299,
+        "gzipped": 3360
       }
     },
     "/stats": {
       "html": {
-        "raw": 7434,
-        "gzipped": 2281
+        "raw": 18528,
+        "gzipped": 5025
       },
       "css": {
         "raw": 0,
@@ -120,11 +120,33 @@
         "gzipped": 0
       },
       "total": {
-        "raw": 7434,
-        "gzipped": 2281
+        "raw": 18528,
+        "gzipped": 5025
       }
     }
   },
-  "fileCount": 31,
+  "searchAssets": {
+    "onPageLoad": {
+      "raw": 134469,
+      "gzipped": 32809,
+      "fileCount": 2
+    },
+    "onFirstQuery": {
+      "raw": 159438,
+      "gzipped": 97657,
+      "fileCount": 5
+    },
+    "perQuery": {
+      "raw": 94005,
+      "gzipped": 94406,
+      "fileCount": 17
+    },
+    "neverFetched": {
+      "raw": 351664,
+      "gzipped": 129963,
+      "fileCount": 6
+    }
+  },
+  "fileCount": 37,
   "generatedBy": "scripts/build-stats.mjs"
 }
