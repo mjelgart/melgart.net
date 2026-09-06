@@ -22,10 +22,8 @@ const FILE_TYPES = {
 // Astro emits (each as <route>/index.html), not aspirational ones.
 const TRACKED_ROUTES = ['/', '/posts', '/sports', '/saved-on-hosting', '/stats'];
 
-// Pagefind writes its search bundle into dist/pagefind/. Those files are kept
-// out of the site totals and reported separately under searchAssets, because
-// what matters here is what a browser actually downloads — and most of that
-// directory is never requested by anyone.
+// Pagefind writes its search bundle into dist/pagefind/. Those files are kept separate because
+// not all components are downloaded for all pages.
 const SEARCH_DIR = 'pagefind';
 
 // The only search files fetched during a normal page load: Search.jsx injects
@@ -151,8 +149,7 @@ function extractAstroAssetRefs(htmlContent) {
 }
 
 // Pagefind ships a wasm blob and a metadata file per supported language, but
-// the entry manifest names only the ones built for this site's content. Anything
-// it doesn't name can never be requested.
+// the entry manifest names only the ones built for this site's content. 
 function readActiveLanguageFiles(distDir) {
   const active = new Set();
   const entryPath = path.join(distDir, SEARCH_DIR, 'pagefind-entry.json');
@@ -208,8 +205,7 @@ function summarizeSearchAssets(searchFiles, distDir) {
 }
 
 // Search.jsx injects the Pagefind UI at runtime, so it never appears in the
-// HTML the way Astro's own bundles do. Find it the way the browser effectively
-// does: a route loads the search UI if one of the bundles it pulls names it.
+// HTML the way Astro's own bundles do. Find it the way the browser does: a route loads the search UI if one of the bundles it pulls names it.
 function routeLoadsSearchUi(refs, fileByPath) {
   for (const ref of refs) {
     const asset = fileByPath.get(ref);
