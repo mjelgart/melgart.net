@@ -11,9 +11,7 @@
   --surface: #f9f9f9;
 
   /* --font-body (Literata) and --font-mono (Source Code Pro) are defined by
-     Astro's fonts config, not here: it emits the @font-face rules and the
-     variables together, with fallback metrics matched to the real faces.
-     See astro.config.mjs. */
+     Astro's fonts config, see astro.config.mjs. */
 
   /* Syntax highlighting. Shiki runs on its css-variables theme (see
      astro.config.mjs) so code blocks read from the site palette instead of
@@ -73,8 +71,7 @@ body {
   font-family: var(--font-body);
   font-optical-sizing: auto;
   font-size: 18px;
-  /* Generous for an ~80-character measure: the failure mode of a long line is
-     the return sweep, and leading is what pays for it. */
+  /* Doing a generous line-height, if any issues can revisit */
   line-height: 1.68;
 }
 
