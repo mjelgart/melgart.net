@@ -1,4 +1,6 @@
 ---
+import { Font } from 'astro:assets';
+
 import '../styles/global.css';
 import '../styles/utils.css';
 
@@ -23,6 +25,14 @@ const name = 'melgart.net';
 
   <!-- Favicon -->
   <link rel="icon" href="/favicon-16x16.png" />
+
+  <!-- Literata (prose) and Source Code Pro (code, wordmark), both SIL OFL.
+       Configured in astro.config.mjs: Astro downloads them at build time and
+       serves them from this origin, so nothing is fetched from Google at
+       runtime. Only upright Literata preloads: it is what blocks first read,
+       while the italic is not needed until well into a post. -->
+  <Font cssVariable="--font-body" preload={[{ style: 'normal' }]} />
+  <Font cssVariable="--font-mono" />
 
   <!-- Feed autodiscovery: lets readers subscribe by pasting the site URL -->
   <link rel="alternate" type="application/rss+xml" title={name} href="/rss.xml" />
@@ -77,7 +87,7 @@ const name = 'melgart.net';
       </header>
     ) : (
       <header class="header">
-        <h2 class="headingLg">
+        <h2 class="headingLg wordmark">
           <a href="/" class="colorInherit">
             {name}
           </a>
