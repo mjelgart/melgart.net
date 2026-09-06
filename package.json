@@ -3,9 +3,9 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && node scripts/build-stats.mjs",
+    "build": "npm run build:pass && node scripts/build-stats.mjs && npm run build:pass",
+    "build:pass": "astro build && pagefind --site dist",
     "preview": "astro preview",
-    "postbuild": "npx pagefind --site dist",
     "test": "vitest",
     "test:run": "vitest run",
     "astro": "astro"

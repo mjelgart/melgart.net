@@ -22,6 +22,19 @@ const FILE_TYPES = {
 // Astro emits (each as <route>/index.html), not aspirational ones.
 const TRACKED_ROUTES = ['/', '/posts', '/sports', '/saved-on-hosting', '/stats'];
 
+// Pagefind writes its search bundle into dist/pagefind/. Those files are kept
+// out of the site totals and reported separately under searchAssets, because
+// what matters here is what a browser actually downloads — and most of that
+// directory is never requested by anyone.
+const SEARCH_DIR = 'pagefind';
+
+// The only search files fetched during a normal page load: Search.jsx injects
+// these two by hand when its island hydrates.
+const SEARCH_EAGER_UI = ['pagefind-ui.js', 'pagefind-ui.css'];
+
+// Fetched once, when a visitor first uses the search box.
+const SEARCH_ENGINE = ['pagefind.js', 'pagefind-worker.js', 'pagefind-entry.json'];
+
 function getFileType(filePath) {
   const ext = path.extname(filePath).toLowerCase();
   for (const [type, extensions] of Object.entries(FILE_TYPES)) {
@@ -137,7 +150,78 @@ function extractAstroAssetRefs(htmlContent) {
   return refs;
 }
 
-function analyzeRouteAssets(files) {
+// Pagefind ships a wasm blob and a metadata file per supported language, but
+// the entry manifest names only the ones built for this site's content. Anything
+// it doesn't name can never be requested.
+function readActiveLanguageFiles(distDir) {
+  const active = new Set();
+  const entryPath = path.join(distDir, SEARCH_DIR, 'pagefind-entry.json');
+  if (!fs.existsSync(entryPath)) return active;
+
+  try {
+    const entry = JSON.parse(fs.readFileSync(entryPath, 'utf8'));
+    for (const language of Object.values(entry.languages || {})) {
+      if (language.wasm) active.add(`wasm.${language.wasm}.pagefind`);
+      if (language.hash) active.add(`pagefind.${language.hash}.pf_meta`);
+    }
+  } catch (error) {
+    console.warn('Could not parse pagefind-entry.json:', error.message);
+  }
+
+  return active;
+}
+
+// Sort a search asset by when — if ever — a browser asks for it.
+function classifySearchAsset(relativePath, activeLanguageFiles) {
+  if (SEARCH_EAGER_UI.includes(relativePath)) return 'onPageLoad';
+  if (relativePath.startsWith('index/') || relativePath.startsWith('fragment/')) {
+    return 'perQuery';
+  }
+  if (SEARCH_ENGINE.includes(relativePath) || activeLanguageFiles.has(relativePath)) {
+    return 'onFirstQuery';
+  }
+  return 'neverFetched';
+}
+
+// Path of a search asset relative to dist/pagefind/, in forward slashes.
+function searchAssetName(file) {
+  return file.path.split(path.sep).join('/').slice(`${SEARCH_DIR}/`.length);
+}
+
+function summarizeSearchAssets(searchFiles, distDir) {
+  const activeLanguageFiles = readActiveLanguageFiles(distDir);
+  const tiers = {
+    onPageLoad: { raw: 0, gzipped: 0, fileCount: 0 },
+    onFirstQuery: { raw: 0, gzipped: 0, fileCount: 0 },
+    perQuery: { raw: 0, gzipped: 0, fileCount: 0 },
+    neverFetched: { raw: 0, gzipped: 0, fileCount: 0 },
+  };
+
+  for (const file of searchFiles) {
+    const tier = tiers[classifySearchAsset(searchAssetName(file), activeLanguageFiles)];
+    tier.raw += file.raw;
+    tier.gzipped += file.gzipped;
+    tier.fileCount += 1;
+  }
+
+  return tiers;
+}
+
+// Search.jsx injects the Pagefind UI at runtime, so it never appears in the
+// HTML the way Astro's own bundles do. Find it the way the browser effectively
+// does: a route loads the search UI if one of the bundles it pulls names it.
+function routeLoadsSearchUi(refs, fileByPath) {
+  for (const ref of refs) {
+    const asset = fileByPath.get(ref);
+    if (!asset || asset.type !== 'js') continue;
+    if (fs.readFileSync(asset.fullPath, 'utf8').includes(`${SEARCH_DIR}/${SEARCH_EAGER_UI[0]}`)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function analyzeRouteAssets(files, searchFiles = []) {
   const routeAssets = {};
 
   // Initialize tracked routes. Per-route totals measure page code (HTML plus
@@ -186,6 +270,16 @@ function analyzeRouteAssets(files) {
       const asset = fileByPath.get(ref);
       if (!asset) continue;
       add(route, asset.type === 'css' ? 'css' : 'js', asset.raw, asset.gzipped);
+    }
+  }
+
+  // Without this, a page with the search box under-reports its real download
+  // weight by the whole Pagefind UI bundle.
+  const eagerUi = searchFiles.filter((file) => SEARCH_EAGER_UI.includes(searchAssetName(file)));
+  for (const route of TRACKED_ROUTES) {
+    if (!routeLoadsSearchUi(countedByRoute[route], fileByPath)) continue;
+    for (const file of eagerUi) {
+      add(route, file.type === 'css' ? 'css' : 'js', file.raw, file.gzipped);
     }
   }
 
@@ -267,11 +361,25 @@ function generateBuildStats() {
 
   console.log('Analyzing build output...');
 
-  // Walk the dist directory and analyze files
-  const files = walkDirectory(distDir);
+  // Walk the dist directory, splitting the site's own output from Pagefind's
+  // search bundle so each can be measured on its own terms.
+  const allFiles = walkDirectory(distDir);
+  const isSearchAsset = (file) =>
+    file.path.split(path.sep).join('/').startsWith(`${SEARCH_DIR}/`);
+  const searchFiles = allFiles.filter(isSearchAsset);
+  const files = allFiles.filter((file) => !isSearchAsset(file));
+
+  if (searchFiles.length === 0) {
+    console.warn(
+      `No ${SEARCH_DIR}/ directory in dist — run pagefind before this script, ` +
+      'or the search assets go unreported.'
+    );
+  }
+
   const totalsByType = getTotalSizeByType(files);
   totalsByType.inlinedCss = getInlinedCssStats(files);
-  const routeAssets = analyzeRouteAssets(files);
+  const routeAssets = analyzeRouteAssets(files, searchFiles);
+  const searchAssets = summarizeSearchAssets(searchFiles, distDir);
 
   // Count posts
   const { published: postCount, drafts: draftCount } = countPosts();
@@ -282,12 +390,13 @@ function generateBuildStats() {
 
   // Generate statistics object
   const buildStats = {
-    schemaVersion: '1.1.0',
+    schemaVersion: '1.2.0',
     buildTimestamp,
     gitCommitSha,
     postCount,
     totalSizes: totalsByType,
     routeAssets,
+    searchAssets,
     fileCount: files.length,
     generatedBy: 'scripts/build-stats.mjs',
   };
@@ -299,6 +408,10 @@ function generateBuildStats() {
   console.log(`Build stats generated: ${outputPath}`);
   console.log(`Total files: ${files.length}`);
   console.log(`Total size: ${Math.round(totalsByType.total.raw / 1024)}KB raw, ${Math.round(totalsByType.total.gzipped / 1024)}KB gzipped`);
+  console.log(
+    `Search: ${Math.round(searchAssets.onPageLoad.gzipped / 1024)}KB gzipped on page load, ` +
+    `${Math.round(searchAssets.neverFetched.raw / 1024)}KB never requested`
+  );
   console.log(`Posts: ${postCount}`);
   if (draftCount > 0) {
     console.log(`Drafts: ${draftCount} (built and reachable by URL, but unlinked from the site)`);
