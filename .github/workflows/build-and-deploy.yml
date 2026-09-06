@@ -64,9 +64,8 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Run tests
         run: npm run test:run
-      # Two passes, by design. Pass one builds the site and its search index;
-      # build-stats.mjs then measures that dist; pass two rebuilds so /stats
-      # ships numbers describing the artifact actually being deployed. Astro
+      # Pass one builds the site and its search index; build-stats.mjs then measures that dist;
+      # pass two rebuilds so /stats ships numbers describing the artifact actually being deployed. Astro
       # clears dist on every build, so pagefind runs inside both passes.
       - name: Build with Astro
         run: ${{ steps.detect-package-manager.outputs.manager }} run build
