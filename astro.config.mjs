@@ -5,7 +5,7 @@ export default defineConfig({
   site: 'https://melgart.net',
   trailingSlash: 'ignore',
   integrations: [react()],
-  // Fonts are downloaded at build time and served from this origin, so no
+  // Fonts are downloaded at build time and served from the site, so no
   // visitor request reaches Google. Astro also derives fallback metrics from
   // the real faces, which keeps the swap from shifting layout.
   fonts: [
@@ -27,9 +27,8 @@ export default defineConfig({
   ],
   markdown: {
     // Default is github-dark, which stamps an inline dark background on every
-    // code block and fights the site palette in light mode. css-variables
-    // defers the colours to --astro-code-* in global.css, so fenced code
-    // follows the theme toggle like everything else.
+    // code block. `css-variables` defers the colours to --astro-code-* in global.css, so fenced code
+    // follows the theme toggle.
     shikiConfig: { theme: 'css-variables' },
   },
 });
