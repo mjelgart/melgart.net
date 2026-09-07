@@ -1,7 +1,6 @@
 # Project To-dos
 - set up linting
 - investigate the Lighthouse accessibility (94-96) and best-practices (96) gaps — framework-independent, likely alt text and/or contrast
-- revisit font choices
 - clear the 8 `astro check` type errors (build and CI are unaffected — CI runs tests
   plus `astro build`, not `astro check`):
   - `posts/[slug].astro` × 6: `Astro.props` infers as `never`, so every `entry.data.*`

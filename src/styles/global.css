@@ -33,9 +33,14 @@ html[data-theme='dark'] {
   color-scheme: dark;
   /* Warm dark palette — old-web candlelight, not Material true-black */
   --bg: #1c1a16;
-  --text: #e8e4da;
+  /* Warmth lives in the ground, not the ink: half the saturation of the
+     original #e8e4da at the same lightness, so the page reads warm without
+     the type itself reading yellow. */
+  --text: #e5e3dd;
   --link: #6cb2ff;
-  --text-muted: #a89f8f;
+  /* Neutralized in parallel with --text, so the meta line does not become the
+     warmest thing on the page once the body copy has cooled. */
+  --text-muted: #a49d92;
   --text-faint: #8a8274;
   --border: #3a362e;
   --border-light: #2e2b24;
