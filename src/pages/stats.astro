@@ -176,15 +176,9 @@ const searchRows = searchAssets
           </tbody>
         </table>
         <p class="lightText note">
-          The index and language payloads are already compressed on disk, so the
-          gzipped column barely moves for them, and for the chunks it reads
-          slightly larger, which is gzip adding framing to data it can't shrink.
-        </p>
-        <p class="lightText note">
-          Pagefind also ships {formatBytes(searchAssets.neverFetched.raw)} across
-          {' '}{searchAssets.neverFetched.fileCount} files that nothing on this site
-          ever requests (two alternative search UIs, a result-highlighting script,
-          and a fallback language index).
+          The index and language payloads are already compressed on disk and for the chunks it reads
+          slightly larger because gzip is actually adding framing. Pagefind also ships {formatBytes(searchAssets.neverFetched.raw)} across
+          {' '}{searchAssets.neverFetched.fileCount} files that nothing on the site ever requests so those bytes aren't counted above.
         </p>
       </section>
     )}
