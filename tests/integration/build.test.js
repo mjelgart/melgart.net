@@ -53,6 +53,11 @@ describe('Build integration', () => {
     expect(postContent).toContain('data-pagefind-body'); // Pagefind marker
     expect(postContent).toContain('<article'); // Article structure
 
+    // An optional subtitle renders under the title, not just in the meta tags.
+    expect(postContent).toMatch(
+      /<p class="subtitle[^"]*"[^>]*>Anarchy, State, and Utopia\. No, not that one\.<\/p>/
+    );
+
     // Assert the RSS feed was generated with real post entries
     const feedPath = join(process.cwd(), 'dist/rss.xml');
     expect(existsSync(feedPath)).toBe(true);
@@ -72,6 +77,7 @@ describe('Build integration', () => {
     expect(draftPage).toContain('noindex'); // Kept out of search engines
     expect(draftPage).toContain('Draft.'); // Banner telling the reader what this is
     expect(draftPage).not.toContain('data-pagefind-body'); // Kept out of the search index
+    expect(draftPage).not.toMatch(/<p class="subtitle/); // No empty line when frontmatter omits it
 
     // ...but appears in none of the places that would surface it to a reader
     // who wasn't given the link.
