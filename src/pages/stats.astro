@@ -39,7 +39,7 @@ const routeRows = Object.entries(routeAssets)
   .sort((a, b) => b.gzipped - a.gzipped);
 
 // The homepage is the heaviest real page (both islands live there) and
-// /saved-on-hosting the lightest; quoting the pair frames the whole range.
+// /saved-on-hosting the lightest.
 const homeWeight = routeAssets['/']?.total.gzipped;
 const staticWeight = routeAssets['/saved-on-hosting']?.total.gzipped;
 
@@ -77,7 +77,7 @@ const searchRows = searchAssets
         static with no server side rendering, nothing computed per request, but 
         also now no unnecessary middleware. This also makes everything quite
         small: the fully static pages carry no JavaScript at all, and what
-        weight the site does have is almost entirely the two interactive
+        weight the site does have is almost entirely from two interactive
         widgets. Everything below measures what a browser actually downloads,
         and is regenerated on every build.
       </p>
@@ -177,16 +177,14 @@ const searchRows = searchAssets
         </table>
         <p class="lightText note">
           The index and language payloads are already compressed on disk, so the
-          gzipped column barely moves for them — and for the chunks it reads
+          gzipped column barely moves for them, and for the chunks it reads
           slightly larger, which is gzip adding framing to data it can't shrink.
         </p>
         <p class="lightText note">
           Pagefind also ships {formatBytes(searchAssets.neverFetched.raw)} across
           {' '}{searchAssets.neverFetched.fileCount} files that nothing on this site
-          ever requests — two alternative search UIs, a result-highlighting script,
-          and a fallback language index. It emits the whole set on every build
-          regardless of which one you use. It costs nothing to leave there: bytes
-          nobody fetches are bytes nobody pays for.
+          ever requests (two alternative search UIs, a result-highlighting script,
+          and a fallback language index).
         </p>
       </section>
     )}
