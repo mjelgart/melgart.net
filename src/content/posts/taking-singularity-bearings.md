@@ -1,5 +1,6 @@
 ---
 title: 'Taking Singularity Bearings'
+subtitle: 'Stochastic parrot or inscrutable shoggoth?'
 date: '2026-09-07'
 ---
 Zvi recently had a post called ["The Three AI Pills"](https://thezvi.substack.com/p/the-three-ai-pills) about the future of AI capabilities. He distinguishes "taking" the three pills as (1) AI exists and can do the things it can already do, (2) AI will be able to do a lot more, and (3) AI will be able to do approximately everything better than humans within our natural lifetimes. I think this framework is an important way to consider developments in LLMs, especially for people who might not be exposed to certain industries like software development. I would definitely recommend his essay, but Zvi's style requires a particular taste, and I think walking through more concrete examples could be helpful. So I'm going to rewrite some of this discussion as a series of capability questions about current AI capabilities.
