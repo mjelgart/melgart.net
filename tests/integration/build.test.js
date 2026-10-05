@@ -14,7 +14,7 @@ describe('Build integration', () => {
   beforeAll(() => {
     writeFileSync(
       draftPath,
-      `---\ntitle: '${DRAFT_TITLE}'\ndate: '2026-06-01'\ndraft: true\n---\nBody of the fixture draft.\n`
+      `---\ntitle: '${DRAFT_TITLE}'\ndate: '2026-06-01'\ndraft: true\n---\nBody of the fixture draft.\n`,
     );
   });
 
@@ -55,7 +55,7 @@ describe('Build integration', () => {
 
     // An optional subtitle renders under the title, not just in the meta tags.
     expect(postContent).toMatch(
-      /<p class="subtitle[^"]*"[^>]*>Anarchy, State, and Utopia\. No, not that one\.<\/p>/
+      /<p class="subtitle[^"]*"[^>]*>Anarchy, State, and Utopia\. No, not that one\.<\/p>/,
     );
 
     // Assert the RSS feed was generated with real post entries

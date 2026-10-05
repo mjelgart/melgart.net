@@ -8,7 +8,7 @@ const TeamCard = ({ team }) => {
 
   const achievementsByYear = useMemo(() => {
     const groupedAchievements = {};
-    team.seasons.forEach(season => {
+    team.seasons.forEach((season) => {
       if (season.achievements.length > 0) {
         groupedAchievements[season.year] = season.achievements;
       }
@@ -30,53 +30,53 @@ const TeamCard = ({ team }) => {
   };
 
   return (
-    <div style={{ marginBottom: '2rem', borderBottom: '1px solid var(--border)', paddingBottom: '1rem' }}>
+    <div
+      style={{
+        marginBottom: '2rem',
+        borderBottom: '1px solid var(--border)',
+        paddingBottom: '1rem',
+      }}
+    >
       <div>
         <h3 className="text-xl">{team.name}</h3>
-        <div style={{ fontSize: '0.8rem'}}>
+        <div style={{ fontSize: '0.8rem' }}>
           <p className="text-sm opacity-75">
-
-          {team.level === "professional"
-            ? `${team.league} • ${team.conference}`
-            : `${team.level} ${team.sport} • ${team.conference}`
-          }
+            {team.level === 'professional'
+              ? `${team.league} • ${team.conference}`
+              : `${team.level} ${team.sport} • ${team.conference}`}
           </p>
         </div>
       </div>
 
-    {/* Championships Summary */}
-    {team.seasons.some(season =>
-      season.achievements.some(a =>
-        a.type === 'championship' || a.type === 'national_championship'
-      )
-    ) && (
-      <div style={{ marginTop: '0.5rem' }}>
-        <div style={{ fontSize: '1rem' }}>Championships: </div>
-        {team.seasons
-          .flatMap(season =>
-            season.achievements
-              .filter(a => a.type === ('championship'))
-              .map(a => ({
-                year: season.year,
-                type: a.type,
-                description: a.description
-              }))
-          )
-          .sort((a, b) => b.year - a.year)
-          .map((championship, index) => (
-            <div key={index} style={{ fontSize: '1rem', marginLeft: '1rem' }}>
-              {championship.year}
-            </div>
-          ))
-        }
-      </div>
-    )}
+      {/* Championships Summary */}
+      {team.seasons.some((season) =>
+        season.achievements.some(
+          (a) => a.type === 'championship' || a.type === 'national_championship',
+        ),
+      ) && (
+        <div style={{ marginTop: '0.5rem' }}>
+          <div style={{ fontSize: '1rem' }}>Championships: </div>
+          {team.seasons
+            .flatMap((season) =>
+              season.achievements
+                .filter((a) => a.type === 'championship')
+                .map((a) => ({
+                  year: season.year,
+                  type: a.type,
+                  description: a.description,
+                })),
+            )
+            .sort((a, b) => b.year - a.year)
+            .map((championship, index) => (
+              <div key={index} style={{ fontSize: '1rem', marginLeft: '1rem' }}>
+                {championship.year}
+              </div>
+            ))}
+        </div>
+      )}
 
       {Object.keys(achievementsByYear).length > 0 && (
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="mt-2 text-sm underline"
-        >
+        <button onClick={() => setIsExpanded(!isExpanded)} className="mt-2 text-sm underline">
           {isExpanded ? 'Hide achievements' : 'Show achievements'}
         </button>
       )}
@@ -89,14 +89,14 @@ const TeamCard = ({ team }) => {
               <div key={year} className="mb-4">
                 <h4 className="font-bold mb-2">{year}</h4>
                 <div className="ml-2">
-                {achievements.map((achievement, index) => (
-                  <div key={index} className="mb-1">
-                    {getAchievementPrefix(achievement.type)} {achievement.description}
-                  </div>
-                ))}
+                  {achievements.map((achievement, index) => (
+                    <div key={index} className="mb-1">
+                      {getAchievementPrefix(achievement.type)} {achievement.description}
+                    </div>
+                  ))}
+                </div>
               </div>
-              </div>
-          ))}
+            ))}
         </div>
       )}
     </div>
@@ -108,27 +108,34 @@ const TeamsTracker = () => {
   const [filterSport, setFilterSport] = useState('all');
 
   const teamsWithPoints = useMemo(() => {
-    return sportsData.teams.map(team => {
-      const totalPoints = team.seasons.reduce((total, season) =>
-        total + season.achievements.reduce((seasonTotal, achievement) => {
-          if (achievement.points !== undefined) {
-            return seasonTotal + achievement.points;
-          }
+    return sportsData.teams.map((team) => {
+      const totalPoints = team.seasons.reduce(
+        (total, season) =>
+          total +
+          season.achievements.reduce((seasonTotal, achievement) => {
+            if (achievement.points !== undefined) {
+              return seasonTotal + achievement.points;
+            }
 
-          const defaultPoints = sportsData.achievement_default_points[achievement.type];
+            const defaultPoints = sportsData.achievement_default_points[achievement.type];
 
-          if (achievement.type === 'rival_victory' && achievement.opponent &&
-              typeof defaultPoints === 'object' && defaultPoints[achievement.opponent]) {
-            return seasonTotal + defaultPoints[achievement.opponent];
-          }
+            if (
+              achievement.type === 'rival_victory' &&
+              achievement.opponent &&
+              typeof defaultPoints === 'object' &&
+              defaultPoints[achievement.opponent]
+            ) {
+              return seasonTotal + defaultPoints[achievement.opponent];
+            }
 
-          if (defaultPoints !== undefined && typeof defaultPoints !== 'object') {
-            return seasonTotal + defaultPoints;
-          }
+            if (defaultPoints !== undefined && typeof defaultPoints !== 'object') {
+              return seasonTotal + defaultPoints;
+            }
 
-          return seasonTotal;
-        }, 0)
-      , 0);
+            return seasonTotal;
+          }, 0),
+        0,
+      );
       return { ...team, totalPoints };
     });
   }, []);
@@ -137,7 +144,7 @@ const TeamsTracker = () => {
     let filtered = teamsWithPoints;
 
     if (filterSport !== 'all') {
-      filtered = filtered.filter(team => team.sport === filterSport);
+      filtered = filtered.filter((team) => team.sport === filterSport);
     }
 
     return filtered.sort((a, b) => {
@@ -148,18 +155,13 @@ const TeamsTracker = () => {
     });
   }, [teamsWithPoints, sortBy, filterSport]);
 
-  const sports = [...new Set(sportsData.teams.map(team => team.sport))];
+  const sports = [...new Set(sportsData.teams.map((team) => team.sport))];
 
   return (
     <div className="max-w-3xl mx-auto p-4">
       <div className="mb-8">
-
         <div className="flex gap-4 mb-4">
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            className="p-1 border"
-          >
+          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="p-1 border">
             <option value="performance">Sort by Recent Performance</option>
             <option value="name">Sort by Name</option>
             <option value="sport">Sort by Sport</option>
@@ -171,7 +173,7 @@ const TeamsTracker = () => {
             className="p-1 border"
           >
             <option value="all">All Sports</option>
-            {sports.map(sport => (
+            {sports.map((sport) => (
               <option key={sport} value={sport}>
                 {sport.charAt(0).toUpperCase() + sport.slice(1)}
               </option>
@@ -181,11 +183,8 @@ const TeamsTracker = () => {
       </div>
 
       <div>
-        {sortedAndFilteredTeams.map(team => (
-          <TeamCard
-            key={team.id}
-            team={team}
-          />
+        {sortedAndFilteredTeams.map((team) => (
+          <TeamCard key={team.id} team={team} />
         ))}
       </div>
     </div>

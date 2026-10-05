@@ -21,7 +21,11 @@ export default defineConfig([
   // React islands.
   {
     files: ['**/*.jsx'],
-    extends: [react.configs.recommended, reactHooks.configs.flat.recommended, jsxA11y.configs.recommended],
+    extends: [
+      react.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      jsxA11y.configs.recommended,
+    ],
     languageOptions: { globals: globals.browser },
   },
 
