@@ -75,6 +75,11 @@ jobs:
       # clears dist on every build, so pagefind runs inside both passes.
       - name: Build with Astro
         run: ${{ steps.detect-package-manager.outputs.manager }} run build
+      - name: Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
       - name: Set nojekyll
         run: touch dist/.nojekyll
       - name: Upload artifact
