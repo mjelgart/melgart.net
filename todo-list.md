@@ -1,5 +1,7 @@
 # Project To-dos
-- investigate the Lighthouse accessibility and best-practices gaps — framework-independent, likely alt text and/or contrast. CI now measures these on every build (see `lighthouserc.json`); raise the thresholds as they're fixed
+- fix the remaining Lighthouse accessibility issues, then raise those pages' thresholds in `lighthouserc.json` to 1:
+  - `/sports` (92): the `<select>` has no label; headings skip levels
+  - `/stats` (95): links in body text are distinguished only by color
 
 ## Ideas for if we ever build a stateful site
 - email, probably
