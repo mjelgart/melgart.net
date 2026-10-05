@@ -1,0 +1,22 @@
+# Version updates on the 1st of every other month. Minor and patch updates
+# arrive as one grouped PR per ecosystem; each major version gets its own PR,
+# since those are the ones that can need code changes.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: cron
+      cronjob: '0 14 1 */2 *'
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: cron
+      cronjob: '0 14 1 */2 *'
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
