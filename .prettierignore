@@ -1,0 +1,6 @@
+# Prose is written by hand, not formatted: posts, READMEs, notes.
+*.md
+
+# Generated
+package-lock.json
+src/data/build-stats.json
