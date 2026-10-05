@@ -8,6 +8,7 @@
     "preview": "astro preview",
     "test": "vitest",
     "test:run": "vitest run",
+    "typecheck": "astro check",
     "astro": "astro"
   },
   "dependencies": {
