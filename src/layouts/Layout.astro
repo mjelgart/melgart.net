@@ -72,15 +72,15 @@ const ogImage = new URL('/images/window preview.jpg', Astro.site);
   <!-- Pre-paint theme init: must run before first render to avoid a flash of light mode -->
   <script is:inline>
     (function () {
-      var stored;
-      try { stored = localStorage.getItem('theme'); } catch (e) {}
-      var theme = (stored === 'light' || stored === 'dark')
+      let stored;
+      try { stored = localStorage.getItem('theme'); } catch { /* storage blocked: use the system preference */ }
+      const theme = (stored === 'light' || stored === 'dark')
         ? stored
         : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       document.documentElement.dataset.theme = theme;
 
       // Literals, because global.css may not be parsed yet. Keep in sync with --bg.
-      var meta = document.querySelector('meta[name="theme-color"]');
+      const meta = document.querySelector('meta[name="theme-color"]');
       if (meta) meta.setAttribute('content', theme === 'dark' ? '#1c1a16' : '#ffffff');
     })();
   </script>
@@ -143,7 +143,7 @@ const ogImage = new URL('/images/window preview.jpg', Astro.site);
     toggle.addEventListener('click', () => {
       const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
       document.documentElement.dataset.theme = next;
-      try { localStorage.setItem('theme', next); } catch (e) {}
+      try { localStorage.setItem('theme', next); } catch { /* storage blocked: theme lasts for this page only */ }
       syncTheme();
     });
   </script>

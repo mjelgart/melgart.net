@@ -1,3 +1,5 @@
+// Lists here render static JSON that never reorders, so index keys are stable.
+/* eslint-disable @eslint-react/no-array-index-key */
 import React, { useState, useMemo } from 'react';
 import sportsData from '../../data/sports-data.json';
 
