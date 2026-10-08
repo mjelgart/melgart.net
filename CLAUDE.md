@@ -43,7 +43,6 @@ URL can be shared, but it is withheld from everything that would surface it incl
 - **Prettier** (`.prettierrc.json`): owns all formatting; don't hand-format. Markdown is ignored, so posts and notes are never rewritten.
 - **Lighthouse CI** (`lighthouserc.json`): runs in CI against the built site. Accessibility below its threshold fails the build; other categories warn. Raise thresholds when scores improve, never lower them to get a change through.
 - **Dependabot** (`.github/dependabot.yml`): every other month. Minor and patch updates are grouped into one PR; majors arrive one per PR.
-- **npm 10 bug:** `npm update`, `npm audit fix`, and some installs crash with `Cannot read properties of null (reading 'edgesOut')`. Use `npx npm@11 <command>` (CI's Node 24 ships npm 11).
 
 ## Code Style Guidelines
 - Use functional React components for islands with named exports
