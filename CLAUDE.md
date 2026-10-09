@@ -42,6 +42,7 @@ URL can be shared, but it is withheld from everything that would surface it incl
 - **ESLint** (`eslint.config.js`): Astro, React islands, hooks, and accessibility rules. Accessibility uses `eslint-plugin-jsx-a11y-x`, the maintained fork; the original does not support ESLint 10. Disable a rule only with a comment saying why.
 - **Prettier** (`.prettierrc.json`): owns all formatting; don't hand-format. Markdown is ignored, so posts and notes are never rewritten.
 - **Lighthouse CI** (`lighthouserc.json`): runs in CI against the built site. Accessibility below its threshold fails the build; other categories warn. Raise thresholds when scores improve, never lower them to get a change through.
+- **Post-deploy check** (`verify-live` job): after each deploy to main, `scripts/verify-deploy.sh` confirms melgart.net serves the exact files just deployed (retrying up to 11 minutes for GitHub Pages' CDN cache) and that every page and image loads, then Lighthouse runs against the live site (`lighthouserc.live.json`, performance and best practices, warn-only).
 - **Dependabot** (`.github/dependabot.yml`): every other month. Minor and patch updates are grouped into one PR; majors arrive one per PR.
 
 ## Code Style Guidelines
