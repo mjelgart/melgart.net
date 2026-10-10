@@ -3,5 +3,7 @@
 // the integration test, where a real build runs.
 
 export const getCollection = async () => {
-  throw new Error('getCollection is unavailable in unit tests — cover it in tests/integration instead');
+  throw new Error(
+    'getCollection is unavailable in unit tests — cover it in tests/integration instead',
+  );
 };

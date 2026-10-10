@@ -11,10 +11,7 @@ const entry = (id, date, draft = false) => ({ id, data: { title: id, date, draft
 
 describe('selectPublished', () => {
   it('drops drafts and keeps published posts', () => {
-    const posts = [
-      entry('published', '2026-01-01'),
-      entry('secret', '2026-02-01', true),
-    ];
+    const posts = [entry('published', '2026-01-01'), entry('secret', '2026-02-01', true)];
 
     expect(selectPublished(posts).map((post) => post.id)).toEqual(['published']);
   });

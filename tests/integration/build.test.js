@@ -1,7 +1,10 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { spawn } from 'child_process';
-import { readFileSync, writeFileSync, rmSync, existsSync } from 'fs';
-import { join } from 'path';
+import { readFileSync, writeFileSync, rmSync, existsSync, readdirSync, statSync } from 'fs';
+import { join, relative } from 'path';
+
+const SITE = 'https://melgart.net';
+const distDir = join(process.cwd(), 'dist');
 
 // A public draft written into the content directory just for this run, so the
 // draft rules are exercised against a real build without shipping a permanent
@@ -10,39 +13,45 @@ const DRAFT_SLUG = 'zz-draft-fixture';
 const DRAFT_TITLE = 'Fixture Draft Post';
 const draftPath = join(process.cwd(), 'src/content/posts', `${DRAFT_SLUG}.md`);
 
+const listHtmlFiles = (dir) =>
+  readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) return listHtmlFiles(path);
+    return entry.name.endsWith('.html') ? [path] : [];
+  });
+
+// The file a static host would serve for a URL path, if any.
+const servesFile = (pathname) => {
+  const target = join(distDir, decodeURIComponent(pathname));
+  return [target, join(target, 'index.html'), `${target}.html`].some(
+    (candidate) => existsSync(candidate) && statSync(candidate).isFile(),
+  );
+};
+
 describe('Build integration', () => {
-  beforeAll(() => {
+  beforeAll(async () => {
     writeFileSync(
       draftPath,
-      `---\ntitle: '${DRAFT_TITLE}'\ndate: '2026-06-01'\ndraft: true\n---\nBody of the fixture draft.\n`
+      `---\ntitle: '${DRAFT_TITLE}'\ndate: '2026-06-01'\ndraft: true\n---\nBody of the fixture draft.\n`,
     );
-  });
+
+    const buildProcess = spawn('npx', ['astro', 'build'], {
+      stdio: 'inherit',
+      cwd: process.cwd(),
+    });
+    await new Promise((resolve, reject) => {
+      buildProcess.on('close', (code) =>
+        code === 0 ? resolve() : reject(new Error(`Build failed with code ${code}`)),
+      );
+      buildProcess.on('error', reject);
+    });
+  }, 60000); // 60 second timeout for build
 
   afterAll(() => {
     rmSync(draftPath, { force: true });
   });
 
-  it('builds successfully and generates expected content', async () => {
-    // Spawn astro build
-    const buildProcess = spawn('npx', ['astro', 'build'], {
-      stdio: 'inherit',
-      cwd: process.cwd(),
-    });
-
-    // Wait for build to complete
-    const buildResult = await new Promise((resolve, reject) => {
-      buildProcess.on('close', (code) => {
-        if (code === 0) {
-          resolve(code);
-        } else {
-          reject(new Error(`Build failed with code ${code}`));
-        }
-      });
-      buildProcess.on('error', reject);
-    });
-
-    expect(buildResult).toBe(0);
-
+  it('generates expected content', () => {
     // Assert that the post file exists
     const postPath = join(process.cwd(), 'dist/posts/the-dispossessed/index.html');
     expect(existsSync(postPath)).toBe(true);
@@ -55,7 +64,7 @@ describe('Build integration', () => {
 
     // An optional subtitle renders under the title, not just in the meta tags.
     expect(postContent).toMatch(
-      /<p class="subtitle[^"]*"[^>]*>Anarchy, State, and Utopia\. No, not that one\.<\/p>/
+      /<p class="subtitle[^"]*"[^>]*>Anarchy, State, and Utopia\. No, not that one\.<\/p>/,
     );
 
     // Assert the RSS feed was generated with real post entries
@@ -90,5 +99,28 @@ describe('Build integration', () => {
     expect(archivePage).not.toContain(DRAFT_SLUG);
     expect(feedContent).not.toContain(DRAFT_TITLE);
     expect(feedContent).not.toContain(DRAFT_SLUG);
-  }, 60000); // 60 second timeout for build
+  });
+
+  // Every page, image, and file a built page points at on this site must exist
+  // in dist/. External links aren't checked: they break for reasons outside
+  // this repo and would fail builds at random.
+  it('has no broken internal links', () => {
+    const broken = [];
+    for (const page of listHtmlFiles(distDir)) {
+      const pagePath = '/' + relative(distDir, page).replace(/index\.html$/, '');
+      const pageUrl = new URL(pagePath, SITE);
+      const html = readFileSync(page, 'utf8');
+
+      for (const [, attr, value] of html.matchAll(/\s(href|src|content)="([^"]*)"/g)) {
+        // content= is only a link in meta tags like og:image; those are absolute.
+        if (attr === 'content' && !value.startsWith(SITE)) continue;
+        if (value.startsWith('#')) continue;
+
+        const url = new URL(value, pageUrl);
+        if (url.origin !== SITE) continue;
+        if (!servesFile(url.pathname)) broken.push(`${pagePath} -> ${value}`);
+      }
+    }
+    expect(broken).toEqual([]);
+  });
 });

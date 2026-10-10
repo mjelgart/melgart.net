@@ -32,7 +32,7 @@ describe('Search component', () => {
       const el = originalCreateElement(tag, ...rest);
       if (tag === 'script') {
         queueMicrotask(() => {
-          el.onerror && el.onerror(new Event('error'));
+          el.onerror?.(new Event('error'));
         });
       }
       return el;

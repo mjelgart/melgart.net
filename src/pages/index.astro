@@ -14,7 +14,7 @@ const formatDate = (dateString) => {
   return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   }).format(new Date(dateString));
 };
 ---
@@ -23,20 +23,35 @@ const formatDate = (dateString) => {
   <div class="column">
     <h1 class="headingXl wordmark">Michael Elgart</h1>
     <section class="headingMd">
-      <p>I'm a software engineer, dad, and blogger. I grew up in Miami, graduated from Duke in North Carolina, and now live with my family in Central Texas.</p>
-      <p>I like discussing prediction markets, AI risk, governance incentives, and basketball. I occasionally write down some of those thoughts which are hosted on the blog here.</p>
+      <p>
+        I'm a software engineer, dad, and blogger. I grew up in Miami, graduated from Duke in North
+        Carolina, and now live with my family in Central Texas.
+      </p>
+      <p>
+        I like discussing prediction markets, AI risk, governance incentives, and basketball. I
+        occasionally write down some of those thoughts which are hosted on the blog here.
+      </p>
     </section>
     <section class="headingMd padding1px marginBottom16px">
       <h2 class="headingLg">My Links</h2>
       <b>
-        Professional: <a href="https://www.linkedin.com/in/michaelelgart/" target="_blank">LinkedIn</a>
+        Professional:{' '}
+        <a href="https://www.linkedin.com/in/michaelelgart/" target="_blank">
+          LinkedIn
+        </a>
         <br />
         Coding:{' '}
-        <a href="https://github.com/mjelgart" target="_blank">GitHub</a>
-        <br/>
+        <a href="https://github.com/mjelgart" target="_blank">
+          GitHub
+        </a>
+        <br />
         Fun:{' '}
-        <a href="https://www.threads.net/@mjelgart" target="_blank">Threads</a>{' '}
-        <a href="https://letterboxd.com/3Fast3Furious/" target="_blank">Letterboxd</a>
+        <a href="https://www.threads.net/@mjelgart" target="_blank">
+          Threads
+        </a>{' '}
+        <a href="https://letterboxd.com/3Fast3Furious/" target="_blank">
+          Letterboxd
+        </a>
       </b>
     </section>
     <section class="headingMd padding1px marginBottom16px">
@@ -47,7 +62,7 @@ const formatDate = (dateString) => {
       <h2 class="headingLg">Blog</h2>
       <ul class="list">
         {sortedPosts.map((post) => (
-          <li class="listItem" key={post.id}>
+          <li class="listItem">
             <a href={`/posts/${post.id}`}>{post.data.title}</a>
             <br />
             <small class="lightText">
@@ -55,36 +70,56 @@ const formatDate = (dateString) => {
             </small>
           </li>
         ))}
-        <li><a href="/posts"> ➡️All Posts</a></li>
-        <li><a href="/rss.xml"> 📡RSS Feed</a></li>
+        <li>
+          <a href="/posts"> ➡️All Posts</a>
+        </li>
+        <li>
+          <a href="/rss.xml"> 📡RSS Feed</a>
+        </li>
       </ul>
     </section>
     <section class="padding1px marginBottom16px">
       <h2 class="headingLg">What I'm Reading</h2>
       <ul class="list">
         <li class="listItem">
-          <a href="https://www.astralcodexten.com/" target="_blank">Astral Codex Ten</a>
+          <a href="https://www.astralcodexten.com/" target="_blank">
+            Astral Codex Ten
+          </a>
         </li>
         <li class="listItem">
-          <a href="https://www.slowboring.com/" target="_blank">Slow Boring</a>
+          <a href="https://www.slowboring.com/" target="_blank">
+            Slow Boring
+          </a>
         </li>
         <li class="listItem">
-          <a href="https://stratechery.com/" target="_blank">Stratechery</a>
+          <a href="https://stratechery.com/" target="_blank">
+            Stratechery
+          </a>
         </li>
         <li class="listItem">
-          <a href="https://postlibertarian.com/" target="_blank">Postlibertarian</a>
+          <a href="https://postlibertarian.com/" target="_blank">
+            Postlibertarian
+          </a>
         </li>
         <li class="listItem">
-          <a href="https://thezvi.wordpress.com/" target="_blank">Don't Worry About the Vase</a>
+          <a href="https://thezvi.wordpress.com/" target="_blank">
+            Don't Worry About the Vase
+          </a>
         </li>
         <li class="listItem">
-          <a href="https://gwern.net/index" target="_blank">Gwern</a>
+          <a href="https://gwern.net/index" target="_blank">
+            Gwern
+          </a>
         </li>
         <li class="listItem">
-          <a href="https://www.construction-physics.com/" target="_blank">Construction Physics</a>
+          <a href="https://www.construction-physics.com/" target="_blank">
+            Construction Physics
+          </a>
         </li>
         <li class="listItem">
-          <a href="https://marginalrevolution.com/" target="_blank">Marginal Revolution</a>
+          <a href="https://marginalrevolution.com/" target="_blank">
+            Marginal Revolution
+          </a>
         </li>
       </ul>
     </section>
@@ -92,22 +127,34 @@ const formatDate = (dateString) => {
       <h2 class="headingLg">What I'm Listening To</h2>
       <ul class="list">
         <li class="listItem">
-          <a href="https://www.dwarkesh.com/" target="_blank">Dwarkesh</a>
+          <a href="https://www.dwarkesh.com/" target="_blank">
+            Dwarkesh
+          </a>
         </li>
         <li class="listItem">
-          <a href="https://www.complexsystemspodcast.com/" target="_blank">Complex Systems</a>
+          <a href="https://www.complexsystemspodcast.com/" target="_blank">
+            Complex Systems
+          </a>
         </li>
         <li class="listItem">
-          <a href="https://reason.com/podcasts/the-reason-roundtable/" target="_blank">Reason Roundtable</a>
+          <a href="https://reason.com/podcasts/the-reason-roundtable/" target="_blank">
+            Reason Roundtable
+          </a>
         </li>
         <li class="listItem">
-          <a href="https://www.wethefifth.com/" target="_blank">The Fifth Column</a>
+          <a href="https://www.wethefifth.com/" target="_blank">
+            The Fifth Column
+          </a>
         </li>
         <li class="listItem">
-          <a href="https://www.econlib.org/econtalk/" target="_blank">EconTalk</a>
+          <a href="https://www.econlib.org/econtalk/" target="_blank">
+            EconTalk
+          </a>
         </li>
         <li class="listItem">
-          <a href="https://80000hours.org/podcast/" target="_blank">80,000 Hours</a>
+          <a href="https://80000hours.org/podcast/" target="_blank">
+            80,000 Hours
+          </a>
         </li>
       </ul>
     </section>
@@ -126,8 +173,16 @@ const formatDate = (dateString) => {
       </ul>
     </section>
     <br />
-    <p>Material on this site created by Michael Elgart is licensed under{' '}
-      <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer">CC BY 4.0</a>.
+    <p>
+      Material on this site created by Michael Elgart is licensed under{' '}
+      <a
+        href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1"
+        target="_blank"
+        rel="license noopener noreferrer"
+      >
+        CC BY 4.0
+      </a>
+      .
     </p>
   </div>
 </Layout>

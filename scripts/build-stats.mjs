@@ -149,7 +149,7 @@ function extractAstroAssetRefs(htmlContent) {
 }
 
 // Pagefind ships a wasm blob and a metadata file per supported language, but
-// the entry manifest names only the ones built for this site's content. 
+// the entry manifest names only the ones built for this site's content.
 function readActiveLanguageFiles(distDir) {
   const active = new Set();
   const entryPath = path.join(distDir, SEARCH_DIR, 'pagefind-entry.json');
@@ -320,9 +320,9 @@ function countPosts() {
     return { published: 0, drafts: 0 };
   }
 
-  const posts = fs.readdirSync(postsDir).filter(file =>
-    file.endsWith('.md') || file.endsWith('.mdx')
-  );
+  const posts = fs
+    .readdirSync(postsDir)
+    .filter((file) => file.endsWith('.md') || file.endsWith('.mdx'));
 
   let published = 0;
   let drafts = 0;
@@ -360,15 +360,14 @@ function generateBuildStats() {
   // Walk the dist directory, splitting the site's own output from Pagefind's
   // search bundle so each can be measured on its own terms.
   const allFiles = walkDirectory(distDir);
-  const isSearchAsset = (file) =>
-    file.path.split(path.sep).join('/').startsWith(`${SEARCH_DIR}/`);
+  const isSearchAsset = (file) => file.path.split(path.sep).join('/').startsWith(`${SEARCH_DIR}/`);
   const searchFiles = allFiles.filter(isSearchAsset);
   const files = allFiles.filter((file) => !isSearchAsset(file));
 
   if (searchFiles.length === 0) {
     console.warn(
       `No ${SEARCH_DIR}/ directory in dist — run pagefind before this script, ` +
-      'or the search assets go unreported.'
+        'or the search assets go unreported.',
     );
   }
 
@@ -403,10 +402,12 @@ function generateBuildStats() {
 
   console.log(`Build stats generated: ${outputPath}`);
   console.log(`Total files: ${files.length}`);
-  console.log(`Total size: ${Math.round(totalsByType.total.raw / 1024)}KB raw, ${Math.round(totalsByType.total.gzipped / 1024)}KB gzipped`);
+  console.log(
+    `Total size: ${Math.round(totalsByType.total.raw / 1024)}KB raw, ${Math.round(totalsByType.total.gzipped / 1024)}KB gzipped`,
+  );
   console.log(
     `Search: ${Math.round(searchAssets.onPageLoad.gzipped / 1024)}KB gzipped on page load, ` +
-    `${Math.round(searchAssets.neverFetched.raw / 1024)}KB never requested`
+      `${Math.round(searchAssets.neverFetched.raw / 1024)}KB never requested`,
   );
   console.log(`Posts: ${postCount}`);
   if (draftCount > 0) {

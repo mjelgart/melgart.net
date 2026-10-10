@@ -7,12 +7,12 @@ name: Deploy Astro site to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+    branches: ['main']
 
   # Runs on pull requests targeting the default branch — build + tests
   # only; the deploy job is gated to push events on main.
   pull_request:
-    branches: ["main"]
+    branches: ['main']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -26,7 +26,7 @@ permissions:
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:
@@ -56,12 +56,18 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: "24"
+          node-version: '24'
           cache: ${{ steps.detect-package-manager.outputs.manager }}
       - name: Setup Pages
         uses: actions/configure-pages@v6
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+      - name: Lint
+        run: npm run lint
+      - name: Check formatting
+        run: npm run format:check
+      - name: Type check
+        run: npm run typecheck
       - name: Run tests
         run: npm run test:run
       # Pass one builds the site and its search index; build-stats.mjs then measures that dist;
@@ -69,6 +75,11 @@ jobs:
       # clears dist on every build, so pagefind runs inside both passes.
       - name: Build with Astro
         run: ${{ steps.detect-package-manager.outputs.manager }} run build
+      - name: Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
       - name: Set nojekyll
         run: touch dist/.nojekyll
       - name: Upload artifact
@@ -90,3 +101,28 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+  # After a deploy, confirm the live site is serving the new build, then run
+  # Lighthouse against it to see what GitHub Pages' delivery adds. Report-only
+  # for Lighthouse: the deploy has already happened.
+  verify-live:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Download the deployed build
+        uses: actions/download-artifact@v8
+        with:
+          name: github-pages
+      - name: Unpack the deployed build
+        run: mkdir deployed && tar -xf artifact.tar -C deployed
+      - name: Check the live site serves this build
+        run: scripts/verify-deploy.sh deployed
+      - name: Lighthouse (live site)
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./lighthouserc.live.json
+          uploadArtifacts: true
+          artifactName: lighthouse-live

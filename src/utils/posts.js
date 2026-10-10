@@ -6,8 +6,7 @@ import { getCollection } from 'astro:content';
  * @param {import('astro:content').CollectionEntry<'posts'>} b
  * @returns {number}
  */
-const byDateDesc = (a, b) =>
-  new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+const byDateDesc = (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
 
 /**
  * Drops public drafts and sorts the rest newest first. Kept separate from
@@ -15,8 +14,7 @@ const byDateDesc = (a, b) =>
  * @param {import('astro:content').CollectionEntry<'posts'>[]} posts
  * @returns {import('astro:content').CollectionEntry<'posts'>[]}
  */
-export const selectPublished = (posts) =>
-  posts.filter((post) => !post.data.draft).sort(byDateDesc);
+export const selectPublished = (posts) => posts.filter((post) => !post.data.draft).sort(byDateDesc);
 
 /**
  * Every published post, newest first. This is the source any page listing

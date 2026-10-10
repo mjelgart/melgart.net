@@ -1,0 +1,20 @@
+{
+  "ci": {
+    "collect": {
+      "url": [
+        "https://melgart.net/",
+        "https://melgart.net/posts/",
+        "https://melgart.net/posts/the-dispossessed/",
+        "https://melgart.net/sports/",
+        "https://melgart.net/stats/"
+      ],
+      "numberOfRuns": 1
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": ["warn", { "minScore": 0.8 }],
+        "categories:best-practices": ["warn", { "minScore": 1 }]
+      }
+    }
+  }
+}
